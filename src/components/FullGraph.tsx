@@ -11,6 +11,32 @@ const BG_DARK  = '#0a0a0a';
 const BG_LIGHT = '#f5f5f5';
 const STORAGE_KEY = 'galaxybrain-theme';
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function resolveId(v: unknown): string {
+  return typeof v === 'object' && v !== null ? (v as GraphNode).id : (v as string);
+}
+
+/** Create a "+" sprite texture canvas, cached per call */
+function makePlusSprite(): THREE.Sprite {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64; canvas.height = 64;
+  const ctx = canvas.getContext('2d')!;
+  ctx.clearRect(0, 0, 64, 64);
+  // Circular background
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.beginPath(); ctx.arc(32, 32, 28, 0, Math.PI * 2); ctx.fill();
+  // "+" symbol
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 36px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('+', 32, 33);
+  const tex = new THREE.CanvasTexture(canvas);
+  const mat = new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true });
+  return new THREE.Sprite(mat);
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function FullGraph() {
@@ -58,6 +84,73 @@ export default function FullGraph() {
   // ── Tag highlight ──────────────────────────────────────────────────────────
   const [highlightedTag, setHighlightedTag] = useState<string | null>(null);
 
+  /**
+   * Set of node IDs directly connected to the currently highlighted tag
+   * (includes the tag itself). Used for visual dim / brighten logic.
+   */
+  const highlightedNodeIds = useMemo<Set<string>>(() => {
+    if (!highlightedTag || !graphData) return new Set();
+    const s = new Set<string>();
+    s.add(highlightedTag);
+    graphData.links.forEach((l) => {
+      const src = resolveId(l.source);
+      const tgt = resolveId(l.target);
+      if (src === highlightedTag) s.add(tgt);
+      if (tgt === highlightedTag) s.add(src);
+    });
+    return s;
+  }, [highlightedTag, graphData]);
+
+  // ── Pulsing PointLights for highlighted tag node ───────────────────────────
+  const pulsingLightsRef = useRef<Map<string, THREE.PointLight>>(new Map());
+
+  useEffect(() => {
+    if (highlightedTag === null) {
+      pulsingLightsRef.current.clear();
+      return;
+    }
+    let rafId: number;
+    const animate = () => {
+      const t = Date.now() / 1000;
+      pulsingLightsRef.current.forEach((light) => {
+        light.intensity = 3 + 2 * Math.sin(t * 3);
+      });
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [highlightedTag]);
+
+  // ── Ghost-click notification (brief "Not yet created" overlay) ────────────
+  const [ghostTooltip, setGhostTooltip] = useState<{ x: number; y: number } | null>(null);
+
+  // ── ?focus=noteId query param — auto-focus camera on mount ─────────────────
+  const focusNodeId = useMemo<string | null>(() => {
+    try { return new URLSearchParams(window.location.search).get('focus'); }
+    catch { return null; }
+  }, []);
+
+  useEffect(() => {
+    if (!focusNodeId || !graphData || !fgRef.current) return;
+    // Give the force simulation a few seconds to partially settle before flying
+    const timer = setTimeout(() => {
+      if (!fgRef.current) return;
+      const found = graphData.nodes.find((n) => n.id === focusNodeId) as
+        | (GraphNode & { x?: number; y?: number; z?: number })
+        | undefined;
+      if (!found || found.x == null) return;
+      const dist  = 80;
+      const mag   = Math.hypot(found.x, found.y ?? 0, found.z ?? 0) || 1;
+      const ratio = 1 + dist / mag;
+      fgRef.current.cameraPosition(
+        { x: found.x * ratio, y: (found.y ?? 0) * ratio, z: (found.z ?? 0) * ratio },
+        { x: found.x, y: found.y ?? 0, z: found.z ?? 0 },
+        1500,
+      );
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [focusNodeId, graphData]);
+
   // ── Dimensions ────────────────────────────────────────────────────────────
   const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   useEffect(() => {
@@ -84,17 +177,41 @@ export default function FullGraph() {
   const visibleData = useMemo((): GraphData => {
     if (!graphData) return { nodes: [], links: [] };
     if (collapsedNodes.size === 0) return graphData;
+
+    // Iteratively propagate hidden status: a node is hidden if ALL its incoming
+    // wikilinks come only from collapsed / hidden nodes, starting from collapsed roots.
     const hidden = new Set<string>();
-    graphData.links.forEach((l) => {
-      const src = typeof l.source === 'object' ? (l.source as GraphNode).id : l.source as string;
-      const tgt = typeof l.target === 'object' ? (l.target as GraphNode).id : l.target as string;
-      if (collapsedNodes.has(src) && l.type === 'wikilink') hidden.add(tgt);
-    });
+
+    // Seed: direct wikilink targets of collapsed nodes
+    let changed = true;
+    while (changed) {
+      changed = false;
+      graphData.links.forEach((l) => {
+        if (l.type !== 'wikilink') return;
+        const src = resolveId(l.source);
+        const tgt = resolveId(l.target);
+        if (hidden.has(tgt)) return;                        // already hidden
+        const tgtNode = graphData.nodes.find((n) => n.id === tgt);
+        if (tgtNode?.type === 'tag') return;               // tags are never hidden
+
+        if (collapsedNodes.has(src) || hidden.has(src)) {
+          // Check whether tgt has ANY incoming wikilink from a visible, non-collapsed node
+          const hasOtherParent = graphData.links.some((ll) => {
+            if (ll.type !== 'wikilink') return false;
+            const llSrc = resolveId(ll.source);
+            const llTgt = resolveId(ll.target);
+            return llTgt === tgt && llSrc !== src && !collapsedNodes.has(llSrc) && !hidden.has(llSrc);
+          });
+          if (!hasOtherParent) { hidden.add(tgt); changed = true; }
+        }
+      });
+    }
+
     return {
       nodes: graphData.nodes.filter((n) => !hidden.has(n.id)),
       links: graphData.links.filter((l) => {
-        const src = typeof l.source === 'object' ? (l.source as GraphNode).id : l.source as string;
-        const tgt = typeof l.target === 'object' ? (l.target as GraphNode).id : l.target as string;
+        const src = resolveId(l.source);
+        const tgt = resolveId(l.target);
         return !hidden.has(src) && !hidden.has(tgt);
       }),
     };
@@ -103,26 +220,65 @@ export default function FullGraph() {
   // ── Node THREE.js objects ─────────────────────────────────────────────────
   const nodeThreeObject = useCallback((rawNode: object) => {
     const node = rawNode as GraphNode;
-    const isHighlighted =
-      highlightedTag !== null &&
-      (graphData?.links ?? []).some((l) => {
-        const src = typeof l.source === 'object' ? (l.source as GraphNode).id : l.source as string;
-        const tgt = typeof l.target === 'object' ? (l.target as GraphNode).id : l.target as string;
-        return tgt === highlightedTag && src === node.id;
-      });
 
-    const obj = buildNodeObject(node.type, node.shape, node.color, node.val);
+    const isHighlightedTag   = node.id === highlightedTag;
+    const isConnected        = highlightedTag !== null && highlightedNodeIds.has(node.id);
+    const isDimmed           = highlightedTag !== null && !isConnected && !isHighlightedTag;
+    const isCollapsed        = node.collapsible && collapsedNodes.has(node.id);
 
-    if (highlightedTag !== null && !isHighlighted && node.id !== highlightedTag) {
-      obj.traverse((child) => {
+    const group = new THREE.Group();
+
+    // ── base mesh ────────────────────────────────────────────────────────────
+    const mesh = buildNodeObject(node.type, node.shape, node.color, node.val);
+
+    // Scale up highlighted / connected nodes
+    if (isHighlightedTag || isConnected) {
+      mesh.scale.multiplyScalar(1.35);
+    }
+
+    // Dim non-highlighted nodes when a tag is active
+    if (isDimmed) {
+      mesh.traverse((child) => {
         if ((child as THREE.Mesh).isMesh) {
           const mat = (child as THREE.Mesh).material as THREE.MeshLambertMaterial;
-          if (mat) { mat.transparent = true; mat.opacity = 0.08; }
+          if (mat) { mat.transparent = true; mat.opacity = 0.15; }
         }
       });
     }
-    return obj;
-  }, [highlightedTag, graphData]);
+
+    // Emissive glow on the highlighted tag itself
+    if (isHighlightedTag) {
+      mesh.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const mat = (child as THREE.Mesh).material as THREE.MeshLambertMaterial;
+          if (mat) {
+            mat.emissive = new THREE.Color(node.color);
+            mat.emissiveIntensity = 0.7;
+          }
+        }
+      });
+      // PointLight that will be pulsed by the RAF loop
+      const light = new THREE.PointLight(node.color, 4, 60);
+      pulsingLightsRef.current.set(node.id, light);
+      group.add(light);
+    } else {
+      pulsingLightsRef.current.delete(node.id);
+    }
+
+    group.add(mesh);
+
+    // ── "+" sprite overlay for collapsed nodes ───────────────────────────────
+    if (isCollapsed) {
+      const sprite = makePlusSprite();
+      const spriteScale = Math.cbrt(node.val) * 0.8 * 1.8;
+      sprite.scale.set(spriteScale, spriteScale, 1);
+      // Offset slightly so it floats above-right of the mesh
+      sprite.position.set(spriteScale * 0.4, spriteScale * 0.4, 0);
+      group.add(sprite);
+    }
+
+    return group;
+  }, [highlightedTag, highlightedNodeIds, collapsedNodes]);
 
   // ── Hover ──────────────────────────────────────────────────────────────────
   const handleNodeHover = useCallback((rawNode: object | null) => {
@@ -131,10 +287,11 @@ export default function FullGraph() {
     if (!rawNode) { el.style.display = 'none'; return; }
     const node = rawNode as GraphNode;
     let content = node.name;
-    if (node.type === 'ghost') content = `${node.name}\nNote not yet created.`;
-    else if (node.type === 'tag') content = node.name;
+    if (node.type === 'ghost') content = `${node.name}\n(Note not yet created)`;
+    else if (node.type === 'tag') content = `#${node.name}`;
     else if (node.excerpt) content = `${node.name}\n${node.excerpt}`;
-    if (node.collapsible && collapsedNodes.has(node.id)) content += '\n[Click to expand]';
+    if (node.collapsible && collapsedNodes.has(node.id))   content += '\n[Click to expand]';
+    if (node.collapsible && !collapsedNodes.has(node.id))  content += '\n[Shift+click to collapse]';
     el.textContent      = content;
     el.style.background = uiBgColor;
     el.style.color      = uiTextColor;
@@ -143,14 +300,35 @@ export default function FullGraph() {
   }, [collapsedNodes, uiBgColor, uiTextColor, uiBorder]);
 
   // ── Click ──────────────────────────────────────────────────────────────────
-  const handleNodeClick = useCallback((rawNode: object) => {
+  const handleNodeClick = useCallback((rawNode: object, event: MouseEvent) => {
     const node = rawNode as GraphNode;
-    if (node.type === 'ghost') return;
-    if (node.type === 'tag') { setHighlightedTag((p) => (p === node.id ? null : node.id)); return; }
-    if (node.collapsible && collapsedNodes.has(node.id)) {
-      setCollapsedNodes((p) => { const n = new Set(p); n.delete(node.id); return n; });
+
+    // Ghost node — show brief "not yet created" tooltip at click position
+    if (node.type === 'ghost') {
+      setGhostTooltip({ x: event.clientX, y: event.clientY });
+      setTimeout(() => setGhostTooltip(null), 2200);
       return;
     }
+
+    // Tag node — toggle tag highlight
+    if (node.type === 'tag') {
+      setHighlightedTag((p) => (p === node.id ? null : node.id));
+      return;
+    }
+
+    // Shift+click on an expanded collapsible node → re-collapse
+    if (event.shiftKey && node.collapsible && !collapsedNodes.has(node.id)) {
+      setCollapsedNodes((p) => { const s = new Set(p); s.add(node.id); return s; });
+      return;
+    }
+
+    // Click on a collapsed node → expand
+    if (node.collapsible && collapsedNodes.has(node.id)) {
+      setCollapsedNodes((p) => { const s = new Set(p); s.delete(node.id); return s; });
+      return;
+    }
+
+    // File node with a path → navigate
     if (node.path) window.location.href = node.path;
   }, [collapsedNodes]);
 
@@ -169,13 +347,29 @@ export default function FullGraph() {
     );
   }, []);
 
-  // ── Link color ────────────────────────────────────────────────────────────
+  // ── Link color (respects tag-highlight state) ─────────────────────────────
   const linkColor = useCallback((rawLink: object) => {
-    const l = rawLink as { type: string };
+    const l = rawLink as { type: string; source: unknown; target: unknown };
+
+    if (highlightedTag !== null) {
+      const src = resolveId(l.source);
+      const tgt = resolveId(l.target);
+      const connected = highlightedNodeIds.has(src) && highlightedNodeIds.has(tgt);
+      if (connected) {
+        if (l.type === 'file-tag')      return '#e74c3ccc';
+        if (l.type === 'tag-hierarchy') return '#e67e22cc';
+        return isDark ? '#ffffffcc' : '#000000cc';
+      }
+      // Dimmed links
+      if (l.type === 'file-tag')      return '#e74c3c0a';
+      if (l.type === 'tag-hierarchy') return '#e67e220a';
+      return isDark ? '#ffffff0a' : '#0000000a';
+    }
+
     if (l.type === 'file-tag')      return '#e74c3c44';
     if (l.type === 'tag-hierarchy') return '#e67e2244';
     return isDark ? '#ffffff22' : '#00000022';
-  }, [isDark]);
+  }, [isDark, highlightedTag, highlightedNodeIds]);
 
   // ── Loading / error ────────────────────────────────────────────────────────
   if (loadError) {
@@ -187,7 +381,6 @@ export default function FullGraph() {
   }
 
   if (!graphData) {
-    // Dark (or light) empty canvas while fetch completes
     return <div style={{ width: '100vw', height: '100vh', background: bgColor }} />;
   }
 
@@ -211,7 +404,7 @@ export default function FullGraph() {
         linkColor={linkColor}
         linkOpacity={0.5}
         linkWidth={0.5}
-        linkDirectionalParticles={2}
+        linkDirectionalParticles={1}
         linkDirectionalParticleWidth={0.8}
         linkDirectionalParticleSpeed={0.005}
         enableNodeDrag={true}
@@ -242,7 +435,7 @@ export default function FullGraph() {
         {isDark ? '☀️' : '🌙'}
       </button>
 
-      {/* Tooltip — single DOM node, updated imperatively */}
+      {/* Hover tooltip — single DOM node, updated imperatively */}
       <div
         ref={tooltipRef}
         style={{
@@ -261,16 +454,38 @@ export default function FullGraph() {
         }}
       />
 
+      {/* Ghost-click "not yet created" toast */}
+      {ghostTooltip && (
+        <div
+          style={{
+            position:      'fixed',
+            left:          ghostTooltip.x + 12,
+            top:           ghostTooltip.y + 12,
+            background:    'rgba(40,40,40,0.92)',
+            color:         '#e0e0e0',
+            border:        '1px solid rgba(255,255,255,0.18)',
+            padding:       '6px 14px',
+            borderRadius:  8,
+            fontSize:      13,
+            pointerEvents: 'none',
+            zIndex:        10000,
+            animation:     'fadeOut 2.2s forwards',
+          }}
+        >
+          Note not yet created
+        </div>
+      )}
+
       {/* Tag filter banner */}
       {highlightedTag !== null && (
         <div style={{ position: 'fixed', top: 20, left: '50%', transform: 'translateX(-50%)', background: 'rgba(231,76,60,0.18)', border: '1px solid #e74c3c', color: '#e74c3c', padding: '6px 16px', borderRadius: 20, fontSize: 13, pointerEvents: 'none', zIndex: 9999 }}>
-          Filtering by {graphData.nodes.find((n) => n.id === highlightedTag)?.name ?? highlightedTag} — click tag again to clear
+          Filtering by #{graphData.nodes.find((n) => n.id === highlightedTag)?.name ?? highlightedTag} — click tag again to clear
         </div>
       )}
 
       {/* Hint bar */}
       <div style={{ position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)', background: isDark ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.75)', color: uiTextColor, padding: '5px 14px', borderRadius: 20, fontSize: 12, pointerEvents: 'none', zIndex: 9998, border: `1px solid ${uiBorder}`, whiteSpace: 'nowrap', backdropFilter: 'blur(4px)' }}>
-        Left-click file → navigate &nbsp;|&nbsp; Left-click tag → filter &nbsp;|&nbsp; Right-click → focus camera &nbsp;|&nbsp; Drag to rotate
+        Click file → navigate &nbsp;|&nbsp; Shift+click → collapse &nbsp;|&nbsp; Click tag → filter &nbsp;|&nbsp; Right-click → focus &nbsp;|&nbsp; Drag to rotate
       </div>
     </div>
   );

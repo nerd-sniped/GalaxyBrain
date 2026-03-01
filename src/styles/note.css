@@ -1,6 +1,96 @@
-/* ─── Individual note page ───────────────────────────────────────────────────── */
+/* ─── Note page prose ───────────────────────────────────────────────────────── */
 
-/* Backlinks section */
+/* Constrain reading width */
+.prose {
+  max-width: 72ch;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9em;
+}
+.prose th, .prose td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.prose thead th {
+  background: var(--surface-1);
+  font-weight: 600;
+  color: var(--text);
+}
+.prose tbody tr:nth-child(even) {
+  background: var(--surface-0);
+}
+
+/* Images */
+.prose img {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+}
+
+/* Task lists (remark-gfm / Astro default) */
+.prose input[type="checkbox"] {
+  accent-color: var(--accent);
+  margin-right: 0.4em;
+  cursor: default;
+}
+.prose li:has(input[type="checkbox"]) {
+  list-style: none;
+  margin-left: -1.2rem;
+}
+
+/* Strikethrough */
+.prose del {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+/* ==highlights== become <span class="highlight"> via remark-obsidian */
+.prose .highlight {
+  background: rgba(255, 213, 0, 0.22);
+  color: inherit;
+  padding: 0.05em 0.25em;
+  border-radius: 2px;
+}
+
+/* Internal wikilinks */
+.prose a[data-wikilink] {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(52, 152, 219, 0.35);
+  transition: border-color 0.15s;
+}
+.prose a[data-wikilink]:hover {
+  border-bottom-color: var(--accent);
+  text-decoration: none;
+}
+
+/* Ghost links — wikilinks pointing to unpublished notes */
+.prose a[data-wikilink].ghost-link {
+  color: var(--text-muted);
+  border-bottom: 1px dashed rgba(136, 136, 136, 0.5);
+  cursor: not-allowed;
+}
+.prose a[data-wikilink].ghost-link:hover {
+  border-bottom-color: var(--text-muted);
+  text-decoration: none;
+}
+
+/* External links — subtle indicator */
+.prose a:not([data-wikilink]) {
+  color: var(--accent);
+}
+.prose a:not([data-wikilink]):hover {
+  text-decoration: underline;
+}
+
+/* ── Backlinks section ─────────────────────────────────── */
 .backlinks {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -38,7 +128,7 @@
 }
 .backlinks-list a:hover { color: var(--accent); text-decoration: none; }
 
-/* Forward links section */
+/* ── Forward links section ────────────────────────────── */
 .forward-links {
   margin-top: 1.5rem;
 }
@@ -74,16 +164,6 @@
 }
 .forward-links-list a:hover { color: var(--accent); text-decoration: none; }
 
-/* Wikilinks rendered as anchor tags */
-.prose a[data-wikilink] {
-  color: var(--accent);
-  border-bottom: 1px dashed rgba(52, 152, 219, 0.4);
-}
-.prose a[data-wikilink]:hover {
-  border-bottom-style: solid;
-  text-decoration: none;
-}
-
 /* Block transclusion (placeholder) */
 .transcluded-block {
   border-left: 3px solid var(--accent);
@@ -97,3 +177,4 @@
   color: var(--text-muted);
   margin-top: 0.5rem;
 }
+

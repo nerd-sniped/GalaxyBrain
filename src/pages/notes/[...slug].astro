@@ -19,7 +19,7 @@ const { Content } = await render(note);
 const title = note.data.title ?? note.id;
 ---
 
-<NoteLayout title={title} excerpt={undefined}>
+<NoteLayout title={title} noteId={note.id} excerpt={undefined}>
   <h1>{title}</h1>
 
   {note.data.tags && note.data.tags.length > 0 && (

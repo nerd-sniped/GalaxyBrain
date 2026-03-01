@@ -15,10 +15,13 @@
     "astro": "^5.17.1",
     "fast-glob": "^3.3.3",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.575.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-force-graph-3d": "^1.29.1",
-    "three": "^0.183.2"
+    "rehype-raw": "^7.0.0",
+    "three": "^0.183.2",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",

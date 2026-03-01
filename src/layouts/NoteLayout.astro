@@ -5,9 +5,12 @@ import '../styles/callouts.css';
 
 interface Props {
   title: string;
+  noteId?: string;
   excerpt?: string;
 }
-const { title, excerpt } = Astro.props;
+const { title, noteId, excerpt } = Astro.props;
+// Derive a slug from the title if noteId not explicitly passed
+const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 ---
 
 <BaseLayout title={`${title} — GalaxyBrain`} description={excerpt}>
@@ -17,54 +20,150 @@ const { title, excerpt } = Astro.props;
         <slot />
       </article>
     </main>
+
     <aside class="note-sidebar">
-      <!-- LocalGraph will go here in Phase 6 -->
-      <div class="sidebar-placeholder">
-        <span>Local graph coming soon</span>
+      <!-- ── View in graph ─────────────────────────────────── -->
+      <a
+        href={`/?focus=${focusId}`}
+        class="view-in-graph"
+        title="Open full graph focused on this note"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        View in graph
+      </a>
+
+      <!-- ── Local graph (Phase 6) ───────────────────────────── -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Local Graph</div>
+        <div class="sidebar-placeholder">Coming in Phase 6</div>
+      </div>
+
+      <!-- ── Backlinks (Phase 6) ────────────────────────────── -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Backlinks</div>
+        <div class="sidebar-placeholder">Coming in Phase 6</div>
+      </div>
+
+      <!-- ── Forward links (Phase 6) ───────────────────────── -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Linked Notes</div>
+        <div class="sidebar-placeholder">Coming in Phase 6</div>
       </div>
     </aside>
   </div>
 </BaseLayout>
 
+{/* Client-side ghost-link detection — cross-references graph.json */}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('/graph.json')
+      .then((r) => r.json())
+      .then((data: { nodes: Array<{ id: string; type: string }> }) => {
+        const published = new Set(
+          data.nodes.filter((n) => n.type === 'file').map((n) => n.id)
+        );
+        document.querySelectorAll<HTMLAnchorElement>('a[data-wikilink]').forEach((a) => {
+          const slug = a.getAttribute('data-wikilink');
+          if (slug && !published.has(slug)) {
+            a.classList.add('ghost-link');
+            a.title = 'Note not yet published';
+          }
+        });
+      })
+      .catch(() => { /* silently ignore — no ghost styling on fetch failure */ });
+  });
+</script>
+
 <style>
   .note-layout {
     display: grid;
-    grid-template-columns: 1fr 320px;
+    grid-template-columns: 1fr 300px;
     min-height: 100vh;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
-    gap: 2rem;
+    padding: 2rem 2rem 4rem;
+    gap: 3rem;
   }
 
   .note-content {
     min-width: 0;
+    max-width: 72ch;
   }
 
+  /* ── Sidebar ─────────────────────────────────────────────── */
   .note-sidebar {
     position: sticky;
     top: 2rem;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .view-in-graph {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+    background: rgba(52, 152, 219, 0.08);
+    border: 1px solid rgba(52, 152, 219, 0.25);
+    border-radius: 20px;
+    padding: 5px 14px 5px 10px;
+    transition: background 0.15s, border-color 0.15s;
+    text-decoration: none;
+    width: fit-content;
+  }
+  .view-in-graph:hover {
+    background: rgba(52, 152, 219, 0.16);
+    border-color: rgba(52, 152, 219, 0.5);
+    text-decoration: none;
+  }
+
+  .sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .sidebar-section-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
   }
 
   .sidebar-placeholder {
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
     color: var(--text-muted);
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    text-align: center;
   }
 
+  /* ── Mobile: sidebar stacks below content ───────────────── */
   @media (max-width: 900px) {
     .note-layout {
       grid-template-columns: 1fr;
+      padding: 1.25rem;
+      gap: 2rem;
+    }
+    .note-content {
+      max-width: 100%;
     }
     .note-sidebar {
-      display: none;
+      position: static;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
     }
   }
 </style>

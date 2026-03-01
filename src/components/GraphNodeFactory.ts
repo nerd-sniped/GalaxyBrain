@@ -37,7 +37,7 @@ export function buildNodeObject(
   color: string,
   val: number,
 ): THREE.Object3D {
-  const scale = Math.cbrt(val) * 0.8;
+  const scale = Math.cbrt(val) * 1.2;
 
   if (type === 'ghost') {
     const geo = new THREE.SphereGeometry(0.6, 8, 8);

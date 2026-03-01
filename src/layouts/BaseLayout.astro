@@ -22,6 +22,19 @@ const { title = 'GalaxyBrain', description = 'A digital garden' } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    {/* Inline script runs before first paint — prevents dark/light flash */}
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('galaxybrain-theme');
+          var dark = stored ? stored !== 'light' : true;
+          document.documentElement.classList.toggle('theme-light', !dark);
+          document.documentElement.classList.toggle('theme-dark', dark);
+        } catch (e) {
+          document.documentElement.classList.add('theme-dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <slot />

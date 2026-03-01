@@ -1,8 +1,13 @@
-/* Obsidian-style callouts — pairs with @heavycircle/remark-obsidian output */
+/* ─── Obsidian-style callouts emitted by @heavycircle/remark-obsidian ─────────
+   The plugin sets callout="type" (bare attr) + class="callout" on the wrapper.
+   Icons are rendered by lucide-react via renderToStaticMarkup.
+   The .callout-icon SVG inherits --callout-icon-color.
+─────────────────────────────────────────────────────────────────────────────── */
+
 .callout {
   border-radius: var(--radius-md);
   padding: 0.75rem 1rem;
-  margin: 1rem 0;
+  margin: 1.25rem 0;
   border-left: 4px solid;
 }
 
@@ -15,57 +20,130 @@
   margin-bottom: 0.5rem;
 }
 
-/* type variants */
-.callout[data-callout="note"],
-.callout[data-callout="info"] {
-  background: rgba(52, 152, 219, 0.08);
-  border-color: #3498db;
-  --callout-icon-color: #3498db;
+.callout-title-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
-.callout[data-callout="warning"],
-.callout[data-callout="caution"],
-.callout[data-callout="attention"] {
-  background: rgba(230, 126, 34, 0.08);
-  border-color: #e67e22;
-  --callout-icon-color: #e67e22;
-}
-
-.callout[data-callout="danger"],
-.callout[data-callout="error"],
-.callout[data-callout="bug"] {
-  background: rgba(231, 76, 60, 0.08);
-  border-color: #e74c3c;
-  --callout-icon-color: #e74c3c;
-}
-
-.callout[data-callout="success"],
-.callout[data-callout="check"],
-.callout[data-callout="done"] {
-  background: rgba(46, 204, 113, 0.08);
-  border-color: #2ecc71;
-  --callout-icon-color: #2ecc71;
-}
-
-.callout[data-callout="quote"],
-.callout[data-callout="cite"] {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.3);
-  --callout-icon-color: rgba(255, 255, 255, 0.5);
-}
-
-.callout[data-callout="tip"],
-.callout[data-callout="hint"],
-.callout[data-callout="important"] {
-  background: rgba(155, 89, 182, 0.08);
-  border-color: #9b59b6;
-  --callout-icon-color: #9b59b6;
-}
-
-.callout-title-icon {
+.callout-icon svg,
+.callout-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
   color: var(--callout-icon-color, var(--accent));
 }
 
 .callout-content p:last-child {
   margin-bottom: 0;
 }
+
+/* ─── Callout type variants ──────────────────────────────────────────────────── */
+/* note, info */
+.callout[callout="note"],
+.callout[callout="info"] {
+  background: rgba(52, 152, 219, 0.08);
+  border-color: #3498db;
+  --callout-icon-color: #3498db;
+}
+
+/* abstract, summary, tldr */
+.callout[callout="abstract"],
+.callout[callout="summary"],
+.callout[callout="tldr"] {
+  background: rgba(26, 188, 156, 0.08);
+  border-color: #1abc9c;
+  --callout-icon-color: #1abc9c;
+}
+
+/* todo */
+.callout[callout="todo"] {
+  background: rgba(52, 152, 219, 0.08);
+  border-color: #3498db;
+  --callout-icon-color: #3498db;
+}
+
+/* tip, hint, important */
+.callout[callout="tip"],
+.callout[callout="hint"],
+.callout[callout="important"] {
+  background: rgba(155, 89, 182, 0.08);
+  border-color: #9b59b6;
+  --callout-icon-color: #9b59b6;
+}
+
+/* success, check, done */
+.callout[callout="success"],
+.callout[callout="check"],
+.callout[callout="done"] {
+  background: rgba(46, 204, 113, 0.08);
+  border-color: #2ecc71;
+  --callout-icon-color: #2ecc71;
+}
+
+/* question, help, faq */
+.callout[callout="question"],
+.callout[callout="help"],
+.callout[callout="faq"] {
+  background: rgba(52, 152, 219, 0.06);
+  border-color: #3498db;
+  --callout-icon-color: #3498db;
+}
+
+/* warning, caution, attention */
+.callout[callout="warning"],
+.callout[callout="caution"],
+.callout[callout="attention"] {
+  background: rgba(230, 126, 34, 0.08);
+  border-color: #e67e22;
+  --callout-icon-color: #e67e22;
+}
+
+/* failure, fail, missing */
+.callout[callout="failure"],
+.callout[callout="fail"],
+.callout[callout="missing"] {
+  background: rgba(231, 76, 60, 0.08);
+  border-color: #e74c3c;
+  --callout-icon-color: #e74c3c;
+}
+
+/* danger, error */
+.callout[callout="danger"],
+.callout[callout="error"] {
+  background: rgba(231, 76, 60, 0.1);
+  border-color: #e74c3c;
+  --callout-icon-color: #e74c3c;
+}
+
+/* bug */
+.callout[callout="bug"] {
+  background: rgba(231, 76, 60, 0.06);
+  border-color: #c0392b;
+  --callout-icon-color: #c0392b;
+}
+
+/* example */
+.callout[callout="example"] {
+  background: rgba(142, 68, 173, 0.08);
+  border-color: #8e44ad;
+  --callout-icon-color: #8e44ad;
+}
+
+/* quote, cite */
+.callout[callout="quote"],
+.callout[callout="cite"] {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.25);
+  --callout-icon-color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+}
+
+/* ─── Light-mode overrides ───────────────────────────────────────────────────── */
+.theme-light .callout[callout="quote"],
+.theme-light .callout[callout="cite"] {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.25);
+  --callout-icon-color: rgba(0, 0, 0, 0.45);
+}
+
