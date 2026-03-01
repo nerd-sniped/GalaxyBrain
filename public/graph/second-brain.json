@@ -1,0 +1,249 @@
+{
+  "nodes": [
+    {
+      "id": "second-brain",
+      "name": "Second Brain",
+      "type": "file",
+      "path": "/notes/second-brain",
+      "val": 10,
+      "shape": "torusknot",
+      "color": "#16a085",
+      "collapsible": false,
+      "excerpt": "Second Brain The \"Second Brain\" is a methodology for building a personal knowledge management (PKM) system. ^pkm-definit"
+    },
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "type": "file",
+      "path": "/notes/digital-garden",
+      "val": 11,
+      "shape": "torus",
+      "color": "#27ae60",
+      "collapsible": false,
+      "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
+    },
+    {
+      "id": "note-taking",
+      "name": "Note Taking",
+      "type": "file",
+      "path": "/notes/note-taking",
+      "val": 8,
+      "shape": "cone",
+      "color": "#8e44ad",
+      "collapsible": true,
+      "excerpt": "Note Taking Effective note taking is fundamentally about creating retrievable, connectable knowledge — not just capturin"
+    },
+    {
+      "id": "philosophy-of-mind",
+      "name": "Philosophy of Mind",
+      "type": "file",
+      "path": "/notes/philosophy-of-mind",
+      "val": 7,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Philosophy of Mind Philosophy of mind explores the nature of mental phenomena: consciousness, perception, cognition, and"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "type": "file",
+      "path": "/notes/obsidian",
+      "val": 7,
+      "shape": "cylinder",
+      "color": "#8e44ad",
+      "collapsible": false,
+      "excerpt": "Obsidian Obsidian is a local-first Markdown note-taking app. It stores notes as plain files on disk, which makes it triv"
+    },
+    {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "type": "file",
+      "path": "/notes/getting-started",
+      "val": 6,
+      "shape": "dodecahedron",
+      "color": "#2ecc71",
+      "collapsible": false,
+      "excerpt": "Getting Started Welcome to the navigation guide for this garden. The 3D Graph The landing page shows a force-directed 3D"
+    },
+    {
+      "id": "tag:meta",
+      "name": "#meta",
+      "type": "tag",
+      "path": null,
+      "val": 6,
+      "shape": "octahedron",
+      "color": "#EC407A",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:productivity",
+      "name": "#productivity",
+      "type": "tag",
+      "path": null,
+      "val": 2,
+      "shape": "octahedron",
+      "color": "#FFA726",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:markdown",
+      "name": "#markdown",
+      "type": "tag",
+      "path": null,
+      "val": 1,
+      "shape": "octahedron",
+      "color": "#FFEE58",
+      "collapsible": false,
+      "excerpt": null
+    }
+  ],
+  "links": [
+    {
+      "source": "digital-garden",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "getting-started",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "note-taking",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "note-taking",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "note-taking",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "note-taking",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "note-taking",
+      "target": "tag:productivity",
+      "type": "file-tag"
+    },
+    {
+      "source": "obsidian",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "second-brain",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "second-brain",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "second-brain",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "second-brain",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "second-brain",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "second-brain",
+      "target": "tag:productivity",
+      "type": "file-tag"
+    },
+    {
+      "source": "second-brain",
+      "target": "tag:markdown",
+      "type": "file-tag"
+    }
+  ],
+  "backlinks": [
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "path": "/notes/digital-garden"
+    },
+    {
+      "id": "note-taking",
+      "name": "Note Taking",
+      "path": "/notes/note-taking"
+    },
+    {
+      "id": "philosophy-of-mind",
+      "name": "Philosophy of Mind",
+      "path": "/notes/philosophy-of-mind"
+    }
+  ],
+  "forwardLinks": [
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "path": "/notes/digital-garden"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "path": "/notes/obsidian"
+    },
+    {
+      "id": "note-taking",
+      "name": "Note Taking",
+      "path": "/notes/note-taking"
+    },
+    {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "path": "/notes/getting-started"
+    }
+  ]
+}

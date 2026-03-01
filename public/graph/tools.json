@@ -1,0 +1,151 @@
+{
+  "nodes": [
+    {
+      "id": "tools",
+      "name": "Tools",
+      "type": "file",
+      "path": "/notes/tools",
+      "val": 6,
+      "shape": "box",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Tools The stack behind this garden. Authoring - Obsidian — the note-taking app used to write and link notes - Git — vers"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "type": "file",
+      "path": "/notes/astro",
+      "val": 8,
+      "shape": "cone",
+      "color": "#e84393",
+      "collapsible": false,
+      "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "type": "file",
+      "path": "/notes/obsidian",
+      "val": 7,
+      "shape": "cylinder",
+      "color": "#8e44ad",
+      "collapsible": false,
+      "excerpt": "Obsidian Obsidian is a local-first Markdown note-taking app. It stores notes as plain files on disk, which makes it triv"
+    },
+    {
+      "id": "tag:tools",
+      "name": "#tools",
+      "type": "tag",
+      "path": null,
+      "val": 3,
+      "shape": "octahedron",
+      "color": "#7E57C2",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:meta",
+      "name": "#meta",
+      "type": "tag",
+      "path": null,
+      "val": 6,
+      "shape": "octahedron",
+      "color": "#EC407A",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "welcome",
+      "name": "Welcome",
+      "type": "file",
+      "path": "/notes/welcome",
+      "val": 6,
+      "shape": "sphere",
+      "color": "#3498db",
+      "collapsible": false,
+      "excerpt": "Welcome to GalaxyBrain This is the starting point of the garden. This site is a living documentGetting Started — a colle"
+    }
+  ],
+  "links": [
+    {
+      "source": "astro",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "astro",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "obsidian",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "tools",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "tools",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "welcome",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "tag:meta",
+      "type": "file-tag"
+    }
+  ],
+  "backlinks": [
+    {
+      "id": "astro",
+      "name": "Astro",
+      "path": "/notes/astro"
+    },
+    {
+      "id": "welcome",
+      "name": "Welcome",
+      "path": "/notes/welcome"
+    }
+  ],
+  "forwardLinks": [
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "path": "/notes/obsidian"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "path": "/notes/astro"
+    }
+  ]
+}

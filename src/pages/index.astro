@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FullGraph from '../components/FullGraph';
+import '../styles/graph.css';
+---
+
+<BaseLayout title="GalaxyBrain — Digital Garden" description="An interactive knowledge graph of linked notes.">
+  <div class="graph-page">
+    <!-- 3D graph — client:only because it needs WebGL / window globals -->
+    <FullGraph client:only="react" />
+  </div>
+</BaseLayout>
+
+<style>
+  .graph-page {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: #0a0a0a;
+  }
+</style>

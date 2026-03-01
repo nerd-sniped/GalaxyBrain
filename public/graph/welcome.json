@@ -1,0 +1,192 @@
+{
+  "nodes": [
+    {
+      "id": "welcome",
+      "name": "Welcome",
+      "type": "file",
+      "path": "/notes/welcome",
+      "val": 6,
+      "shape": "sphere",
+      "color": "#3498db",
+      "collapsible": false,
+      "excerpt": "Welcome to GalaxyBrain This is the starting point of the garden. This site is a living documentGetting Started — a colle"
+    },
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "type": "file",
+      "path": "/notes/digital-garden",
+      "val": 11,
+      "shape": "torus",
+      "color": "#27ae60",
+      "collapsible": false,
+      "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
+    },
+    {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "type": "file",
+      "path": "/notes/getting-started",
+      "val": 6,
+      "shape": "dodecahedron",
+      "color": "#2ecc71",
+      "collapsible": false,
+      "excerpt": "Getting Started Welcome to the navigation guide for this garden. The 3D Graph The landing page shows a force-directed 3D"
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "type": "file",
+      "path": "/notes/tools",
+      "val": 6,
+      "shape": "box",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Tools The stack behind this garden. Authoring - Obsidian — the note-taking app used to write and link notes - Git — vers"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "type": "file",
+      "path": "/notes/obsidian",
+      "val": 7,
+      "shape": "cylinder",
+      "color": "#8e44ad",
+      "collapsible": false,
+      "excerpt": "Obsidian Obsidian is a local-first Markdown note-taking app. It stores notes as plain files on disk, which makes it triv"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "type": "file",
+      "path": "/notes/astro",
+      "val": 8,
+      "shape": "cone",
+      "color": "#e84393",
+      "collapsible": false,
+      "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
+      "id": "tag:meta",
+      "name": "#meta",
+      "type": "tag",
+      "path": null,
+      "val": 6,
+      "shape": "octahedron",
+      "color": "#EC407A",
+      "collapsible": false,
+      "excerpt": null
+    }
+  ],
+  "links": [
+    {
+      "source": "astro",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "welcome",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "getting-started",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "obsidian",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "welcome",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "tag:meta",
+      "type": "file-tag"
+    }
+  ],
+  "backlinks": [
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "path": "/notes/digital-garden"
+    }
+  ],
+  "forwardLinks": [
+    {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "path": "/notes/getting-started"
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "path": "/notes/tools"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "path": "/notes/obsidian"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "path": "/notes/astro"
+    }
+  ]
+}

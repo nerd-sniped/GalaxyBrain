@@ -1,0 +1,182 @@
+{
+  "nodes": [
+    {
+      "id": "philosophy-of-mind",
+      "name": "Philosophy of Mind",
+      "type": "file",
+      "path": "/notes/philosophy-of-mind",
+      "val": 7,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Philosophy of Mind Philosophy of mind explores the nature of mental phenomena: consciousness, perception, cognition, and"
+    },
+    {
+      "id": "ghost:consciousness",
+      "name": "Consciousness",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "type": "file",
+      "path": "/notes/digital-garden",
+      "val": 11,
+      "shape": "torus",
+      "color": "#27ae60",
+      "collapsible": false,
+      "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
+    },
+    {
+      "id": "ghost:extended-mind-thesis",
+      "name": "Extended Mind Thesis",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "second-brain",
+      "name": "Second Brain",
+      "type": "file",
+      "path": "/notes/second-brain",
+      "val": 10,
+      "shape": "torusknot",
+      "color": "#16a085",
+      "collapsible": false,
+      "excerpt": "Second Brain The \"Second Brain\" is a methodology for building a personal knowledge management (PKM) system. ^pkm-definit"
+    },
+    {
+      "id": "note-taking",
+      "name": "Note Taking",
+      "type": "file",
+      "path": "/notes/note-taking",
+      "val": 8,
+      "shape": "cone",
+      "color": "#8e44ad",
+      "collapsible": true,
+      "excerpt": "Note Taking Effective note taking is fundamentally about creating retrievable, connectable knowledge — not just capturin"
+    },
+    {
+      "id": "tag:philosophy",
+      "name": "#philosophy",
+      "type": "tag",
+      "path": null,
+      "val": 1,
+      "shape": "octahedron",
+      "color": "#78909C",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:meta/concepts",
+      "name": "#meta/concepts",
+      "type": "tag",
+      "path": null,
+      "val": 4,
+      "shape": "octahedron",
+      "color": "#EC407A",
+      "collapsible": false,
+      "excerpt": null
+    }
+  ],
+  "links": [
+    {
+      "source": "digital-garden",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "tag:meta/concepts",
+      "type": "file-tag"
+    },
+    {
+      "source": "note-taking",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "note-taking",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "note-taking",
+      "target": "tag:meta/concepts",
+      "type": "file-tag"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "ghost:consciousness",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "ghost:extended-mind-thesis",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "tag:philosophy",
+      "type": "file-tag"
+    },
+    {
+      "source": "philosophy-of-mind",
+      "target": "tag:meta/concepts",
+      "type": "file-tag"
+    },
+    {
+      "source": "second-brain",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "second-brain",
+      "target": "note-taking",
+      "type": "wikilink"
+    }
+  ],
+  "backlinks": [],
+  "forwardLinks": [
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "path": "/notes/digital-garden"
+    },
+    {
+      "id": "second-brain",
+      "name": "Second Brain",
+      "path": "/notes/second-brain"
+    },
+    {
+      "id": "note-taking",
+      "name": "Note Taking",
+      "path": "/notes/note-taking"
+    }
+  ]
+}

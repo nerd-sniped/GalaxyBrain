@@ -1,0 +1,70 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import '../styles/note.css';
+import '../styles/callouts.css';
+
+interface Props {
+  title: string;
+  excerpt?: string;
+}
+const { title, excerpt } = Astro.props;
+---
+
+<BaseLayout title={`${title} — GalaxyBrain`} description={excerpt}>
+  <div class="note-layout">
+    <main class="note-content">
+      <article class="prose">
+        <slot />
+      </article>
+    </main>
+    <aside class="note-sidebar">
+      <!-- LocalGraph will go here in Phase 6 -->
+      <div class="sidebar-placeholder">
+        <span>Local graph coming soon</span>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .note-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    gap: 2rem;
+  }
+
+  .note-content {
+    min-width: 0;
+  }
+
+  .note-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+
+  .sidebar-placeholder {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 900px) {
+    .note-layout {
+      grid-template-columns: 1fr;
+    }
+    .note-sidebar {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,84 @@
+/* ─── Full graph (landing page) ─────────────────────────────────────────────── */
+.graph-page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg);
+}
+
+/* ─── Graph overlay UI ───────────────────────────────────────────────────────── */
+.graph-overlay {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.graph-title {
+  top: 24px;
+  left: 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255 255 255 / 0.7);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.graph-hint {
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(0 0 0 / 0.5);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+/* ─── Local graph (sidebar) ──────────────────────────────────────────────────── */
+.local-graph-container {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.local-graph-header {
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+}
+
+.graph-legend {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot--file   { background: var(--accent); }
+.legend-dot--tag    { background: var(--accent-tag); }
+.legend-dot--ghost  { background: transparent; border: 1px solid var(--text-muted); }

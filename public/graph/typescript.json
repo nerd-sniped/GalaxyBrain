@@ -1,0 +1,207 @@
+{
+  "nodes": [
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "type": "file",
+      "path": "/notes/typescript",
+      "val": 8,
+      "shape": "cylinder",
+      "color": "#3178c6",
+      "collapsible": false,
+      "excerpt": "TypeScript TypeScript is a statically typed superset of JavaScript that compiles to plain JS. Why TypeScript JavaScript'"
+    },
+    {
+      "id": "programming",
+      "name": "Programming",
+      "type": "file",
+      "path": "/notes/programming",
+      "val": 12,
+      "shape": "dodecahedron",
+      "color": "#e67e22",
+      "collapsible": true,
+      "excerpt": "Programming A collection of notes on programming languages, paradigms, and techniques. Languages Covered - Rust — system"
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "type": "file",
+      "path": "/notes/rust",
+      "val": 7,
+      "shape": "box",
+      "color": "#F74C00",
+      "collapsible": false,
+      "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "type": "file",
+      "path": "/notes/astro",
+      "val": 8,
+      "shape": "cone",
+      "color": "#e84393",
+      "collapsible": false,
+      "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
+      "id": "web-dev",
+      "name": "Web Dev",
+      "type": "file",
+      "path": "/notes/web-dev",
+      "val": 7,
+      "shape": "sphere",
+      "color": "#e74c3c",
+      "collapsible": false,
+      "excerpt": "Web Dev Web development covers building applications that run in the browser or on web servers. Frontend Stack Used Here"
+    },
+    {
+      "id": "tag:programming/web",
+      "name": "#programming/web",
+      "type": "tag",
+      "path": null,
+      "val": 3,
+      "shape": "octahedron",
+      "color": "#26C6DA",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:tech",
+      "name": "#tech",
+      "type": "tag",
+      "path": null,
+      "val": 4,
+      "shape": "octahedron",
+      "color": "#D4E157",
+      "collapsible": false,
+      "excerpt": null
+    }
+  ],
+  "links": [
+    {
+      "source": "programming",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "programming",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "programming",
+      "target": "web-dev",
+      "type": "wikilink"
+    },
+    {
+      "source": "programming",
+      "target": "tag:tech",
+      "type": "file-tag"
+    },
+    {
+      "source": "rust",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "tag:tech",
+      "type": "file-tag"
+    },
+    {
+      "source": "typescript",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "web-dev",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "tag:programming/web",
+      "type": "file-tag"
+    },
+    {
+      "source": "typescript",
+      "target": "tag:tech",
+      "type": "file-tag"
+    },
+    {
+      "source": "web-dev",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "web-dev",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "web-dev",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "web-dev",
+      "target": "tag:programming/web",
+      "type": "file-tag"
+    },
+    {
+      "source": "web-dev",
+      "target": "tag:tech",
+      "type": "file-tag"
+    }
+  ],
+  "backlinks": [
+    {
+      "id": "programming",
+      "name": "Programming",
+      "path": "/notes/programming"
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "path": "/notes/rust"
+    },
+    {
+      "id": "web-dev",
+      "name": "Web Dev",
+      "path": "/notes/web-dev"
+    }
+  ],
+  "forwardLinks": [
+    {
+      "id": "astro",
+      "name": "Astro",
+      "path": "/notes/astro"
+    },
+    {
+      "id": "web-dev",
+      "name": "Web Dev",
+      "path": "/notes/web-dev"
+    },
+    {
+      "id": "programming",
+      "name": "Programming",
+      "path": "/notes/programming"
+    }
+  ]
+}

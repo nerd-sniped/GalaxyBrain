@@ -1,0 +1,99 @@
+/* ─── Individual note page ───────────────────────────────────────────────────── */
+
+/* Backlinks section */
+.backlinks {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.backlinks-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.backlinks-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.backlinks-list a {
+  font-size: 0.9rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.backlinks-list a::before {
+  content: '←';
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.backlinks-list a:hover { color: var(--accent); text-decoration: none; }
+
+/* Forward links section */
+.forward-links {
+  margin-top: 1.5rem;
+}
+
+.forward-links-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.forward-links-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.forward-links-list a {
+  font-size: 0.9rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.forward-links-list a::before {
+  content: '→';
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.forward-links-list a:hover { color: var(--accent); text-decoration: none; }
+
+/* Wikilinks rendered as anchor tags */
+.prose a[data-wikilink] {
+  color: var(--accent);
+  border-bottom: 1px dashed rgba(52, 152, 219, 0.4);
+}
+.prose a[data-wikilink]:hover {
+  border-bottom-style: solid;
+  text-decoration: none;
+}
+
+/* Block transclusion (placeholder) */
+.transcluded-block {
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background: var(--surface-1);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.transcluded-block-source {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}

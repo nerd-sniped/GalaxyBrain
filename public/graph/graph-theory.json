@@ -1,0 +1,121 @@
+{
+  "nodes": [
+    {
+      "id": "graph-theory",
+      "name": "Graph Theory",
+      "type": "file",
+      "path": "/notes/graph-theory",
+      "val": 6,
+      "shape": "octahedron",
+      "color": "#1abc9c",
+      "collapsible": false,
+      "excerpt": "Graph Theory Graph theory is the study of graphs — mathematical structures used to model pairwise relations between obje"
+    },
+    {
+      "id": "ghost:dijkstra",
+      "name": "Dijkstra",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:minimum-spanning-tree",
+      "name": "Minimum Spanning Tree",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "programming",
+      "name": "Programming",
+      "type": "file",
+      "path": "/notes/programming",
+      "val": 12,
+      "shape": "dodecahedron",
+      "color": "#e67e22",
+      "collapsible": true,
+      "excerpt": "Programming A collection of notes on programming languages, paradigms, and techniques. Languages Covered - Rust — system"
+    },
+    {
+      "id": "tag:math",
+      "name": "#math",
+      "type": "tag",
+      "path": null,
+      "val": 1,
+      "shape": "octahedron",
+      "color": "#FFA726",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:programming",
+      "name": "#programming",
+      "type": "tag",
+      "path": null,
+      "val": 4,
+      "shape": "octahedron",
+      "color": "#26C6DA",
+      "collapsible": false,
+      "excerpt": null
+    }
+  ],
+  "links": [
+    {
+      "source": "graph-theory",
+      "target": "ghost:dijkstra",
+      "type": "wikilink"
+    },
+    {
+      "source": "graph-theory",
+      "target": "ghost:minimum-spanning-tree",
+      "type": "wikilink"
+    },
+    {
+      "source": "graph-theory",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "graph-theory",
+      "target": "tag:math",
+      "type": "file-tag"
+    },
+    {
+      "source": "graph-theory",
+      "target": "tag:programming",
+      "type": "file-tag"
+    },
+    {
+      "source": "programming",
+      "target": "graph-theory",
+      "type": "wikilink"
+    },
+    {
+      "source": "programming",
+      "target": "tag:programming",
+      "type": "file-tag"
+    }
+  ],
+  "backlinks": [
+    {
+      "id": "programming",
+      "name": "Programming",
+      "path": "/notes/programming"
+    }
+  ],
+  "forwardLinks": [
+    {
+      "id": "programming",
+      "name": "Programming",
+      "path": "/notes/programming"
+    }
+  ]
+}

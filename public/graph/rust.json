@@ -1,0 +1,167 @@
+{
+  "nodes": [
+    {
+      "id": "rust",
+      "name": "Rust",
+      "type": "file",
+      "path": "/notes/rust",
+      "val": 7,
+      "shape": "box",
+      "color": "#F74C00",
+      "collapsible": false,
+      "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
+    },
+    {
+      "id": "programming",
+      "name": "Programming",
+      "type": "file",
+      "path": "/notes/programming",
+      "val": 12,
+      "shape": "dodecahedron",
+      "color": "#e67e22",
+      "collapsible": true,
+      "excerpt": "Programming A collection of notes on programming languages, paradigms, and techniques. Languages Covered - Rust — system"
+    },
+    {
+      "id": "ghost:ownership-model",
+      "name": "Ownership Model",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "type": "file",
+      "path": "/notes/typescript",
+      "val": 8,
+      "shape": "cylinder",
+      "color": "#3178c6",
+      "collapsible": false,
+      "excerpt": "TypeScript TypeScript is a statically typed superset of JavaScript that compiles to plain JS. Why TypeScript JavaScript'"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "type": "file",
+      "path": "/notes/astro",
+      "val": 8,
+      "shape": "cone",
+      "color": "#e84393",
+      "collapsible": false,
+      "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
+      "id": "tag:programming/systems",
+      "name": "#programming/systems",
+      "type": "tag",
+      "path": null,
+      "val": 2,
+      "shape": "octahedron",
+      "color": "#26C6DA",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:tech",
+      "name": "#tech",
+      "type": "tag",
+      "path": null,
+      "val": 4,
+      "shape": "octahedron",
+      "color": "#D4E157",
+      "collapsible": false,
+      "excerpt": null
+    }
+  ],
+  "links": [
+    {
+      "source": "programming",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "programming",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "programming",
+      "target": "tag:tech",
+      "type": "file-tag"
+    },
+    {
+      "source": "rust",
+      "target": "ghost:ownership-model",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "tag:programming/systems",
+      "type": "file-tag"
+    },
+    {
+      "source": "rust",
+      "target": "tag:tech",
+      "type": "file-tag"
+    },
+    {
+      "source": "typescript",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "tag:tech",
+      "type": "file-tag"
+    }
+  ],
+  "backlinks": [
+    {
+      "id": "programming",
+      "name": "Programming",
+      "path": "/notes/programming"
+    }
+  ],
+  "forwardLinks": [
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "path": "/notes/typescript"
+    },
+    {
+      "id": "astro",
+      "name": "Astro",
+      "path": "/notes/astro"
+    },
+    {
+      "id": "programming",
+      "name": "Programming",
+      "path": "/notes/programming"
+    }
+  ]
+}

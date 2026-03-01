@@ -1,0 +1,203 @@
+{
+  "nodes": [
+    {
+      "id": "astro",
+      "name": "Astro",
+      "type": "file",
+      "path": "/notes/astro",
+      "val": 8,
+      "shape": "cone",
+      "color": "#e84393",
+      "collapsible": false,
+      "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "type": "file",
+      "path": "/notes/tools",
+      "val": 6,
+      "shape": "box",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Tools The stack behind this garden. Authoring - Obsidian — the note-taking app used to write and link notes - Git — vers"
+    },
+    {
+      "id": "tag:tools",
+      "name": "#tools",
+      "type": "tag",
+      "path": null,
+      "val": 3,
+      "shape": "octahedron",
+      "color": "#7E57C2",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "type": "file",
+      "path": "/notes/digital-garden",
+      "val": 11,
+      "shape": "torus",
+      "color": "#27ae60",
+      "collapsible": false,
+      "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "type": "file",
+      "path": "/notes/rust",
+      "val": 7,
+      "shape": "box",
+      "color": "#F74C00",
+      "collapsible": false,
+      "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "type": "file",
+      "path": "/notes/typescript",
+      "val": 8,
+      "shape": "cylinder",
+      "color": "#3178c6",
+      "collapsible": false,
+      "excerpt": "TypeScript TypeScript is a statically typed superset of JavaScript that compiles to plain JS. Why TypeScript JavaScript'"
+    },
+    {
+      "id": "web-dev",
+      "name": "Web Dev",
+      "type": "file",
+      "path": "/notes/web-dev",
+      "val": 7,
+      "shape": "sphere",
+      "color": "#e74c3c",
+      "collapsible": false,
+      "excerpt": "Web Dev Web development covers building applications that run in the browser or on web servers. Frontend Stack Used Here"
+    },
+    {
+      "id": "welcome",
+      "name": "Welcome",
+      "type": "file",
+      "path": "/notes/welcome",
+      "val": 6,
+      "shape": "sphere",
+      "color": "#3498db",
+      "collapsible": false,
+      "excerpt": "Welcome to GalaxyBrain This is the starting point of the garden. This site is a living documentGetting Started — a colle"
+    }
+  ],
+  "links": [
+    {
+      "source": "astro",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "astro",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "digital-garden",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "digital-garden",
+      "target": "welcome",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "typescript",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "web-dev",
+      "type": "wikilink"
+    },
+    {
+      "source": "web-dev",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "web-dev",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
+      "target": "astro",
+      "type": "wikilink"
+    }
+  ],
+  "backlinks": [
+    {
+      "id": "digital-garden",
+      "name": "Digital Garden",
+      "path": "/notes/digital-garden"
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "path": "/notes/rust"
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "path": "/notes/tools"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "path": "/notes/typescript"
+    },
+    {
+      "id": "web-dev",
+      "name": "Web Dev",
+      "path": "/notes/web-dev"
+    },
+    {
+      "id": "welcome",
+      "name": "Welcome",
+      "path": "/notes/welcome"
+    }
+  ],
+  "forwardLinks": [
+    {
+      "id": "tools",
+      "name": "Tools",
+      "path": "/notes/tools"
+    }
+  ]
+}

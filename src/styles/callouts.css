@@ -1,0 +1,71 @@
+/* Obsidian-style callouts — pairs with @heavycircle/remark-obsidian output */
+.callout {
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid;
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* type variants */
+.callout[data-callout="note"],
+.callout[data-callout="info"] {
+  background: rgba(52, 152, 219, 0.08);
+  border-color: #3498db;
+  --callout-icon-color: #3498db;
+}
+
+.callout[data-callout="warning"],
+.callout[data-callout="caution"],
+.callout[data-callout="attention"] {
+  background: rgba(230, 126, 34, 0.08);
+  border-color: #e67e22;
+  --callout-icon-color: #e67e22;
+}
+
+.callout[data-callout="danger"],
+.callout[data-callout="error"],
+.callout[data-callout="bug"] {
+  background: rgba(231, 76, 60, 0.08);
+  border-color: #e74c3c;
+  --callout-icon-color: #e74c3c;
+}
+
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"] {
+  background: rgba(46, 204, 113, 0.08);
+  border-color: #2ecc71;
+  --callout-icon-color: #2ecc71;
+}
+
+.callout[data-callout="quote"],
+.callout[data-callout="cite"] {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.3);
+  --callout-icon-color: rgba(255, 255, 255, 0.5);
+}
+
+.callout[data-callout="tip"],
+.callout[data-callout="hint"],
+.callout[data-callout="important"] {
+  background: rgba(155, 89, 182, 0.08);
+  border-color: #9b59b6;
+  --callout-icon-color: #9b59b6;
+}
+
+.callout-title-icon {
+  color: var(--callout-icon-color, var(--accent));
+}
+
+.callout-content p:last-child {
+  margin-bottom: 0;
+}
