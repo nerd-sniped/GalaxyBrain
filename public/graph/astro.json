@@ -49,7 +49,7 @@
       "name": "Rust",
       "type": "file",
       "path": "/notes/rust",
-      "val": 7,
+      "val": 9,
       "shape": "box",
       "color": "#F74C00",
       "collapsible": false,
@@ -60,7 +60,7 @@
       "name": "TypeScript",
       "type": "file",
       "path": "/notes/typescript",
-      "val": 8,
+      "val": 10,
       "shape": "cylinder",
       "color": "#3178c6",
       "collapsible": false,
@@ -133,6 +133,11 @@
     {
       "source": "typescript",
       "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "rust",
       "type": "wikilink"
     },
     {

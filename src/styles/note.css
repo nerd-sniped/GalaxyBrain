@@ -164,17 +164,144 @@
 }
 .forward-links-list a:hover { color: var(--accent); text-decoration: none; }
 
-/* Block transclusion (placeholder) */
-.transcluded-block {
+/* ── Block Transclusion ────────────────────────────────────────────────────── */
+
+/* Transcluded block: ![[note#^blockId]] */
+.prose blockquote.transclusion {
   border-left: 3px solid var(--accent);
-  padding: 0.75rem 1rem;
-  margin: 1rem 0;
-  background: var(--surface-1);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--surface-1);
+  padding: 0.75rem 1.1rem 0.6rem 1.1rem;
+  margin: 1.25rem 0 1.25rem 0.5rem;
+  box-shadow: inset 4px 0 0 var(--accent);
+  position: relative;
 }
-.transcluded-block-source {
-  font-size: 0.75rem;
+
+/* Override the normal blockquote border so .transclusion is distinct */
+.prose blockquote.transclusion::before {
+  content: '❝';
+  position: absolute;
+  top: 0.4rem;
+  right: 0.75rem;
+  font-size: 1.2rem;
+  color: var(--accent);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.prose blockquote.transclusion p {
+  margin: 0.25rem 0;
+  color: var(--text);
+}
+
+/* Cite link: "From: note-name" — right-aligned, small */
+.prose blockquote.transclusion cite.transclusion-cite {
+  display: block;
+  text-align: right;
+  font-size: 0.72rem;
+  font-style: normal;
   color: var(--text-muted);
-  margin-top: 0.5rem;
+  margin-top: 0.55rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.18);
+}
+
+.prose blockquote.transclusion cite.transclusion-cite a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.prose blockquote.transclusion cite.transclusion-cite a:hover {
+  text-decoration: underline;
+}
+
+/* Full-note embed: ![[note]] — collapsible <details> */
+.prose details.transclusion-embed {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.25rem 0;
+  overflow: hidden;
+  background: var(--surface-1);
+}
+
+.prose details.transclusion-embed > summary.transclusion-embed-header {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.prose details.transclusion-embed > summary.transclusion-embed-header::before {
+  content: '▶';
+  font-size: 0.65rem;
+  color: var(--accent);
+  transition: transform 0.2s;
+}
+
+.prose details.transclusion-embed[open] > summary.transclusion-embed-header::before {
+  transform: rotate(90deg);
+}
+
+.prose details.transclusion-embed > summary.transclusion-embed-header:hover {
+  background: var(--surface-2, var(--surface-1));
+  color: var(--text);
+}
+
+.prose details.transclusion-embed > summary.transclusion-embed-header a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.prose details.transclusion-embed > summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose .transclusion-embed-body {
+  padding: 0.85rem 1.1rem;
+  font-size: 0.9em;
+  border-top: 1px solid var(--border);
+}
+
+.prose .transclusion-embed-body p {
+  margin: 0.4rem 0;
+}
+
+/* Missing block/note warning */
+.prose .transclusion-missing {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 100, 50, 0.10);
+  border: 1px solid rgba(255, 100, 50, 0.35);
+  border-radius: var(--radius-md);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0;
+}
+
+.prose .transclusion-missing code {
+  font-size: 0.8em;
+  opacity: 0.85;
+}
+
+/* Vault images — give them the same treatment as .prose img */
+.prose img.vault-image {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+  display: block;
 }
 

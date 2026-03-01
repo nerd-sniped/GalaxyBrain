@@ -40,3 +40,35 @@ A ==ghost node== appears when a wikilink points to a note that doesn't exist yet
 ## Collapsible Nodes
 
 Notes with `collapsible: true` in their frontmatter start with their downstream links hidden. Click once to reveal children; click again to navigate.
+
+## Graph Architecture Diagram
+
+The graph below shows a simplified sample of the force-directed layout used on the home page:
+
+![[diagram.svg]]
+
+## Transclusion Examples
+
+This section demonstrates block and note embedding.
+
+### Rust Ownership Model (block embed)
+
+> The following is transcluded directly from [[Rust]]:
+
+![[Rust#^ownership-intro]]
+
+### Note-Taking Principle (block embed)
+
+![[Note Taking#^atomic-note]]
+
+### Broken Reference (error handling test)
+
+The embed below references a block that does not exist — it should render a warning instead of breaking the build:
+
+![[nonexistent note#^broken-id]]
+
+### Full Note Embed
+
+The full content of [[Note Taking]] is embedded below (collapsed by default):
+
+![[Note Taking]]

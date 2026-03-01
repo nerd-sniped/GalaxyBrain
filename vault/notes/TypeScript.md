@@ -24,7 +24,17 @@ JavaScript's dynamic typing makes large codebases hard to maintain. TypeScript a
 
 This entire project is written in TypeScript (`strict` mode). Path aliases (`@lib/*`, `@components/*`) are configured in `tsconfig.json`. ^ts-config-ref
 
+Below is a screenshot of the type definitions used by this project:
+
+![[examples/screenshot.svg]]
+
 [[Astro]] has first-class TypeScript support with no configuration required.
+
+## Borrow vs Type Checking
+
+TypeScript's type system is purely structural (erased at runtime). Compare this to Rust's borrow checker:
+
+![[Rust#^borrow-ref]]
 
 ## Relationship to #programming/web
 

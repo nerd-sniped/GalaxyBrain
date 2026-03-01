@@ -27,7 +27,7 @@
       "name": "Note Taking",
       "type": "file",
       "path": "/notes/note-taking",
-      "val": 8,
+      "val": 9,
       "shape": "cone",
       "color": "#8e44ad",
       "collapsible": true,
@@ -60,7 +60,7 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 6,
+      "val": 10,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
@@ -120,6 +120,11 @@
       "source": "digital-garden",
       "target": "tag:meta",
       "type": "file-tag"
+    },
+    {
+      "source": "getting-started",
+      "target": "note-taking",
+      "type": "wikilink"
     },
     {
       "source": "getting-started",

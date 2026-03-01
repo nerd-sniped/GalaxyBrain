@@ -5,11 +5,22 @@
       "name": "Rust",
       "type": "file",
       "path": "/notes/rust",
-      "val": 7,
+      "val": 9,
       "shape": "box",
       "color": "#F74C00",
       "collapsible": false,
       "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
+    },
+    {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "type": "file",
+      "path": "/notes/getting-started",
+      "val": 10,
+      "shape": "dodecahedron",
+      "color": "#2ecc71",
+      "collapsible": false,
+      "excerpt": "Getting Started Welcome to the navigation guide for this garden. The 3D Graph The landing page shows a force-directed 3D"
     },
     {
       "id": "programming",
@@ -38,7 +49,7 @@
       "name": "TypeScript",
       "type": "file",
       "path": "/notes/typescript",
-      "val": 8,
+      "val": 10,
       "shape": "cylinder",
       "color": "#3178c6",
       "collapsible": false,
@@ -79,6 +90,11 @@
     }
   ],
   "links": [
+    {
+      "source": "getting-started",
+      "target": "rust",
+      "type": "wikilink"
+    },
     {
       "source": "programming",
       "target": "rust",
@@ -131,6 +147,11 @@
     },
     {
       "source": "typescript",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
       "target": "programming",
       "type": "wikilink"
     },
@@ -142,9 +163,19 @@
   ],
   "backlinks": [
     {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "path": "/notes/getting-started"
+    },
+    {
       "id": "programming",
       "name": "Programming",
       "path": "/notes/programming"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "path": "/notes/typescript"
     }
   ],
   "forwardLinks": [

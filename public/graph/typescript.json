@@ -5,7 +5,7 @@
       "name": "TypeScript",
       "type": "file",
       "path": "/notes/typescript",
-      "val": 8,
+      "val": 10,
       "shape": "cylinder",
       "color": "#3178c6",
       "collapsible": false,
@@ -27,11 +27,22 @@
       "name": "Rust",
       "type": "file",
       "path": "/notes/rust",
-      "val": 7,
+      "val": 9,
       "shape": "box",
       "color": "#F74C00",
       "collapsible": false,
       "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
+    },
+    {
+      "id": "ghost:examples-screenshot-svg",
+      "name": "examples/screenshot.svg",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
     },
     {
       "id": "astro",
@@ -121,7 +132,17 @@
     },
     {
       "source": "typescript",
+      "target": "ghost:examples-screenshot-svg",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
       "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "rust",
       "type": "wikilink"
     },
     {
@@ -192,6 +213,11 @@
       "id": "astro",
       "name": "Astro",
       "path": "/notes/astro"
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "path": "/notes/rust"
     },
     {
       "id": "web-dev",

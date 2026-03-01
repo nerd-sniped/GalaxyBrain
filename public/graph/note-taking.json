@@ -5,11 +5,22 @@
       "name": "Note Taking",
       "type": "file",
       "path": "/notes/note-taking",
-      "val": 8,
+      "val": 9,
       "shape": "cone",
       "color": "#8e44ad",
       "collapsible": true,
       "excerpt": "Note Taking Effective note taking is fundamentally about creating retrievable, connectable knowledge — not just capturin"
+    },
+    {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "type": "file",
+      "path": "/notes/getting-started",
+      "val": 10,
+      "shape": "dodecahedron",
+      "color": "#2ecc71",
+      "collapsible": false,
+      "excerpt": "Getting Started Welcome to the navigation guide for this garden. The 3D Graph The landing page shows a force-directed 3D"
     },
     {
       "id": "obsidian",
@@ -43,17 +54,6 @@
       "color": "#27ae60",
       "collapsible": false,
       "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
-    },
-    {
-      "id": "getting-started",
-      "name": "Getting Started",
-      "type": "file",
-      "path": "/notes/getting-started",
-      "val": 6,
-      "shape": "dodecahedron",
-      "color": "#2ecc71",
-      "collapsible": false,
-      "excerpt": "Getting Started Welcome to the navigation guide for this garden. The 3D Graph The landing page shows a force-directed 3D"
     },
     {
       "id": "tag:productivity",
@@ -109,6 +109,11 @@
       "source": "digital-garden",
       "target": "tag:meta/concepts",
       "type": "file-tag"
+    },
+    {
+      "source": "getting-started",
+      "target": "note-taking",
+      "type": "wikilink"
     },
     {
       "source": "note-taking",
@@ -192,6 +197,11 @@
     }
   ],
   "backlinks": [
+    {
+      "id": "getting-started",
+      "name": "Getting Started",
+      "path": "/notes/getting-started"
+    },
     {
       "id": "philosophy-of-mind",
       "name": "Philosophy of Mind",

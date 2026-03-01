@@ -60,7 +60,7 @@
       "name": "Note Taking",
       "type": "file",
       "path": "/notes/note-taking",
-      "val": 8,
+      "val": 9,
       "shape": "cone",
       "color": "#8e44ad",
       "collapsible": true,

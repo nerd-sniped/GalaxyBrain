@@ -5,7 +5,7 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 6,
+      "val": 10,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
@@ -23,6 +23,50 @@
       "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
     },
     {
+      "id": "ghost:diagram-svg",
+      "name": "diagram.svg",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "type": "file",
+      "path": "/notes/rust",
+      "val": 9,
+      "shape": "box",
+      "color": "#F74C00",
+      "collapsible": false,
+      "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
+    },
+    {
+      "id": "note-taking",
+      "name": "Note Taking",
+      "type": "file",
+      "path": "/notes/note-taking",
+      "val": 9,
+      "shape": "cone",
+      "color": "#8e44ad",
+      "collapsible": true,
+      "excerpt": "Note Taking Effective note taking is fundamentally about creating retrievable, connectable knowledge — not just capturin"
+    },
+    {
+      "id": "ghost:nonexistent-note",
+      "name": "nonexistent note",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
       "id": "tag:meta",
       "name": "#meta",
       "type": "tag",
@@ -32,17 +76,6 @@
       "color": "#EC407A",
       "collapsible": false,
       "excerpt": null
-    },
-    {
-      "id": "note-taking",
-      "name": "Note Taking",
-      "type": "file",
-      "path": "/notes/note-taking",
-      "val": 8,
-      "shape": "cone",
-      "color": "#8e44ad",
-      "collapsible": true,
-      "excerpt": "Note Taking Effective note taking is fundamentally about creating retrievable, connectable knowledge — not just capturin"
     },
     {
       "id": "obsidian",
@@ -103,6 +136,26 @@
       "source": "digital-garden",
       "target": "tag:meta",
       "type": "file-tag"
+    },
+    {
+      "source": "getting-started",
+      "target": "ghost:diagram-svg",
+      "type": "wikilink"
+    },
+    {
+      "source": "getting-started",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "getting-started",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "getting-started",
+      "target": "ghost:nonexistent-note",
+      "type": "wikilink"
     },
     {
       "source": "getting-started",
@@ -202,5 +255,16 @@
       "path": "/notes/welcome"
     }
   ],
-  "forwardLinks": []
+  "forwardLinks": [
+    {
+      "id": "rust",
+      "name": "Rust",
+      "path": "/notes/rust"
+    },
+    {
+      "id": "note-taking",
+      "name": "Note Taking",
+      "path": "/notes/note-taking"
+    }
+  ]
 }

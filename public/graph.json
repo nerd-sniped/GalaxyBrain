@@ -27,7 +27,7 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 6,
+      "val": 10,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
@@ -49,7 +49,7 @@
       "name": "Note Taking",
       "type": "file",
       "path": "/notes/note-taking",
-      "val": 8,
+      "val": 9,
       "shape": "cone",
       "color": "#8e44ad",
       "collapsible": true,
@@ -93,7 +93,7 @@
       "name": "Rust",
       "type": "file",
       "path": "/notes/rust",
-      "val": 7,
+      "val": 9,
       "shape": "box",
       "color": "#F74C00",
       "collapsible": false,
@@ -126,7 +126,7 @@
       "name": "TypeScript",
       "type": "file",
       "path": "/notes/typescript",
-      "val": 8,
+      "val": 10,
       "shape": "cylinder",
       "color": "#3178c6",
       "collapsible": false,
@@ -287,6 +287,28 @@
       "excerpt": null
     },
     {
+      "id": "ghost:diagram-svg",
+      "name": "diagram.svg",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:nonexistent-note",
+      "name": "nonexistent note",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
       "id": "ghost:dijkstra",
       "name": "Dijkstra",
       "type": "ghost",
@@ -362,6 +384,17 @@
       "color": "#ffffff",
       "collapsible": false,
       "excerpt": null
+    },
+    {
+      "id": "ghost:examples-screenshot-svg",
+      "name": "examples/screenshot.svg",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
     }
   ],
   "links": [
@@ -414,6 +447,26 @@
       "source": "digital-garden",
       "target": "tag:meta/concepts",
       "type": "file-tag"
+    },
+    {
+      "source": "getting-started",
+      "target": "ghost:diagram-svg",
+      "type": "wikilink"
+    },
+    {
+      "source": "getting-started",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "getting-started",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "getting-started",
+      "target": "ghost:nonexistent-note",
+      "type": "wikilink"
     },
     {
       "source": "getting-started",
@@ -647,7 +700,17 @@
     },
     {
       "source": "typescript",
+      "target": "ghost:examples-screenshot-svg",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
       "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "rust",
       "type": "wikilink"
     },
     {
