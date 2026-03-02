@@ -42,6 +42,8 @@ jobs:
       - name: Create PR with upstream changes
         if: steps.check.outputs.behind != '0'
         uses: actions/github-script@v7
+        env:
+          BASE_BRANCH: ${{ inputs.branch || 'main' }}
         with:
           script: |
             const { execSync } = require('child_process');
@@ -58,7 +60,7 @@ jobs:
               repo: context.repo.repo,
               title: `chore: sync updates from GalaxyBrain template`,
               head: branch,
-              base: '${{ inputs.branch || "main" }}',
+              base: process.env.BASE_BRANCH,
               body: [
                 '## Upstream template sync',
                 '',
