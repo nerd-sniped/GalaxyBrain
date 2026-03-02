@@ -9,7 +9,7 @@ public/graph/
 public/blocks.json
 
 # Vault assets copied during build
-src/assets/vault/
+public/vault-assets/
 
 # Obsidian workspace state (machine-local, not useful in git)
 vault/.obsidian/workspace.json
