@@ -1,4 +1,5 @@
 import { useRef, useCallback, useEffect, useState, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import ForceGraph3D from 'react-force-graph-3d';
 import type { ForceGraphMethods } from 'react-force-graph-3d';
 import * as THREE from 'three';
@@ -477,11 +478,17 @@ export default function FullGraph() {
         </div>
       )}
 
-      {/* Tag filter banner */}
-      {highlightedTag !== null && (
-        <div style={{ position: 'fixed', top: 20, left: '50%', transform: 'translateX(-50%)', background: 'rgba(231,76,60,0.18)', border: '1px solid #e74c3c', color: '#e74c3c', padding: '6px 16px', borderRadius: 20, fontSize: 13, pointerEvents: 'none', zIndex: 9999 }}>
-          Filtering by #{graphData.nodes.find((n) => n.id === highlightedTag)?.name ?? highlightedTag} — click tag again to clear
-        </div>
+      {/* Tag filter banner — rendered via portal to escape ForceGraph3D canvas event interception */}
+      {highlightedTag !== null && createPortal(
+        <div style={{ position: 'fixed', top: 20, left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(231,76,60,0.18)', border: '1px solid #e74c3c', color: '#e74c3c', padding: '6px 10px 6px 16px', borderRadius: 20, fontSize: 13, zIndex: 99999, userSelect: 'none', pointerEvents: 'none' }}>
+          <span>Filtering by #{graphData.nodes.find((n) => n.id === highlightedTag)?.name ?? highlightedTag}</span>
+          <button
+            onPointerDown={(e) => { e.stopPropagation(); e.preventDefault(); setHighlightedTag(null); }}
+            style={{ pointerEvents: 'all', background: 'rgba(231,76,60,0.3)', border: '1px solid #e74c3c', color: '#e74c3c', borderRadius: 12, width: 22, height: 22, cursor: 'pointer', fontSize: 13, lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: 0 }}
+            title="Clear tag filter"
+          >✕</button>
+        </div>,
+        document.body,
       )}
 
       {/* Hint bar */}
