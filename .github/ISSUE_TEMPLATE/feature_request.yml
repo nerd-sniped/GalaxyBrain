@@ -1,0 +1,58 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea that would make GalaxyBrain better? We'd love to hear it.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the gap or pain point you're running into.
+      placeholder: "I can't easily see which notes haven't been linked to anything yet. Orphaned notes are invisible in the current graph."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the feature you'd like
+      placeholder: "A toggle or filter to highlight orphan nodes (no incoming or outgoing wikilinks) so I can spot gaps in my vault."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+      description: Any workarounds you've tried, or other approaches that could work.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area does this affect?
+      options:
+        - 3D graph (FullGraph)
+        - Local graph (sidebar)
+        - Note rendering / Markdown pipeline
+        - Frontmatter / configuration
+        - Build pipeline
+        - Obsidian integration
+        - Deployment / Netlify
+        - Documentation / vault notes
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: extras
+    attributes:
+      label: Additional context
+      description: Mockups, screenshots, links to similar features elsewhere — anything that helps clarify the idea.
+    validations:
+      required: false

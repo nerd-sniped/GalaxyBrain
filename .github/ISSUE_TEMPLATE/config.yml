@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Show & Tell — share your vault
+    url: https://github.com/nerd-sniped/GalaxyBrain/discussions/categories/show-and-tell
+    about: Share a live site you've built with GalaxyBrain
+  - name: 🙋 Q&A — ask a question
+    url: https://github.com/nerd-sniped/GalaxyBrain/discussions/categories/q-a
+    about: Not a bug — just need help getting something working

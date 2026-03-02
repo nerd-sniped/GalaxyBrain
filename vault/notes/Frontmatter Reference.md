@@ -28,6 +28,8 @@ graph:
   shape: dodecahedron
   color: "#F74C00"
   collapsible: false
+  callout: false
+  calloutText: "Start Here!"
 ---
 ```
 
@@ -117,6 +119,26 @@ graph:
 ```
 
 When `true`, the node starts with all its downstream wikilink targets hidden. A `+` badge is shown on the node. Clicking expands the subtree; Shift+clicking an expanded node re-collapses it.
+
+Default: `false`
+
+---
+
+### `graph.callout` and `graph.calloutText`
+
+```yaml
+graph:
+  callout: true
+  calloutText: "Start Here!"
+```
+
+When `callout: true`, an animated arrow and floating label appear on the landing page pointing to this node, inviting first-time visitors to click it as their entry point into the graph.
+
+- `calloutText` sets the text shown in the bubble. Defaults to `"Click to get started"` if omitted.
+- Only one note should have `callout: true` at a time.
+- The callout auto-dismisses when the user clicks the node or the bubble, or after 30 seconds.
+- Once dismissed it does not reappear for the rest of that browser session (`sessionStorage`).
+- The pulsing rings and arrow colour match the node's `graph.color`.
 
 Default: `false`
 

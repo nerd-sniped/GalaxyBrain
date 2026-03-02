@@ -1,10 +1,17 @@
 # GalaxyBrain
 
+[![CI](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml/badge.svg)](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen)](https://nodejs.org)
+[![Built with Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01)](https://astro.build)
+
 A **starter template** for publishing your Obsidian vault as an interactive 3D knowledge graph website.
 
 Edit notes in Obsidian → push to GitHub → site rebuilds on Netlify automatically.
 
 **[Live demo →](https://galaxybrain.netlify.app)**
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/nerd-sniped/GalaxyBrain)
 
 ---
 
@@ -375,6 +382,19 @@ public/
 
 ---
 
+## Community
+
+| | |
+|---|---|
+| 🐛 Found a bug? | [Open an issue](https://github.com/nerd-sniped/GalaxyBrain/issues/new?template=bug_report.yml) |
+| ✨ Have an idea? | [Request a feature](https://github.com/nerd-sniped/GalaxyBrain/issues/new?template=feature_request.yml) |
+| 💬 Just want to chat? | [Start a discussion](https://github.com/nerd-sniped/GalaxyBrain/discussions) |
+| 🌟 Built something? | [Show it off](https://github.com/nerd-sniped/GalaxyBrain/discussions/categories/show-and-tell) |
+
+Contributions are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+---
+
 ## License
 
-MIT — use this template for anything, personal or commercial.
+MIT — use this template for anything, personal or commercial. See [LICENSE](LICENSE).

@@ -5,10 +5,12 @@
       "name": "Astro",
       "type": "file",
       "path": "/notes/astro",
-      "val": 10,
+      "val": 3,
       "shape": "cone",
       "color": "#e84393",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
     },
     {
@@ -16,10 +18,12 @@
       "name": "Tools",
       "type": "file",
       "path": "/notes/tools",
-      "val": 7,
+      "val": 5,
       "shape": "box",
       "color": "#9b59b6",
       "collapsible": true,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Tools The stack behind this garden. Authoring - Obsidian — the note-taking app used to write and link notes - Git — vers"
     },
     {
@@ -31,84 +35,9 @@
       "shape": "octahedron",
       "color": "#7E57C2",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "",
       "excerpt": null
-    },
-    {
-      "id": "digital-garden",
-      "name": "Digital Garden",
-      "type": "file",
-      "path": "/notes/digital-garden",
-      "val": 13,
-      "shape": "torus",
-      "color": "#27ae60",
-      "collapsible": false,
-      "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
-    },
-    {
-      "id": "javascript",
-      "name": "JavaScript",
-      "type": "file",
-      "path": "/notes/javascript",
-      "val": 9,
-      "shape": "torusknot",
-      "color": "#f7df1e",
-      "collapsible": false,
-      "excerpt": "JavaScript JavaScript is the lingua franca of the web — the only language that runs natively in every browser. It has al"
-    },
-    {
-      "id": "projects",
-      "name": "Projects",
-      "type": "file",
-      "path": "/notes/projects",
-      "val": 15,
-      "shape": "dodecahedron",
-      "color": "#9b59b6",
-      "collapsible": true,
-      "excerpt": "Projects Active and planned projects connected to this knowledge garden. GalaxyBrain — This Site The project you are rea"
-    },
-    {
-      "id": "rust",
-      "name": "Rust",
-      "type": "file",
-      "path": "/notes/rust",
-      "val": 13,
-      "shape": "box",
-      "color": "#F74C00",
-      "collapsible": false,
-      "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
-    },
-    {
-      "id": "typescript",
-      "name": "TypeScript",
-      "type": "file",
-      "path": "/notes/typescript",
-      "val": 14,
-      "shape": "cylinder",
-      "color": "#3178c6",
-      "collapsible": false,
-      "excerpt": "TypeScript TypeScript is a statically typed superset of JavaScript that compiles to plain JS. Why TypeScript JavaScript'"
-    },
-    {
-      "id": "web-dev",
-      "name": "Web Dev",
-      "type": "file",
-      "path": "/notes/web-dev",
-      "val": 9,
-      "shape": "sphere",
-      "color": "#e74c3c",
-      "collapsible": false,
-      "excerpt": "Web Dev Web development covers building applications that run in the browser or on web servers. Frontend Stack Used Here"
-    },
-    {
-      "id": "welcome",
-      "name": "Welcome",
-      "type": "file",
-      "path": "/notes/welcome",
-      "val": 7,
-      "shape": "sphere",
-      "color": "#3498db",
-      "collapsible": false,
-      "excerpt": "Welcome to GalaxyBrain This is the starting point of the garden. This site is a living documentGetting Started — a colle"
     }
   ],
   "links": [
@@ -123,66 +52,6 @@
       "type": "file-tag"
     },
     {
-      "source": "digital-garden",
-      "target": "astro",
-      "type": "wikilink"
-    },
-    {
-      "source": "digital-garden",
-      "target": "welcome",
-      "type": "wikilink"
-    },
-    {
-      "source": "javascript",
-      "target": "typescript",
-      "type": "wikilink"
-    },
-    {
-      "source": "javascript",
-      "target": "astro",
-      "type": "wikilink"
-    },
-    {
-      "source": "javascript",
-      "target": "web-dev",
-      "type": "wikilink"
-    },
-    {
-      "source": "projects",
-      "target": "astro",
-      "type": "wikilink"
-    },
-    {
-      "source": "projects",
-      "target": "typescript",
-      "type": "wikilink"
-    },
-    {
-      "source": "projects",
-      "target": "digital-garden",
-      "type": "wikilink"
-    },
-    {
-      "source": "projects",
-      "target": "rust",
-      "type": "wikilink"
-    },
-    {
-      "source": "projects",
-      "target": "tools",
-      "type": "wikilink"
-    },
-    {
-      "source": "rust",
-      "target": "typescript",
-      "type": "wikilink"
-    },
-    {
-      "source": "rust",
-      "target": "astro",
-      "type": "wikilink"
-    },
-    {
       "source": "tools",
       "target": "astro",
       "type": "wikilink"
@@ -191,83 +60,13 @@
       "source": "tools",
       "target": "tag:tools",
       "type": "file-tag"
-    },
-    {
-      "source": "typescript",
-      "target": "astro",
-      "type": "wikilink"
-    },
-    {
-      "source": "typescript",
-      "target": "rust",
-      "type": "wikilink"
-    },
-    {
-      "source": "typescript",
-      "target": "web-dev",
-      "type": "wikilink"
-    },
-    {
-      "source": "web-dev",
-      "target": "astro",
-      "type": "wikilink"
-    },
-    {
-      "source": "web-dev",
-      "target": "typescript",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "tools",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "astro",
-      "type": "wikilink"
     }
   ],
   "backlinks": [
     {
-      "id": "digital-garden",
-      "name": "Digital Garden",
-      "path": "/notes/digital-garden"
-    },
-    {
-      "id": "javascript",
-      "name": "JavaScript",
-      "path": "/notes/javascript"
-    },
-    {
-      "id": "projects",
-      "name": "Projects",
-      "path": "/notes/projects"
-    },
-    {
-      "id": "rust",
-      "name": "Rust",
-      "path": "/notes/rust"
-    },
-    {
       "id": "tools",
       "name": "Tools",
       "path": "/notes/tools"
-    },
-    {
-      "id": "typescript",
-      "name": "TypeScript",
-      "path": "/notes/typescript"
-    },
-    {
-      "id": "web-dev",
-      "name": "Web Dev",
-      "path": "/notes/web-dev"
-    },
-    {
-      "id": "welcome",
-      "name": "Welcome",
-      "path": "/notes/welcome"
     }
   ],
   "forwardLinks": [

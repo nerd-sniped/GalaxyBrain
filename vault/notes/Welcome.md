@@ -7,6 +7,8 @@ graph:
   shape: sphere
   color: "#3498db"
   collapsible: true
+  callout: true
+  calloutText: "Start Here!"
 ---
 
 # Welcome to GalaxyBrain

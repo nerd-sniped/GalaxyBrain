@@ -1,6 +1,19 @@
 {
   "nodes": [
     {
+      "id": "astro",
+      "name": "Astro",
+      "type": "file",
+      "path": "/notes/astro",
+      "val": 3,
+      "shape": "cone",
+      "color": "#e84393",
+      "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
+      "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
       "id": "frontmatter-reference",
       "name": "Frontmatter Reference",
       "type": "file",
@@ -9,6 +22,8 @@
       "shape": "box",
       "color": "#7f8c8d",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Frontmatter Reference Every note in can include a YAML frontmatter block between delimiters at the very top of the file."
     },
     {
@@ -16,10 +31,12 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 2,
+      "val": 3,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Getting Started This page explains how to navigate the site and what everything in the graph means. Navigating the 3D Gr"
     },
     {
@@ -31,6 +48,8 @@
       "shape": "cylinder",
       "color": "#27ae60",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "GitHub Setup This note explains how to host the GalaxyBrain repo on GitHub so that Netlify can auto-deploy your site whe"
     },
     {
@@ -42,6 +61,8 @@
       "shape": "torusknot",
       "color": "#e74c3c",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Graph Features GalaxyBrain's 3D graph is fully customisable per note. This page covers all the visual options available."
     },
     {
@@ -53,6 +74,8 @@
       "shape": "dodecahedron",
       "color": "#9b59b6",
       "collapsible": true,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "How to Use This Template GalaxyBrain is a template — a starting point for publishing your own Obsidian vault as an inter"
     },
     {
@@ -64,6 +87,8 @@
       "shape": "cylinder",
       "color": "#00ad9f",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Netlify Deployment Netlify hosts the built site and automatically rebuilds it every time you push to GitHub. Setup takes"
     },
     {
@@ -75,7 +100,35 @@
       "shape": "cylinder",
       "color": "#8e44ad",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Obsidian Setup This note walks you through creating and configuring an Obsidian vault that works with GalaxyBrain. 1. In"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "type": "file",
+      "path": "/notes/obsidian",
+      "val": 3,
+      "shape": "cylinder",
+      "color": "#8e44ad",
+      "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
+      "excerpt": "Obsidian Obsidian is a local-first Markdown note-taking app. It stores notes as plain files on disk, which makes it triv"
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "type": "file",
+      "path": "/notes/tools",
+      "val": 5,
+      "shape": "box",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "callout": false,
+      "calloutText": "Click to get started",
+      "excerpt": "Tools The stack behind this garden. Authoring - Obsidian — the note-taking app used to write and link notes - Git — vers"
     },
     {
       "id": "welcome",
@@ -85,7 +138,9 @@
       "val": 8,
       "shape": "sphere",
       "color": "#3498db",
-      "collapsible": true,
+      "collapsible": false,
+      "callout": true,
+      "calloutText": "Start Here!",
       "excerpt": "Welcome to GalaxyBrain This is the starter template for building your own 3D knowledge graph from an Obsidian vault. You"
     },
     {
@@ -97,17 +152,34 @@
       "shape": "torus",
       "color": "#e67e22",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Writing Notes Everything you need to know about writing notes that appear correctly on the site. The Basics A publishabl"
+    },
+    {
+      "id": "tag:tools",
+      "name": "#tools",
+      "type": "tag",
+      "path": null,
+      "val": 3,
+      "shape": "octahedron",
+      "color": "#7E57C2",
+      "collapsible": false,
+      "callout": false,
+      "calloutText": "",
+      "excerpt": null
     },
     {
       "id": "tag:meta/authoring",
       "name": "#meta/authoring",
       "type": "tag",
       "path": null,
-      "val": 3,
+      "val": 4,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "",
       "excerpt": null
     },
     {
@@ -115,10 +187,12 @@
       "name": "#meta/reference",
       "type": "tag",
       "path": null,
-      "val": 1,
+      "val": 2,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "",
       "excerpt": null
     },
     {
@@ -126,10 +200,12 @@
       "name": "#meta/start",
       "type": "tag",
       "path": null,
-      "val": 3,
+      "val": 4,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "",
       "excerpt": null
     },
     {
@@ -137,10 +213,25 @@
       "name": "#meta/setup",
       "type": "tag",
       "path": null,
-      "val": 4,
+      "val": 5,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "",
+      "excerpt": null
+    },
+    {
+      "id": "tag:meta",
+      "name": "#meta",
+      "type": "tag",
+      "path": null,
+      "val": 5,
+      "shape": "octahedron",
+      "color": "#EC407A",
+      "collapsible": false,
+      "callout": false,
+      "calloutText": "",
       "excerpt": null
     },
     {
@@ -152,10 +243,22 @@
       "shape": "sphere",
       "color": "#ffffff",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "",
       "excerpt": null
     }
   ],
   "links": [
+    {
+      "source": "astro",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "astro",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
     {
       "source": "frontmatter-reference",
       "target": "graph-features",
@@ -262,6 +365,36 @@
       "type": "file-tag"
     },
     {
+      "source": "obsidian",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "obsidian",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "tools",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "tools",
+      "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "tools",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
       "source": "welcome",
       "target": "how-to-use-this-template",
       "type": "wikilink"
@@ -310,6 +443,26 @@
       "source": "writing-notes",
       "target": "tag:meta/authoring",
       "type": "file-tag"
+    },
+    {
+      "source": "tag:meta",
+      "target": "tag:meta/authoring",
+      "type": "tag-hierarchy"
+    },
+    {
+      "source": "tag:meta",
+      "target": "tag:meta/reference",
+      "type": "tag-hierarchy"
+    },
+    {
+      "source": "tag:meta",
+      "target": "tag:meta/start",
+      "type": "tag-hierarchy"
+    },
+    {
+      "source": "tag:meta",
+      "target": "tag:meta/setup",
+      "type": "tag-hierarchy"
     }
   ]
 }

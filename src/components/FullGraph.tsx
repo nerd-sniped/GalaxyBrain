@@ -172,6 +172,99 @@ export default function FullGraph() {
     return () => clearTimeout(timer);
   }, [focusNodeId, graphData]);
 
+  // ── "Start here" callout (shown once to new visitors) ─────────────────────
+  // Points to the note with `graph.callout: true` in its frontmatter.
+  // The callout text comes from `graph.calloutText`.
+  const CALLOUT_KEY = 'gb-callout-dismissed';
+
+  const calloutTarget = useMemo(() => {
+    if (!graphData) return null;
+    return (graphData.nodes.find((n) => n.callout) ?? null) as
+      (GraphNode & { x?: number; y?: number; z?: number }) | null;
+  }, [graphData]);
+
+  const calloutLabel = calloutTarget?.calloutText || 'Click to get started';
+
+  const [showCallout, setShowCallout] = useState<boolean>(() => {
+    try { return !sessionStorage.getItem(CALLOUT_KEY); } catch { return true; }
+  });
+  const [calloutPos, setCalloutPos] = useState<{ x: number; y: number } | null>(null);
+  // Keep a ref so the RAF loop always reads the current node position object
+  const calloutTargetRef = useRef(calloutTarget);
+  calloutTargetRef.current = calloutTarget;
+  // Use a ref so handleNodeClick can read current value without re-creating the callback
+  const showCalloutRef = useRef(showCallout);
+  showCalloutRef.current = showCallout;
+
+  const dismissCallout = useCallback(() => {
+    try { sessionStorage.setItem(CALLOUT_KEY, '1'); } catch {}
+    setShowCallout(false);
+    setCalloutPos(null);
+  }, []);
+
+  // (calloutTarget is derived from graphData via useMemo — no separate tracking effect needed)
+
+  // Inject CSS keyframes once
+  useEffect(() => {
+    if (!showCallout) return;
+    const style = document.createElement('style');
+    style.id = 'gb-callout-styles';
+    style.textContent = `
+      @keyframes gb-pulse {
+        0%   { transform: translate(-50%,-50%) scale(1);   opacity: 0.9; }
+        100% { transform: translate(-50%,-50%) scale(2.8); opacity: 0;   }
+      }
+      @keyframes gb-float {
+        0%, 100% { transform: translate(-50%,-100%) translateY(0px);  }
+        50%       { transform: translate(-50%,-100%) translateY(-7px); }
+      }
+      @keyframes gb-fadein { from { opacity: 0; } to { opacity: 1; } }
+    `;
+    document.head.appendChild(style);
+    return () => { document.getElementById('gb-callout-styles')?.remove(); };
+  }, [showCallout]);
+
+  // RAF loop: project the node's 3D world position to 2D screen coordinates
+  useEffect(() => {
+    if (!showCallout) return;
+    let rafId: number;
+
+    const project = () => {
+      const node = calloutTargetRef.current;
+      const fg   = fgRef.current as ForceGraphMethods & {
+        camera?:   () => THREE.Camera;
+        renderer?: () => THREE.WebGLRenderer;
+      };
+      if (fg && node && node.x != null) {
+        const camera   = fg.camera?.();
+        const renderer = fg.renderer?.();
+        if (camera && renderer) {
+          const size = new THREE.Vector2();
+          renderer.getSize(size);
+          const vec = new THREE.Vector3(node.x, node.y ?? 0, node.z ?? 0);
+          vec.project(camera);
+          const sx = (vec.x  *  0.5 + 0.5) * size.x;
+          const sy = (-vec.y *  0.5 + 0.5) * size.y;
+          if (sx > 0 && sy > 0 && sx < size.x && sy < size.y) {
+            setCalloutPos({ x: sx, y: sy });
+          }
+        }
+      }
+      rafId = requestAnimationFrame(project);
+    };
+
+    // Wait for the force simulation to partially settle before tracking
+    const startTimer   = setTimeout(() => { rafId = requestAnimationFrame(project); }, 2500);
+    // Auto-dismiss after 30 s so return visitors aren't stuck with it
+    const dismissTimer = setTimeout(() => dismissCallout(), 30000);
+
+    return () => {
+      clearTimeout(startTimer);
+      clearTimeout(dismissTimer);
+      cancelAnimationFrame(rafId);
+    };
+  }, [showCallout, dismissCallout]);
+
   // ── Dimensions ────────────────────────────────────────────────────────────
   const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   useEffect(() => {
@@ -349,9 +442,12 @@ export default function FullGraph() {
       return;
     }
 
+    // Dismiss if the callout target node is clicked
+    if (showCalloutRef.current && node.callout) dismissCallout();
+
     // File node with a path → navigate
     if (node.path) window.location.href = node.path;
-  }, [collapsedNodes]);
+  }, [collapsedNodes, dismissCallout]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Right-click: fly camera ────────────────────────────────────────────────
   const handleNodeRightClick = useCallback((rawNode: object, event: MouseEvent) => {
@@ -488,6 +584,69 @@ export default function FullGraph() {
             title="Clear tag filter"
           >✕</button>
         </div>,
+        document.body,
+      )}
+
+      {/* Start-here callout — rendered via portal, tracks the target node in world space */}
+      {showCallout && calloutPos && calloutTarget && createPortal(
+        <>
+          {/* Pulsing rings centered on the node */}
+          {[0, 0.85].map((delay) => (
+            <div key={delay} style={{
+              position: 'fixed', left: calloutPos.x, top: calloutPos.y,
+              transform: 'translate(-50%,-50%)',
+              width: 52, height: 52, borderRadius: '50%',
+              border: `2px solid ${calloutTarget.color ?? '#3498db'}`,
+              animation: `gb-pulse 1.7s ease-out ${delay}s infinite`,
+              pointerEvents: 'none', zIndex: 99998,
+            }} />
+          ))}
+
+          {/* Dashed connector line + arrowhead */}
+          <svg style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 99998, overflow: 'visible' }}>
+            <defs>
+              <marker id="gb-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill={calloutTarget.color ?? '#3498db'} opacity="0.75" />
+              </marker>
+            </defs>
+            <line
+              x1={calloutPos.x - 110} y1={calloutPos.y - 75}
+              x2={calloutPos.x - 14}  y2={calloutPos.y - 14}
+              stroke={calloutTarget.color ?? '#3498db'} strokeWidth="1.5" strokeDasharray="5,4" opacity="0.65"
+              markerEnd="url(#gb-arrowhead)"
+            />
+          </svg>
+
+          {/* Label bubble */}
+          <div
+            onPointerDown={(e) => { e.stopPropagation(); dismissCallout(); }}
+            style={{
+              position:       'fixed',
+              left:           calloutPos.x - 110,
+              top:            calloutPos.y - 75,
+              transform:      'translate(-50%, -100%)',
+              animation:      'gb-float 2.4s ease-in-out infinite, gb-fadein 0.6s ease',
+              zIndex:         99999,
+              pointerEvents:  'all',
+              cursor:         'pointer',
+              background:     isDark ? 'rgba(10,30,60,0.88)' : 'rgba(220,235,255,0.94)',
+              border:         `1px solid ${calloutTarget.color ?? '#3498db'}99`,
+              borderRadius:   12,
+              padding:        '10px 16px',
+              color:          isDark ? '#74b9ff' : '#1a5fa8',
+              fontSize:       13,
+              fontFamily:     'sans-serif',
+              textAlign:      'center',
+              backdropFilter: 'blur(6px)',
+              userSelect:     'none',
+              whiteSpace:     'nowrap',
+              boxShadow:      `0 4px 20px ${calloutTarget.color ?? '#3498db'}33`,
+            }}
+            title="Click to dismiss"
+          >
+            <div style={{ fontWeight: 600 }}>{calloutLabel}</div>
+          </div>
+        </>,
         document.body,
       )}
 

@@ -100,7 +100,9 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
       val: 1,
       shape: (fm.graph?.shape as NodeShape) ?? 'sphere',
       color: fm.graph?.color ?? '#3498db',
-      collapsible: fm.graph?.collapsible ?? false,
+      collapsible: fm.graph?.callout ? false : (fm.graph?.collapsible ?? false),
+      callout:     fm.graph?.callout    ?? false,
+      calloutText: fm.graph?.calloutText ?? 'Click to get started',
       excerpt: note.excerpt || null,
     };
     nodeMap.set(note.id, node);
@@ -119,6 +121,8 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
       shape: 'octahedron',
       color: tagColor(topLevel),
       collapsible: false,
+      callout:     false,
+      calloutText: '',
       excerpt: null,
     };
     nodeMap.set(tagId, node);
@@ -166,6 +170,8 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
       shape: 'sphere',
       color: '#ffffff',
       collapsible: false,
+      callout:     false,
+      calloutText: '',
       excerpt: null,
     };
     nodeMap.set(ghostId, node);

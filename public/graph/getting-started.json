@@ -5,10 +5,12 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 2,
+      "val": 3,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "Getting Started This page explains how to navigate the site and what everything in the graph means. Navigating the 3D Gr"
     },
     {
@@ -20,6 +22,8 @@
       "shape": "dodecahedron",
       "color": "#9b59b6",
       "collapsible": true,
+      "callout": false,
+      "calloutText": "Click to get started",
       "excerpt": "How to Use This Template GalaxyBrain is a template — a starting point for publishing your own Obsidian vault as an inter"
     },
     {
@@ -27,11 +31,26 @@
       "name": "#meta/start",
       "type": "tag",
       "path": null,
-      "val": 3,
+      "val": 4,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
+      "callout": false,
+      "calloutText": "",
       "excerpt": null
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "type": "file",
+      "path": "/notes/obsidian",
+      "val": 3,
+      "shape": "cylinder",
+      "color": "#8e44ad",
+      "collapsible": false,
+      "callout": false,
+      "calloutText": "Click to get started",
+      "excerpt": "Obsidian Obsidian is a local-first Markdown note-taking app. It stores notes as plain files on disk, which makes it triv"
     }
   ],
   "links": [
@@ -49,9 +68,20 @@
       "source": "how-to-use-this-template",
       "target": "tag:meta/start",
       "type": "file-tag"
+    },
+    {
+      "source": "obsidian",
+      "target": "getting-started",
+      "type": "wikilink"
     }
   ],
-  "backlinks": [],
+  "backlinks": [
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "path": "/notes/obsidian"
+    }
+  ],
   "forwardLinks": [
     {
       "id": "how-to-use-this-template",
