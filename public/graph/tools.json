@@ -5,7 +5,7 @@
       "name": "Tools",
       "type": "file",
       "path": "/notes/tools",
-      "val": 5,
+      "val": 4,
       "shape": "box",
       "color": "#9b59b6",
       "collapsible": true,
@@ -40,19 +40,6 @@
       "excerpt": "Obsidian Obsidian is a local-first Markdown note-taking app. It stores notes as plain files on disk, which makes it triv"
     },
     {
-      "id": "tag:tools",
-      "name": "#tools",
-      "type": "tag",
-      "path": null,
-      "val": 3,
-      "shape": "octahedron",
-      "color": "#7E57C2",
-      "collapsible": false,
-      "callout": false,
-      "calloutText": "",
-      "excerpt": null
-    },
-    {
       "id": "tag:meta",
       "name": "#meta",
       "type": "tag",
@@ -73,16 +60,6 @@
       "type": "wikilink"
     },
     {
-      "source": "astro",
-      "target": "tag:tools",
-      "type": "file-tag"
-    },
-    {
-      "source": "obsidian",
-      "target": "tag:tools",
-      "type": "file-tag"
-    },
-    {
       "source": "tools",
       "target": "obsidian",
       "type": "wikilink"
@@ -91,11 +68,6 @@
       "source": "tools",
       "target": "astro",
       "type": "wikilink"
-    },
-    {
-      "source": "tools",
-      "target": "tag:tools",
-      "type": "file-tag"
     },
     {
       "source": "tools",

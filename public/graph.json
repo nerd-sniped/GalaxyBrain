@@ -122,7 +122,7 @@
       "name": "Tools",
       "type": "file",
       "path": "/notes/tools",
-      "val": 5,
+      "val": 4,
       "shape": "box",
       "color": "#9b59b6",
       "collapsible": true,
@@ -161,7 +161,7 @@
       "name": "#tools",
       "type": "tag",
       "path": null,
-      "val": 3,
+      "val": 2,
       "shape": "octahedron",
       "color": "#7E57C2",
       "collapsible": false,
@@ -383,11 +383,6 @@
       "source": "tools",
       "target": "astro",
       "type": "wikilink"
-    },
-    {
-      "source": "tools",
-      "target": "tag:tools",
-      "type": "file-tag"
     },
     {
       "source": "tools",

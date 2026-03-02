@@ -273,19 +273,22 @@ export default function FullGraph() {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // ── Tooltip (imperative — zero React re-renders on hover/mousemove) ────────
+  // ── Cursor tooltip + preview panel (both updated imperatively) ─────────────
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const previewRef  = useRef<HTMLDivElement>(null);
 
-  const updateTooltipPosition = useCallback((x: number, y: number) => {
-    const el = tooltipRef.current;
-    if (!el || el.style.display === 'none') return;
-    el.style.left = `${x + 14}px`;
-    el.style.top  = `${y + 14}px`;
+  // Use a native document listener — the Three.js canvas consumes pointer events
+  // and prevents the React synthetic onMouseMove from firing on the wrapper.
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const el = tooltipRef.current;
+      if (!el || el.style.display === 'none') return;
+      el.style.left = `${e.clientX + 14}px`;
+      el.style.top  = `${e.clientY + 14}px`;
+    };
+    document.addEventListener('mousemove', onMove);
+    return () => document.removeEventListener('mousemove', onMove);
   }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    updateTooltipPosition(e.clientX, e.clientY);
-  }, [updateTooltipPosition]);
 
   // ── Visible data (stable reference → force sim never restarts spuriously) ──
   const visibleData = useMemo((): GraphData => {
@@ -396,21 +399,54 @@ export default function FullGraph() {
 
   // ── Hover ──────────────────────────────────────────────────────────────────
   const handleNodeHover = useCallback((rawNode: object | null) => {
-    const el = tooltipRef.current;
-    if (!el) return;
-    if (!rawNode) { el.style.display = 'none'; return; }
+    const el      = tooltipRef.current;
+    const preview = previewRef.current;
+
+    if (!rawNode) {
+      if (el)      el.style.display = 'none';
+      if (preview) { preview.style.opacity = '0'; preview.style.transform = 'translateY(6px)'; }
+      return;
+    }
+
     const node = rawNode as GraphNode;
-    let content = node.name;
-    if (node.type === 'ghost') content = `${node.name}\n(Note not yet created)`;
-    else if (node.type === 'tag') content = `#${node.name}`;
-    else if (node.excerpt) content = `${node.name}\n${node.excerpt}`;
-    if (node.collapsible && collapsedNodes.has(node.id))   content += '\n[Click to expand]';
-    if (node.collapsible && !collapsedNodes.has(node.id))  content += '\n[Shift+click to collapse]';
-    el.textContent      = content;
-    el.style.background = uiBgColor;
-    el.style.color      = uiTextColor;
-    el.style.border     = `1px solid ${uiBorder}`;
-    el.style.display    = 'block';
+
+    // ── Name label at cursor ──────────────────────────────────────────────────────
+    if (el) {
+      el.textContent      = node.type === 'tag' ? `#${node.name}` : node.name;
+      el.style.background = uiBgColor;
+      el.style.color      = uiTextColor;
+      el.style.border     = `1px solid ${uiBorder}`;
+      el.style.display    = 'block';
+    }
+
+    // ── Rich preview panel at bottom-left edge ────────────────────────────────
+    if (preview) {
+      const typeLabel   = node.type === 'tag' ? 'tag' : node.type === 'ghost' ? 'unlinked note' : 'note';
+      const displayName = node.type === 'tag' ? `#${node.name}` : node.name;
+
+      let excerptHtml = '';
+      if (node.type === 'ghost') {
+        excerptHtml = `<em style="opacity:0.5">This note hasn't been created yet.</em>`;
+      } else if (node.excerpt) {
+        excerptHtml = node.excerpt;
+      }
+
+      let hint = '';
+      if (node.collapsible && collapsedNodes.has(node.id))  hint = 'Click to expand';
+      if (node.collapsible && !collapsedNodes.has(node.id)) hint = 'Shift+click to collapse';
+
+      preview.style.background  = uiBgColor;
+      preview.style.color       = uiTextColor;
+      preview.style.borderColor = uiBorder;
+      preview.innerHTML = `
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;opacity:0.45;margin-bottom:5px">${typeLabel}</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:${excerptHtml ? '8px' : '0'}">${displayName}</div>
+        ${excerptHtml ? `<div style="font-size:12px;opacity:0.72;line-height:1.55">${excerptHtml}</div>` : ''}
+        ${hint ? `<div style="font-size:11px;opacity:0.45;margin-top:8px;border-top:1px solid ${uiBorder};padding-top:6px">${hint}</div>` : ''}
+      `;
+      preview.style.opacity   = '1';
+      preview.style.transform = 'translateY(0)';
+    }
   }, [collapsedNodes, uiBgColor, uiTextColor, uiBorder]);
 
   // ── Click ──────────────────────────────────────────────────────────────────
@@ -507,7 +543,6 @@ export default function FullGraph() {
   return (
     <div
       style={{ width: '100vw', height: '100vh', background: bgColor, overflow: 'hidden', position: 'relative' }}
-      onMouseMove={handleMouseMove}
     >
       <ForceGraph3D
         ref={fgRef}
@@ -519,6 +554,7 @@ export default function FullGraph() {
         nodeThreeObjectExtend={false}
         onNodeClick={handleNodeClick}
         onNodeRightClick={handleNodeRightClick}
+        nodeLabel=""
         onNodeHover={handleNodeHover}
         linkColor={linkColor}
         linkOpacity={0.5}
@@ -533,7 +569,7 @@ export default function FullGraph() {
 
       {/* Dark / light toggle has moved to BaseLayout */}
 
-      {/* Hover tooltip — single DOM node, updated imperatively */}
+      {/* Cursor name label */}
       <div
         ref={tooltipRef}
         style={{
@@ -541,14 +577,38 @@ export default function FullGraph() {
           position:       'fixed',
           left:           0,
           top:            0,
-          padding:        '8px 12px',
+          padding:        '5px 10px',
           borderRadius:   6,
-          fontSize:       13,
+          fontSize:       12,
+          fontWeight:     600,
           pointerEvents:  'none',
-          whiteSpace:     'pre-line',
-          maxWidth:       260,
+          whiteSpace:     'nowrap',
           zIndex:         9999,
           backdropFilter: 'blur(4px)',
+        }}
+      />
+
+      {/* Node preview panel — bottom-left edge, slides in on hover */}
+      <div
+        ref={previewRef}
+        style={{
+          position:       'fixed',
+          bottom:         58,
+          left:           20,
+          width:          272,
+          maxWidth:       'calc(100vw - 40px)',
+          padding:        '12px 14px',
+          borderRadius:   10,
+          border:         '1px solid',
+          fontSize:       13,
+          lineHeight:     1.4,
+          pointerEvents:  'none',
+          zIndex:         9999,
+          backdropFilter: 'blur(8px)',
+          fontFamily:     'sans-serif',
+          opacity:        0,
+          transform:      'translateY(6px)',
+          transition:     'opacity 0.18s ease, transform 0.18s ease',
         }}
       />
 

@@ -266,11 +266,17 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
     [noteId, clickedOnce, isDark],
   );
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    const el = tooltipRef.current;
-    if (!el || el.style.display === 'none') return;
-    el.style.left = `${e.clientX + 14}px`;
-    el.style.top  = `${e.clientY + 14}px`;
+  // Use a native document listener — the Three.js canvas consumes pointer events
+  // and prevents React's synthetic onMouseMove from firing on the wrapper.
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const el = tooltipRef.current;
+      if (!el || el.style.display === 'none') return;
+      el.style.left = `${e.clientX + 14}px`;
+      el.style.top  = `${e.clientY + 14}px`;
+    };
+    document.addEventListener('mousemove', onMove);
+    return () => document.removeEventListener('mousemove', onMove);
   }, []);
 
   // ── Node click: progressive expansion ─────────────────────────────────────
@@ -354,7 +360,6 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
       <div
         ref={containerRef}
         className="local-graph-canvas"
-        onMouseMove={handleMouseMove}
       >
         {(!isLoaded || !isVisible) && (
           <div
@@ -382,6 +387,7 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
             backgroundColor={bgColor}
             nodeThreeObject={nodeThreeObject}
             nodeThreeObjectExtend={false}
+            nodeLabel=""
             onNodeClick={handleNodeClick}
             onNodeRightClick={handleNodeRightClick}
             onNodeHover={handleNodeHover}

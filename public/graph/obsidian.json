@@ -31,7 +31,7 @@
       "name": "#tools",
       "type": "tag",
       "path": null,
-      "val": 3,
+      "val": 2,
       "shape": "octahedron",
       "color": "#7E57C2",
       "collapsible": false,
@@ -44,7 +44,7 @@
       "name": "Tools",
       "type": "file",
       "path": "/notes/tools",
-      "val": 5,
+      "val": 4,
       "shape": "box",
       "color": "#9b59b6",
       "collapsible": true,
@@ -68,11 +68,6 @@
       "source": "tools",
       "target": "obsidian",
       "type": "wikilink"
-    },
-    {
-      "source": "tools",
-      "target": "tag:tools",
-      "type": "file-tag"
     }
   ],
   "backlinks": [

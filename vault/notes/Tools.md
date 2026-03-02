@@ -1,7 +1,7 @@
 ---
 publish: true
 title: "Tools"
-tags: [tools, meta]
+tags: [meta]
 graph:
   shape: box
   color: "#9b59b6"

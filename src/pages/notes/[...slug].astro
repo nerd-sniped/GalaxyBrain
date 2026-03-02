@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import NoteLayout from '../../layouts/NoteLayout.astro';
+import { slugify } from '../../lib/vault-parser.ts';
 
 export async function getStaticPaths() {
   const allNotes = await getCollection('notes');
@@ -8,7 +9,7 @@ export async function getStaticPaths() {
   const published = allNotes.filter((note) => note.data.publish === true);
 
   return published.map((note) => ({
-    params: { slug: note.id },
+    params: { slug: slugify(note.id) },
     props: { note },
   }));
 }
@@ -16,10 +17,11 @@ export async function getStaticPaths() {
 const { note } = Astro.props;
 const { Content } = await render(note);
 
+const noteId = slugify(note.id);
 const title = note.data.title ?? note.id;
 ---
 
-<NoteLayout title={title} noteId={note.id} excerpt={undefined}>
+<NoteLayout title={title} noteId={noteId} excerpt={undefined}>
   <h1>{title}</h1>
 
   {note.data.tags && note.data.tags.length > 0 && (
