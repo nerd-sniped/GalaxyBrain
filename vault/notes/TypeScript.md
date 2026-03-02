@@ -1,7 +1,7 @@
 ---
 publish: true
 title: "TypeScript"
-tags: [programming/web, tech]
+tags: [programming/js, programming/web, tech]
 aliases: [ts]
 graph:
   shape: cylinder

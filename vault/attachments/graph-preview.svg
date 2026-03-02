@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#0a0a0a" rx="8"/>
+  <!-- Title -->
+  <text x="200" y="30" fill="#e0e0e0" font-family="sans-serif" font-size="14" text-anchor="middle" font-weight="bold">GalaxyBrain — Full Graph Preview</text>
+  <!-- Central node (Welcome) -->
+  <circle cx="200" cy="150" r="18" fill="#3498db" opacity="0.9"/>
+  <text x="200" y="154" fill="white" font-family="sans-serif" font-size="9" text-anchor="middle">Welcome</text>
+  <!-- Programming cluster -->
+  <circle cx="100" cy="100" r="12" fill="#e67e22" opacity="0.85"/>
+  <text x="100" y="104" fill="white" font-family="sans-serif" font-size="7" text-anchor="middle">Programming</text>
+  <circle cx="60" cy="70" r="9" fill="#F74C00" opacity="0.85"/>
+  <text x="60" y="73" fill="white" font-family="sans-serif" font-size="6" text-anchor="middle">Rust</text>
+  <circle cx="140" cy="70" r="9" fill="#3178c6" opacity="0.85"/>
+  <text x="140" y="73" fill="white" font-family="sans-serif" font-size="6" text-anchor="middle">TypeScript</text>
+  <circle cx="50" cy="120" r="9" fill="#f7df1e" opacity="0.85"/>
+  <text x="50" y="123" fill="#333" font-family="sans-serif" font-size="6" text-anchor="middle">JavaScript</text>
+  <!-- Garden cluster -->
+  <circle cx="300" cy="100" r="12" fill="#27ae60" opacity="0.85"/>
+  <text x="300" y="104" fill="white" font-family="sans-serif" font-size="7" text-anchor="middle">Digital Garden</text>
+  <circle cx="340" cy="70" r="9" fill="#8e44ad" opacity="0.85"/>
+  <text x="340" y="73" fill="white" font-family="sans-serif" font-size="6" text-anchor="middle">Obsidian</text>
+  <circle cx="270" cy="60" r="9" fill="#e84393" opacity="0.85"/>
+  <text x="270" y="63" fill="white" font-family="sans-serif" font-size="6" text-anchor="middle">Astro</text>
+  <!-- Books cluster -->
+  <circle cx="200" cy="230" r="12" fill="#e67e22" opacity="0.85"/>
+  <text x="200" y="234" fill="white" font-family="sans-serif" font-size="7" text-anchor="middle">Reading List</text>
+  <circle cx="150" cy="265" r="9" fill="#e74c3c" opacity="0.85"/>
+  <text x="150" y="268" fill="white" font-family="sans-serif" font-size="6" text-anchor="middle">Note Taking</text>
+  <circle cx="250" cy="265" r="9" fill="#16a085" opacity="0.85"/>
+  <text x="250" y="268" fill="white" font-family="sans-serif" font-size="6" text-anchor="middle">Second Brain</text>
+  <!-- Ghost nodes (wireframe style) -->
+  <circle cx="30" cy="50" r="6" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+  <text x="30" y="66" fill="#aaa" font-family="sans-serif" font-size="5" text-anchor="middle">Ownership Model</text>
+  <circle cx="370" cy="200" r="6" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
+  <text x="370" y="215" fill="#aaa" font-family="sans-serif" font-size="5" text-anchor="middle">React Hooks</text>
+  <!-- Edges -->
+  <line x1="200" y1="150" x2="100" y2="100" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="200" y1="150" x2="300" y2="100" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="200" y1="150" x2="200" y2="230" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="100" y1="100" x2="60" y2="70" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="100" y1="100" x2="140" y2="70" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="100" y1="100" x2="50" y2="120" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="300" y1="100" x2="340" y2="70" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="300" y1="100" x2="270" y2="60" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="200" y1="230" x2="150" y2="265" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <line x1="200" y1="230" x2="250" y2="265" stroke="#ffffff" stroke-width="0.5" opacity="0.2"/>
+  <!-- Tag nodes -->
+  <polygon points="120,200 130,185 140,200 130,215" fill="#FF6B6B" opacity="0.7"/>
+  <text x="130" y="228" fill="#FF6B6B" font-family="sans-serif" font-size="6" text-anchor="middle">#programming/rust</text>
+  <polygon points="240,170 250,155 260,170 250,185" fill="#42A5F5" opacity="0.7"/>
+  <text x="250" y="196" fill="#42A5F5" font-family="sans-serif" font-size="6" text-anchor="middle">#programming/js</text>
+  <!-- Legend -->
+  <circle cx="20" cy="285" r="4" fill="#3498db"/>
+  <text x="28" y="288" fill="#888" font-family="sans-serif" font-size="8">File node</text>
+  <circle cx="90" cy="285" r="4" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.5"/>
+  <text x="98" y="288" fill="#888" font-family="sans-serif" font-size="8">Ghost node</text>
+  <polygon points="168,281 173,285 168,289 163,285" fill="#FF6B6B" opacity="0.7"/>
+  <text x="178" y="288" fill="#888" font-family="sans-serif" font-size="8">Tag node</text>
+</svg>

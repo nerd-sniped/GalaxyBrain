@@ -62,9 +62,14 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
   log.info(`Found ${mdFiles.length} markdown files in vault/notes/`);
 
   // ── 2. Parse every file ────────────────────────────────────────────────────
-  const allNotes = mdFiles.map((filePath) => {
-    const raw = readFileSync(filePath, 'utf-8');
-    return parseNote(raw, filePath, vaultNotesRoot);
+  const allNotes = mdFiles.flatMap((filePath) => {
+    try {
+      const raw = readFileSync(filePath, 'utf-8');
+      return [parseNote(raw, filePath, vaultNotesRoot)];
+    } catch (err) {
+      log.warn(`Skipping malformed file ${path.relative(vaultNotesRoot, filePath)}: ${String(err)}`);
+      return [] as ReturnType<typeof parseNote>[];
+    }
   });
 
   // ── 3. Filter to published notes ───────────────────────────────────────────

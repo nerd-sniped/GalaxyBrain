@@ -5,18 +5,29 @@
       "name": "Web Dev",
       "type": "file",
       "path": "/notes/web-dev",
-      "val": 7,
+      "val": 9,
       "shape": "sphere",
       "color": "#e74c3c",
       "collapsible": false,
       "excerpt": "Web Dev Web development covers building applications that run in the browser or on web servers. Frontend Stack Used Here"
     },
     {
+      "id": "javascript",
+      "name": "JavaScript",
+      "type": "file",
+      "path": "/notes/javascript",
+      "val": 9,
+      "shape": "torusknot",
+      "color": "#f7df1e",
+      "collapsible": false,
+      "excerpt": "JavaScript JavaScript is the lingua franca of the web — the only language that runs natively in every browser. It has al"
+    },
+    {
       "id": "programming",
       "name": "Programming",
       "type": "file",
       "path": "/notes/programming",
-      "val": 12,
+      "val": 14,
       "shape": "dodecahedron",
       "color": "#e67e22",
       "collapsible": true,
@@ -27,7 +38,7 @@
       "name": "TypeScript",
       "type": "file",
       "path": "/notes/typescript",
-      "val": 10,
+      "val": 14,
       "shape": "cylinder",
       "color": "#3178c6",
       "collapsible": false,
@@ -38,11 +49,22 @@
       "name": "Astro",
       "type": "file",
       "path": "/notes/astro",
-      "val": 8,
+      "val": 10,
       "shape": "cone",
       "color": "#e84393",
       "collapsible": false,
       "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
+      "id": "tag:programming/js",
+      "name": "#programming/js",
+      "type": "tag",
+      "path": null,
+      "val": 4,
+      "shape": "octahedron",
+      "color": "#26C6DA",
+      "collapsible": false,
+      "excerpt": null
     },
     {
       "id": "tag:programming/web",
@@ -60,7 +82,7 @@
       "name": "#tech",
       "type": "tag",
       "path": null,
-      "val": 4,
+      "val": 5,
       "shape": "octahedron",
       "color": "#D4E157",
       "collapsible": false,
@@ -68,6 +90,36 @@
     }
   ],
   "links": [
+    {
+      "source": "javascript",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "web-dev",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "tag:programming/js",
+      "type": "file-tag"
+    },
+    {
+      "source": "javascript",
+      "target": "tag:tech",
+      "type": "file-tag"
+    },
     {
       "source": "programming",
       "target": "typescript",
@@ -97,6 +149,11 @@
       "source": "typescript",
       "target": "programming",
       "type": "wikilink"
+    },
+    {
+      "source": "typescript",
+      "target": "tag:programming/js",
+      "type": "file-tag"
     },
     {
       "source": "typescript",
@@ -122,6 +179,11 @@
       "source": "web-dev",
       "target": "programming",
       "type": "wikilink"
+    },
+    {
+      "source": "web-dev",
+      "target": "tag:programming/js",
+      "type": "file-tag"
     },
     {
       "source": "web-dev",
@@ -135,6 +197,11 @@
     }
   ],
   "backlinks": [
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "path": "/notes/javascript"
+    },
     {
       "id": "programming",
       "name": "Programming",

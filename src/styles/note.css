@@ -284,3 +284,28 @@
   display: block;
 }
 
+/* Broken-image placeholder for missing vault images */
+.prose .vault-image-missing {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary, rgba(255,255,255,0.05));
+  color: var(--text-muted);
+  font-size: 0.8em;
+  opacity: 0.7;
+  cursor: default;
+}
+
+.prose .vault-image-missing svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.prose .vault-image-missing-label {
+  font-style: normal;
+  font-family: var(--font-mono, monospace);
+}
+

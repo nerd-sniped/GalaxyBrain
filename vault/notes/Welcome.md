@@ -26,4 +26,6 @@ Navigate by exploring the 3D graph on the landing page, or follow the links belo
 
 A digital garden is somewhere between a blog and a wiki. Notes are written at various stages of completeness and are openly linked to each other.
 
+![[graph-preview.svg]]
+
 This garden uses [[Obsidian]] as its authoring tool and [[Astro]] as its publishing platform.

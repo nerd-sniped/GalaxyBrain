@@ -1,9 +1,9 @@
 [build]
-  command   = "pnpm build"
+  command   = "npm run build"
   publish   = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
 
 [[headers]]
   for = "/graph.json"
@@ -27,8 +27,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy        = "strict-origin-when-cross-origin"
 
-# SPA-style 404 fallback (optional — static routes should cover everything)
+# SPA-style 404 fallback
 [[redirects]]
   from   = "/*"
-  to     = "/404"
+  to     = "/index.html"
   status = 404

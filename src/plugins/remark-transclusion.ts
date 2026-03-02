@@ -184,6 +184,18 @@ function buildMissingNoteWarning(noteName: string): string {
   ].join('\n');
 }
 
+// ─── Circular-reference / depth guard ────────────────────────────────────────
+
+/**
+ * Track the set of note slugs currently being expanded so we can detect
+ * circular embeds (A ⊃ B ⊃ A) and cap expansion at MAX_EMBED_DEPTH.
+ * Stored as a module-level stack: remark processes one document at a time
+ * synchronously, so a simple counter is safe.
+ */
+const MAX_EMBED_DEPTH = 3;
+let _embedDepth = 0;
+const _expandingNotes = new Set<string>();
+
 // ─── Plugin ───────────────────────────────────────────────────────────────────
 
 const remarkTransclusion: Plugin<[], Root> = () => {
@@ -235,18 +247,38 @@ const remarkTransclusion: Plugin<[], Root> = () => {
           }
         } else {
           // Full note embed: ![[note]]
-          const noteContent = index[noteSlug];
-
-          if (noteContent) {
+          // Guard against circular embeds and excessive nesting depth
+          if (_embedDepth >= MAX_EMBED_DEPTH) {
             parts.push({
               type: 'html' as const,
-              value: buildFullNoteEmbed(noteName, noteSlug, noteContent),
+              value: `<div class="transclusion-missing">⚠ Max embed depth (${MAX_EMBED_DEPTH}) reached — skipping <code>[[${noteName}]]</code></div>`,
+            } as Html);
+          } else if (_expandingNotes.has(noteSlug)) {
+            parts.push({
+              type: 'html' as const,
+              value: `<div class="transclusion-missing">⚠ Circular embed detected — skipping <code>[[${noteName}]]</code></div>`,
             } as Html);
           } else {
-            parts.push({
-              type: 'html' as const,
-              value: buildMissingNoteWarning(noteName),
-            } as Html);
+            const noteContent = index[noteSlug];
+
+            if (noteContent) {
+              _embedDepth++;
+              _expandingNotes.add(noteSlug);
+              try {
+                parts.push({
+                  type: 'html' as const,
+                  value: buildFullNoteEmbed(noteName, noteSlug, noteContent),
+                } as Html);
+              } finally {
+                _embedDepth--;
+                _expandingNotes.delete(noteSlug);
+              }
+            } else {
+              parts.push({
+                type: 'html' as const,
+                value: buildMissingNoteWarning(noteName),
+              } as Html);
+            }
           }
         }
 

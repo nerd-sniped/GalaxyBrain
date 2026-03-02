@@ -1,13 +1,15 @@
 ---
 publish: true
 title: "Rust"
-tags: [programming/systems, tech]
+tags: [programming/rust, programming/systems, tech]
 graph:
   shape: box
   color: "#F74C00"
 ---
 
 # Rust
+
+![[rust-logo.svg]]
 
 Rust is a systems programming language focused on safety, speed, and concurrency.
 

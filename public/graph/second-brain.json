@@ -5,7 +5,7 @@
       "name": "Second Brain",
       "type": "file",
       "path": "/notes/second-brain",
-      "val": 10,
+      "val": 12,
       "shape": "torusknot",
       "color": "#16a085",
       "collapsible": false,
@@ -16,7 +16,7 @@
       "name": "Digital Garden",
       "type": "file",
       "path": "/notes/digital-garden",
-      "val": 11,
+      "val": 13,
       "shape": "torus",
       "color": "#27ae60",
       "collapsible": false,
@@ -27,7 +27,7 @@
       "name": "Note Taking",
       "type": "file",
       "path": "/notes/note-taking",
-      "val": 9,
+      "val": 12,
       "shape": "cone",
       "color": "#8e44ad",
       "collapsible": true,
@@ -38,18 +38,40 @@
       "name": "Philosophy of Mind",
       "type": "file",
       "path": "/notes/philosophy-of-mind",
-      "val": 7,
+      "val": 8,
       "shape": "dodecahedron",
       "color": "#9b59b6",
       "collapsible": true,
       "excerpt": "Philosophy of Mind Philosophy of mind explores the nature of mental phenomena: consciousness, perception, cognition, and"
     },
     {
+      "id": "projects",
+      "name": "Projects",
+      "type": "file",
+      "path": "/notes/projects",
+      "val": 15,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Projects Active and planned projects connected to this knowledge garden. GalaxyBrain — This Site The project you are rea"
+    },
+    {
+      "id": "reading-list",
+      "name": "Reading List",
+      "type": "file",
+      "path": "/notes/reading-list",
+      "val": 12,
+      "shape": "cylinder",
+      "color": "#e67e22",
+      "collapsible": false,
+      "excerpt": "Reading List An ongoing list of books — partly a record of what I've read, partly a wishlist, mostly a reflection on ide"
+    },
+    {
       "id": "obsidian",
       "name": "Obsidian",
       "type": "file",
       "path": "/notes/obsidian",
-      "val": 7,
+      "val": 8,
       "shape": "cylinder",
       "color": "#8e44ad",
       "collapsible": false,
@@ -60,7 +82,7 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 10,
+      "val": 11,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
@@ -71,7 +93,7 @@
       "name": "#meta",
       "type": "tag",
       "path": null,
-      "val": 6,
+      "val": 7,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
@@ -177,6 +199,56 @@
       "type": "wikilink"
     },
     {
+      "source": "projects",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "reading-list",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "reading-list",
+      "target": "philosophy-of-mind",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
       "source": "second-brain",
       "target": "digital-garden",
       "type": "wikilink"
@@ -227,6 +299,16 @@
       "id": "philosophy-of-mind",
       "name": "Philosophy of Mind",
       "path": "/notes/philosophy-of-mind"
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "path": "/notes/projects"
+    },
+    {
+      "id": "reading-list",
+      "name": "Reading List",
+      "path": "/notes/reading-list"
     }
   ],
   "forwardLinks": [

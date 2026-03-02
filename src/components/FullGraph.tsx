@@ -80,6 +80,15 @@ export default function FullGraph() {
   const uiBgColor   = isDark ? 'rgba(20,20,20,0.9)' : 'rgba(240,240,240,0.9)';
   const uiBorder    = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)';
 
+  // Keep a ref so nodeThreeObject can read current theme without being
+  // recreated on every toggle (avoids full node-object rebuild on theme change).
+  const isDarkRef = useRef(isDark);
+  isDarkRef.current = isDark;
+  // When theme changes, ask the graph to refresh its node visuals once.
+  useEffect(() => {
+    (fgRef.current as { refresh?: () => void } | undefined)?.refresh?.();
+  }, [isDark]);
+
   // ── Collapse state ─────────────────────────────────────────────────────────
   const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
   useEffect(() => {
@@ -240,7 +249,7 @@ export default function FullGraph() {
     const group = new THREE.Group();
 
     // ── base mesh ────────────────────────────────────────────────────────────
-    const mesh = buildNodeObject(node.type, node.shape, node.color, node.val, !isDark);
+    const mesh = buildNodeObject(node.type, node.shape, node.color, node.val, !isDarkRef.current);
 
     // Scale up highlighted / connected nodes
     if (isHighlightedTag || isConnected) {
@@ -289,7 +298,7 @@ export default function FullGraph() {
     }
 
     return group;
-  }, [highlightedTag, highlightedNodeIds, collapsedNodes, isDark]);
+  }, [highlightedTag, highlightedNodeIds, collapsedNodes]); // isDark via isDarkRef — stable callback, refresh() on theme change
 
   // ── Hover ──────────────────────────────────────────────────────────────────
   const handleNodeHover = useCallback((rawNode: object | null) => {
@@ -385,8 +394,10 @@ export default function FullGraph() {
   // ── Loading / error ────────────────────────────────────────────────────────
   if (loadError) {
     return (
-      <div style={{ width: '100vw', height: '100vh', background: bgColor, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#e74c3c', fontFamily: 'sans-serif' }}>
-        Failed to load graph.json: {loadError}
+      <div style={{ width: '100vw', height: '100vh', background: bgColor, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12, color: '#e74c3c', fontFamily: 'sans-serif' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Could not load graph</span>
+        <span style={{ fontSize: 12, opacity: 0.6 }}>{loadError}</span>
       </div>
     );
   }

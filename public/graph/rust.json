@@ -5,7 +5,7 @@
       "name": "Rust",
       "type": "file",
       "path": "/notes/rust",
-      "val": 9,
+      "val": 13,
       "shape": "box",
       "color": "#F74C00",
       "collapsible": false,
@@ -16,7 +16,7 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 10,
+      "val": 11,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
@@ -27,11 +27,44 @@
       "name": "Programming",
       "type": "file",
       "path": "/notes/programming",
-      "val": 12,
+      "val": 14,
       "shape": "dodecahedron",
       "color": "#e67e22",
       "collapsible": true,
       "excerpt": "Programming A collection of notes on programming languages, paradigms, and techniques. Languages Covered - Rust — system"
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "type": "file",
+      "path": "/notes/projects",
+      "val": 15,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Projects Active and planned projects connected to this knowledge garden. GalaxyBrain — This Site The project you are rea"
+    },
+    {
+      "id": "reading-list",
+      "name": "Reading List",
+      "type": "file",
+      "path": "/notes/reading-list",
+      "val": 12,
+      "shape": "cylinder",
+      "color": "#e67e22",
+      "collapsible": false,
+      "excerpt": "Reading List An ongoing list of books — partly a record of what I've read, partly a wishlist, mostly a reflection on ide"
+    },
+    {
+      "id": "ghost:rust-logo-svg",
+      "name": "rust-logo.svg",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
     },
     {
       "id": "ghost:ownership-model",
@@ -49,7 +82,7 @@
       "name": "TypeScript",
       "type": "file",
       "path": "/notes/typescript",
-      "val": 10,
+      "val": 14,
       "shape": "cylinder",
       "color": "#3178c6",
       "collapsible": false,
@@ -60,11 +93,22 @@
       "name": "Astro",
       "type": "file",
       "path": "/notes/astro",
-      "val": 8,
+      "val": 10,
       "shape": "cone",
       "color": "#e84393",
       "collapsible": false,
       "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
+    },
+    {
+      "id": "tag:programming/rust",
+      "name": "#programming/rust",
+      "type": "tag",
+      "path": null,
+      "val": 2,
+      "shape": "octahedron",
+      "color": "#26C6DA",
+      "collapsible": false,
+      "excerpt": null
     },
     {
       "id": "tag:programming/systems",
@@ -82,7 +126,7 @@
       "name": "#tech",
       "type": "tag",
       "path": null,
-      "val": 4,
+      "val": 5,
       "shape": "octahedron",
       "color": "#D4E157",
       "collapsible": false,
@@ -111,6 +155,51 @@
       "type": "file-tag"
     },
     {
+      "source": "projects",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "reading-list",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "ghost:rust-logo-svg",
+      "type": "wikilink"
+    },
+    {
       "source": "rust",
       "target": "ghost:ownership-model",
       "type": "wikilink"
@@ -129,6 +218,11 @@
       "source": "rust",
       "target": "programming",
       "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "tag:programming/rust",
+      "type": "file-tag"
     },
     {
       "source": "rust",
@@ -171,6 +265,16 @@
       "id": "programming",
       "name": "Programming",
       "path": "/notes/programming"
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "path": "/notes/projects"
+    },
+    {
+      "id": "reading-list",
+      "name": "Reading List",
+      "path": "/notes/reading-list"
     },
     {
       "id": "typescript",

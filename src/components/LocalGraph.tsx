@@ -60,6 +60,13 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
 
   const bgColor = isDark ? BG_DARK : BG_LIGHT;
 
+  // Ref keeps nodeThreeObject stable across theme changes (same pattern as FullGraph)
+  const isDarkRef = useRef(isDark);
+  isDarkRef.current = isDark;
+  useEffect(() => {
+    (fgRef.current as { refresh?: () => void } | undefined)?.refresh?.();
+  }, [isDark]);
+
   // ── Graph state ────────────────────────────────────────────────────────────
   const [nodes, setNodes] = useState<Map<string, GraphNode>>(new Map());
   const [links, setLinks] = useState<GraphLink[]>([]);
@@ -137,6 +144,9 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
   // ── Container width (responsive) ──────────────────────────────────────────
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(280);
+  // Lazy initialisation: only mount the ForceGraph3D when the container is
+  // visible in the viewport (equivalent of loading="lazy" for images on mobile).
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -147,7 +157,39 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
       if (w) setWidth(w);
     });
     ro.observe(el);
-    return () => ro.disconnect();
+
+    // Intersect observer — defer Three.js initialisation until actually visible
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setIsVisible(true);
+          io.disconnect(); // only need to fire once
+        }
+      },
+      { rootMargin: '100px' },
+    );
+    io.observe(el);
+
+    return () => {
+      ro.disconnect();
+      io.disconnect();
+    };
+  }, []);
+
+  // ── Three.js cleanup on unmount ─────────────────────────────────────────
+  // ForceGraph3D internally creates a WebGLRenderer. Without disposal the
+  // GPU context is leaked when navigating between notes.
+  useEffect(() => {
+    return () => {
+      if (!fgRef.current) return;
+      try {
+        (fgRef.current as { pauseAnimation?: () => void }).pauseAnimation?.();
+        const renderer = (fgRef.current as { renderer?: () => { dispose?: () => void } }).renderer?.();
+        renderer?.dispose?.();
+      } catch {
+        // Best-effort cleanup — ignore errors on unmount
+      }
+    };
   }, []);
 
   // ── Node Three.js visuals ──────────────────────────────────────────────────
@@ -158,7 +200,7 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
       const isPrimed      = clickedOnce.has(node.id) && !isCurrentNote;
 
       const group = new THREE.Group();
-      const mesh  = buildNodeObject(node.type, node.shape, node.color, node.val, !isDark);
+      const mesh  = buildNodeObject(node.type, node.shape, node.color, node.val, !isDarkRef.current);
 
       if (isCurrentNote) {
         // Larger + emissive glow for the focal note
@@ -299,7 +341,7 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
   // ── Early returns ─────────────────────────────────────────────────────────
   if (loadError) {
     return (
-      <div className="local-graph-error">Failed to load local graph</div>
+      <div className="local-graph-error">Could not load graph</div>
     );
   }
 
@@ -314,7 +356,7 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
         className="local-graph-canvas"
         onMouseMove={handleMouseMove}
       >
-        {!isLoaded && (
+        {(!isLoaded || !isVisible) && (
           <div
             style={{
               height:         350,
@@ -327,11 +369,11 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
               fontSize:       12,
             }}
           >
-            Loading…
+            {isLoaded && !isVisible ? 'Scroll to view graph…' : 'Loading…'}
           </div>
         )}
 
-        {isLoaded && (
+        {isLoaded && isVisible && (
           <ForceGraph3D
             ref={fgRef}
             graphData={graphData}

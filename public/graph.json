@@ -5,7 +5,7 @@
       "name": "Astro",
       "type": "file",
       "path": "/notes/astro",
-      "val": 8,
+      "val": 10,
       "shape": "cone",
       "color": "#e84393",
       "collapsible": false,
@@ -16,7 +16,7 @@
       "name": "Digital Garden",
       "type": "file",
       "path": "/notes/digital-garden",
-      "val": 11,
+      "val": 13,
       "shape": "torus",
       "color": "#27ae60",
       "collapsible": false,
@@ -27,7 +27,7 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 10,
+      "val": 11,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
@@ -45,11 +45,22 @@
       "excerpt": "Graph Theory Graph theory is the study of graphs — mathematical structures used to model pairwise relations between obje"
     },
     {
+      "id": "javascript",
+      "name": "JavaScript",
+      "type": "file",
+      "path": "/notes/javascript",
+      "val": 9,
+      "shape": "torusknot",
+      "color": "#f7df1e",
+      "collapsible": false,
+      "excerpt": "JavaScript JavaScript is the lingua franca of the web — the only language that runs natively in every browser. It has al"
+    },
+    {
       "id": "note-taking",
       "name": "Note Taking",
       "type": "file",
       "path": "/notes/note-taking",
-      "val": 9,
+      "val": 12,
       "shape": "cone",
       "color": "#8e44ad",
       "collapsible": true,
@@ -60,7 +71,7 @@
       "name": "Obsidian",
       "type": "file",
       "path": "/notes/obsidian",
-      "val": 7,
+      "val": 8,
       "shape": "cylinder",
       "color": "#8e44ad",
       "collapsible": false,
@@ -71,7 +82,7 @@
       "name": "Philosophy of Mind",
       "type": "file",
       "path": "/notes/philosophy-of-mind",
-      "val": 7,
+      "val": 8,
       "shape": "dodecahedron",
       "color": "#9b59b6",
       "collapsible": true,
@@ -82,18 +93,40 @@
       "name": "Programming",
       "type": "file",
       "path": "/notes/programming",
-      "val": 12,
+      "val": 14,
       "shape": "dodecahedron",
       "color": "#e67e22",
       "collapsible": true,
       "excerpt": "Programming A collection of notes on programming languages, paradigms, and techniques. Languages Covered - Rust — system"
     },
     {
+      "id": "projects",
+      "name": "Projects",
+      "type": "file",
+      "path": "/notes/projects",
+      "val": 15,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Projects Active and planned projects connected to this knowledge garden. GalaxyBrain — This Site The project you are rea"
+    },
+    {
+      "id": "reading-list",
+      "name": "Reading List",
+      "type": "file",
+      "path": "/notes/reading-list",
+      "val": 12,
+      "shape": "cylinder",
+      "color": "#e67e22",
+      "collapsible": false,
+      "excerpt": "Reading List An ongoing list of books — partly a record of what I've read, partly a wishlist, mostly a reflection on ide"
+    },
+    {
       "id": "rust",
       "name": "Rust",
       "type": "file",
       "path": "/notes/rust",
-      "val": 9,
+      "val": 13,
       "shape": "box",
       "color": "#F74C00",
       "collapsible": false,
@@ -104,7 +137,7 @@
       "name": "Second Brain",
       "type": "file",
       "path": "/notes/second-brain",
-      "val": 10,
+      "val": 12,
       "shape": "torusknot",
       "color": "#16a085",
       "collapsible": false,
@@ -115,7 +148,7 @@
       "name": "Tools",
       "type": "file",
       "path": "/notes/tools",
-      "val": 6,
+      "val": 7,
       "shape": "box",
       "color": "#9b59b6",
       "collapsible": true,
@@ -126,7 +159,7 @@
       "name": "TypeScript",
       "type": "file",
       "path": "/notes/typescript",
-      "val": 10,
+      "val": 14,
       "shape": "cylinder",
       "color": "#3178c6",
       "collapsible": false,
@@ -137,7 +170,7 @@
       "name": "Web Dev",
       "type": "file",
       "path": "/notes/web-dev",
-      "val": 7,
+      "val": 9,
       "shape": "sphere",
       "color": "#e74c3c",
       "collapsible": false,
@@ -148,7 +181,7 @@
       "name": "Welcome",
       "type": "file",
       "path": "/notes/welcome",
-      "val": 6,
+      "val": 7,
       "shape": "sphere",
       "color": "#3498db",
       "collapsible": false,
@@ -170,7 +203,7 @@
       "name": "#meta",
       "type": "tag",
       "path": null,
-      "val": 6,
+      "val": 7,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
@@ -184,6 +217,17 @@
       "val": 4,
       "shape": "octahedron",
       "color": "#EC407A",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:projects/garden",
+      "name": "#projects/garden",
+      "type": "tag",
+      "path": null,
+      "val": 3,
+      "shape": "octahedron",
+      "color": "#66BB6A",
       "collapsible": false,
       "excerpt": null
     },
@@ -203,9 +247,31 @@
       "name": "#programming",
       "type": "tag",
       "path": null,
+      "val": 6,
+      "shape": "octahedron",
+      "color": "#26C6DA",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:programming/js",
+      "name": "#programming/js",
+      "type": "tag",
+      "path": null,
       "val": 4,
       "shape": "octahedron",
       "color": "#26C6DA",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:tech",
+      "name": "#tech",
+      "type": "tag",
+      "path": null,
+      "val": 5,
+      "shape": "octahedron",
+      "color": "#D4E157",
       "collapsible": false,
       "excerpt": null
     },
@@ -221,6 +287,17 @@
       "excerpt": null
     },
     {
+      "id": "tag:books/technical",
+      "name": "#books/technical",
+      "type": "tag",
+      "path": null,
+      "val": 2,
+      "shape": "octahedron",
+      "color": "#66BB6A",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
       "id": "tag:philosophy",
       "name": "#philosophy",
       "type": "tag",
@@ -232,13 +309,24 @@
       "excerpt": null
     },
     {
-      "id": "tag:tech",
-      "name": "#tech",
+      "id": "tag:books/fiction",
+      "name": "#books/fiction",
       "type": "tag",
       "path": null,
-      "val": 4,
+      "val": 1,
       "shape": "octahedron",
-      "color": "#D4E157",
+      "color": "#66BB6A",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "tag:programming/rust",
+      "name": "#programming/rust",
+      "type": "tag",
+      "path": null,
+      "val": 2,
+      "shape": "octahedron",
+      "color": "#26C6DA",
       "collapsible": false,
       "excerpt": null
     },
@@ -331,6 +419,39 @@
       "excerpt": null
     },
     {
+      "id": "ghost:vue-js",
+      "name": "Vue.js",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:node-js-ecosystem",
+      "name": "Node.js Ecosystem",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:react-hooks",
+      "name": "React Hooks",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
       "id": "ghost:consciousness",
       "name": "Consciousness",
       "type": "ghost",
@@ -375,6 +496,72 @@
       "excerpt": null
     },
     {
+      "id": "ghost:rust-web-framework-experiment",
+      "name": "Rust Web Framework Experiment",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:cli-note-search-tool",
+      "name": "CLI Note Search Tool",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:inbox",
+      "name": "Inbox",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:the-pragmatic-programmer",
+      "name": "The Pragmatic Programmer",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:the-left-hand-of-darkness",
+      "name": "The Left Hand of Darkness",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:rust-logo-svg",
+      "name": "rust-logo.svg",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
       "id": "ghost:ownership-model",
       "name": "Ownership Model",
       "type": "ghost",
@@ -388,6 +575,17 @@
     {
       "id": "ghost:examples-screenshot-svg",
       "name": "examples/screenshot.svg",
+      "type": "ghost",
+      "path": null,
+      "val": 1,
+      "shape": "sphere",
+      "color": "#ffffff",
+      "collapsible": false,
+      "excerpt": null
+    },
+    {
+      "id": "ghost:graph-preview-svg",
+      "name": "graph-preview.svg",
       "type": "ghost",
       "path": null,
       "val": 1,
@@ -449,6 +647,11 @@
       "type": "file-tag"
     },
     {
+      "source": "digital-garden",
+      "target": "tag:projects/garden",
+      "type": "file-tag"
+    },
+    {
       "source": "getting-started",
       "target": "ghost:diagram-svg",
       "type": "wikilink"
@@ -499,6 +702,51 @@
       "type": "file-tag"
     },
     {
+      "source": "javascript",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "ghost:vue-js",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "ghost:node-js-ecosystem",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "ghost:react-hooks",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "web-dev",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "javascript",
+      "target": "tag:programming/js",
+      "type": "file-tag"
+    },
+    {
+      "source": "javascript",
+      "target": "tag:tech",
+      "type": "file-tag"
+    },
+    {
       "source": "note-taking",
       "target": "obsidian",
       "type": "wikilink"
@@ -526,6 +774,11 @@
     {
       "source": "note-taking",
       "target": "tag:meta/concepts",
+      "type": "file-tag"
+    },
+    {
+      "source": "note-taking",
+      "target": "tag:books/technical",
       "type": "file-tag"
     },
     {
@@ -614,6 +867,141 @@
       "type": "file-tag"
     },
     {
+      "source": "projects",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "programming",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "reading-list",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "ghost:rust-web-framework-experiment",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "ghost:cli-note-search-tool",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "ghost:inbox",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "tag:projects/garden",
+      "type": "file-tag"
+    },
+    {
+      "source": "projects",
+      "target": "tag:meta",
+      "type": "file-tag"
+    },
+    {
+      "source": "reading-list",
+      "target": "rust",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "typescript",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "ghost:the-pragmatic-programmer",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "philosophy-of-mind",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "ghost:the-left-hand-of-darkness",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "getting-started",
+      "type": "wikilink"
+    },
+    {
+      "source": "reading-list",
+      "target": "tag:books/fiction",
+      "type": "file-tag"
+    },
+    {
+      "source": "reading-list",
+      "target": "tag:books/technical",
+      "type": "file-tag"
+    },
+    {
+      "source": "reading-list",
+      "target": "tag:projects/garden",
+      "type": "file-tag"
+    },
+    {
+      "source": "rust",
+      "target": "ghost:rust-logo-svg",
+      "type": "wikilink"
+    },
+    {
       "source": "rust",
       "target": "ghost:ownership-model",
       "type": "wikilink"
@@ -632,6 +1020,11 @@
       "source": "rust",
       "target": "programming",
       "type": "wikilink"
+    },
+    {
+      "source": "rust",
+      "target": "tag:programming/rust",
+      "type": "file-tag"
     },
     {
       "source": "rust",
@@ -725,6 +1118,11 @@
     },
     {
       "source": "typescript",
+      "target": "tag:programming/js",
+      "type": "file-tag"
+    },
+    {
+      "source": "typescript",
       "target": "tag:programming/web",
       "type": "file-tag"
     },
@@ -750,6 +1148,11 @@
     },
     {
       "source": "web-dev",
+      "target": "tag:programming/js",
+      "type": "file-tag"
+    },
+    {
+      "source": "web-dev",
       "target": "tag:programming/web",
       "type": "file-tag"
     },
@@ -770,6 +1173,11 @@
     },
     {
       "source": "welcome",
+      "target": "ghost:graph-preview-svg",
+      "type": "wikilink"
+    },
+    {
+      "source": "welcome",
       "target": "obsidian",
       "type": "wikilink"
     },
@@ -786,6 +1194,16 @@
     {
       "source": "tag:meta",
       "target": "tag:meta/concepts",
+      "type": "tag-hierarchy"
+    },
+    {
+      "source": "tag:programming",
+      "target": "tag:programming/js",
+      "type": "tag-hierarchy"
+    },
+    {
+      "source": "tag:programming",
+      "target": "tag:programming/rust",
       "type": "tag-hierarchy"
     },
     {

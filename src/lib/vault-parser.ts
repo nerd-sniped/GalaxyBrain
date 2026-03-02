@@ -115,8 +115,19 @@ export function parseNote(
   absolutePath: string,
   vaultNotesRoot: string,
 ): ParsedNote {
-  const parsed = matter(rawContent);
-  const fm = parsed.data as NoteFrontmatter;
+  // Gracefully handle malformed / missing frontmatter: gray-matter may throw on
+  // certain malformed YAML strings. Falling back to an empty frontmatter object
+  // means the note will be treated as publish: false (filtered out by graph-builder).
+  let parsed: ReturnType<typeof matter>;
+  try {
+    parsed = matter(rawContent);
+  } catch {
+    console.warn(`[vault-parser] Failed to parse frontmatter in ${absolutePath} — treating as unpublished`);
+    parsed = matter('');
+    parsed.content = rawContent;
+  }
+  // An empty frontmatter data object means publish is undefined → treated as false.
+  const fm = (parsed.data ?? {}) as NoteFrontmatter;
 
   // Compute relative path from vault/notes/ root
   const relativePath = path

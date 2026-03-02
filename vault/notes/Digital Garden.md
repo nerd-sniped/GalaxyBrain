@@ -1,7 +1,7 @@
 ---
 publish: true
 title: "Digital Garden"
-tags: [meta, meta/concepts]
+tags: [meta, meta/concepts, projects/garden]
 aliases: [garden, digital-garden]
 graph:
   shape: torus

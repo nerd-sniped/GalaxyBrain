@@ -1,7 +1,7 @@
 ---
 publish: true
 title: "Web Dev"
-tags: [programming/web, tech]
+tags: [programming/js, programming/web, tech]
 aliases: [web-development, frontend]
 graph:
   shape: sphere

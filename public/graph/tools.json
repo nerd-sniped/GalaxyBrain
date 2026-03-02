@@ -5,7 +5,7 @@
       "name": "Tools",
       "type": "file",
       "path": "/notes/tools",
-      "val": 6,
+      "val": 7,
       "shape": "box",
       "color": "#9b59b6",
       "collapsible": true,
@@ -16,18 +16,29 @@
       "name": "Astro",
       "type": "file",
       "path": "/notes/astro",
-      "val": 8,
+      "val": 10,
       "shape": "cone",
       "color": "#e84393",
       "collapsible": false,
       "excerpt": "Astro Astro is the static site generator powering this garden. Why Astro - Islands architecture — ship zero JS by defaul"
     },
     {
+      "id": "projects",
+      "name": "Projects",
+      "type": "file",
+      "path": "/notes/projects",
+      "val": 15,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Projects Active and planned projects connected to this knowledge garden. GalaxyBrain — This Site The project you are rea"
+    },
+    {
       "id": "obsidian",
       "name": "Obsidian",
       "type": "file",
       "path": "/notes/obsidian",
-      "val": 7,
+      "val": 8,
       "shape": "cylinder",
       "color": "#8e44ad",
       "collapsible": false,
@@ -49,7 +60,7 @@
       "name": "#meta",
       "type": "tag",
       "path": null,
-      "val": 6,
+      "val": 7,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
@@ -60,7 +71,7 @@
       "name": "Welcome",
       "type": "file",
       "path": "/notes/welcome",
-      "val": 6,
+      "val": 7,
       "shape": "sphere",
       "color": "#3498db",
       "collapsible": false,
@@ -81,6 +92,26 @@
     {
       "source": "obsidian",
       "target": "tag:tools",
+      "type": "file-tag"
+    },
+    {
+      "source": "projects",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "astro",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "tag:meta",
       "type": "file-tag"
     },
     {
@@ -129,6 +160,11 @@
       "id": "astro",
       "name": "Astro",
       "path": "/notes/astro"
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "path": "/notes/projects"
     },
     {
       "id": "welcome",

@@ -98,8 +98,17 @@ const remarkVaultImages: Plugin<[], Root> = () => {
           };
           parts.push(htmlNode as unknown as PhrasingContent);
         } else {
-          // Not found — keep original text so it doesn't silently disappear
-          parts.push({ type: 'text', value: m[0] });
+          // Not found in vault — render a broken-image placeholder and log a warning
+          console.warn(`[remark-vault-images] Image not found in vault: ${filename}`);
+          const brokenHtml = [
+            `<span class="vault-image-missing" title="Image not found: ${filename}">`,
+            `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">`,
+            `<rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="8.5" r="1.5"/>`,
+            `</svg>`,
+            `<em class="vault-image-missing-label">${filename}</em>`,
+            `</span>`,
+          ].join('');
+          parts.push({ type: 'html' as const, value: brokenHtml } as unknown as PhrasingContent);
         }
 
         lastIndex = OBSIDIAN_IMG_RE.lastIndex;

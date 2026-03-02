@@ -5,7 +5,7 @@
       "name": "Obsidian",
       "type": "file",
       "path": "/notes/obsidian",
-      "val": 7,
+      "val": 8,
       "shape": "cylinder",
       "color": "#8e44ad",
       "collapsible": false,
@@ -16,7 +16,7 @@
       "name": "Digital Garden",
       "type": "file",
       "path": "/notes/digital-garden",
-      "val": 11,
+      "val": 13,
       "shape": "torus",
       "color": "#27ae60",
       "collapsible": false,
@@ -27,7 +27,7 @@
       "name": "Note Taking",
       "type": "file",
       "path": "/notes/note-taking",
-      "val": 9,
+      "val": 12,
       "shape": "cone",
       "color": "#8e44ad",
       "collapsible": true,
@@ -38,7 +38,7 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 10,
+      "val": 11,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
@@ -56,11 +56,22 @@
       "excerpt": null
     },
     {
+      "id": "projects",
+      "name": "Projects",
+      "type": "file",
+      "path": "/notes/projects",
+      "val": 15,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
+      "collapsible": true,
+      "excerpt": "Projects Active and planned projects connected to this knowledge garden. GalaxyBrain — This Site The project you are rea"
+    },
+    {
       "id": "second-brain",
       "name": "Second Brain",
       "type": "file",
       "path": "/notes/second-brain",
-      "val": 10,
+      "val": 12,
       "shape": "torusknot",
       "color": "#16a085",
       "collapsible": false,
@@ -71,7 +82,7 @@
       "name": "Tools",
       "type": "file",
       "path": "/notes/tools",
-      "val": 6,
+      "val": 7,
       "shape": "box",
       "color": "#9b59b6",
       "collapsible": true,
@@ -82,7 +93,7 @@
       "name": "Welcome",
       "type": "file",
       "path": "/notes/welcome",
-      "val": 6,
+      "val": 7,
       "shape": "sphere",
       "color": "#3498db",
       "collapsible": false,
@@ -146,6 +157,31 @@
       "type": "file-tag"
     },
     {
+      "source": "projects",
+      "target": "obsidian",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "digital-garden",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "note-taking",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "second-brain",
+      "type": "wikilink"
+    },
+    {
+      "source": "projects",
+      "target": "tools",
+      "type": "wikilink"
+    },
+    {
       "source": "second-brain",
       "target": "digital-garden",
       "type": "wikilink"
@@ -201,6 +237,11 @@
       "id": "note-taking",
       "name": "Note Taking",
       "path": "/notes/note-taking"
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "path": "/notes/projects"
     },
     {
       "id": "second-brain",

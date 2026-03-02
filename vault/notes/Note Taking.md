@@ -1,7 +1,7 @@
 ---
 publish: true
 title: "Note Taking"
-tags: [productivity, meta/concepts]
+tags: [productivity, meta/concepts, books/technical]
 graph:
   shape: cone
   color: "#8e44ad"
