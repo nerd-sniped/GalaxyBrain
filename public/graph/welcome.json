@@ -5,7 +5,7 @@
       "name": "Welcome",
       "type": "file",
       "path": "/notes/welcome",
-      "val": 8,
+      "val": 4,
       "shape": "sphere",
       "color": "#3498db",
       "collapsible": false,
@@ -25,58 +25,6 @@
       "callout": false,
       "calloutText": "Click to get started",
       "excerpt": "How to Use This Template GalaxyBrain is a template — a starting point for publishing your own Obsidian vault as an inter"
-    },
-    {
-      "id": "obsidian-setup",
-      "name": "Obsidian Setup",
-      "type": "file",
-      "path": "/notes/obsidian-setup",
-      "val": 6,
-      "shape": "cylinder",
-      "color": "#8e44ad",
-      "collapsible": false,
-      "callout": false,
-      "calloutText": "Click to get started",
-      "excerpt": "Obsidian Setup This note walks you through creating and configuring an Obsidian vault that works with GalaxyBrain. 1. In"
-    },
-    {
-      "id": "github-setup",
-      "name": "GitHub Setup",
-      "type": "file",
-      "path": "/notes/github-setup",
-      "val": 6,
-      "shape": "cylinder",
-      "color": "#27ae60",
-      "collapsible": false,
-      "callout": false,
-      "calloutText": "Click to get started",
-      "excerpt": "GitHub Setup This note explains how to host the GalaxyBrain repo on GitHub so that Netlify can auto-deploy your site whe"
-    },
-    {
-      "id": "netlify-deployment",
-      "name": "Netlify Deployment",
-      "type": "file",
-      "path": "/notes/netlify-deployment",
-      "val": 6,
-      "shape": "cylinder",
-      "color": "#00ad9f",
-      "collapsible": false,
-      "callout": false,
-      "calloutText": "Click to get started",
-      "excerpt": "Netlify Deployment Netlify hosts the built site and automatically rebuilds it every time you push to GitHub. Setup takes"
-    },
-    {
-      "id": "writing-notes",
-      "name": "Writing Notes",
-      "type": "file",
-      "path": "/notes/writing-notes",
-      "val": 5,
-      "shape": "torus",
-      "color": "#e67e22",
-      "collapsible": false,
-      "callout": false,
-      "calloutText": "Click to get started",
-      "excerpt": "Writing Notes Everything you need to know about writing notes that appear correctly on the site. The Basics A publishabl"
     },
     {
       "id": "graph-features",
@@ -125,54 +73,9 @@
       "type": "wikilink"
     },
     {
-      "source": "github-setup",
-      "target": "obsidian-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "github-setup",
-      "target": "netlify-deployment",
-      "type": "wikilink"
-    },
-    {
-      "source": "how-to-use-this-template",
-      "target": "obsidian-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "how-to-use-this-template",
-      "target": "github-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "how-to-use-this-template",
-      "target": "netlify-deployment",
-      "type": "wikilink"
-    },
-    {
-      "source": "how-to-use-this-template",
-      "target": "writing-notes",
-      "type": "wikilink"
-    },
-    {
       "source": "how-to-use-this-template",
       "target": "tag:meta/start",
       "type": "file-tag"
-    },
-    {
-      "source": "netlify-deployment",
-      "target": "writing-notes",
-      "type": "wikilink"
-    },
-    {
-      "source": "netlify-deployment",
-      "target": "graph-features",
-      "type": "wikilink"
-    },
-    {
-      "source": "obsidian-setup",
-      "target": "github-setup",
-      "type": "wikilink"
     },
     {
       "source": "welcome",
@@ -181,26 +84,6 @@
     },
     {
       "source": "welcome",
-      "target": "obsidian-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "github-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "netlify-deployment",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "writing-notes",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
       "target": "graph-features",
       "type": "wikilink"
     },
@@ -213,11 +96,6 @@
       "source": "welcome",
       "target": "tag:meta/start",
       "type": "file-tag"
-    },
-    {
-      "source": "writing-notes",
-      "target": "frontmatter-reference",
-      "type": "wikilink"
     }
   ],
   "backlinks": [],
@@ -226,26 +104,6 @@
       "id": "how-to-use-this-template",
       "name": "How to Use This Template",
       "path": "/notes/how-to-use-this-template"
-    },
-    {
-      "id": "obsidian-setup",
-      "name": "Obsidian Setup",
-      "path": "/notes/obsidian-setup"
-    },
-    {
-      "id": "github-setup",
-      "name": "GitHub Setup",
-      "path": "/notes/github-setup"
-    },
-    {
-      "id": "netlify-deployment",
-      "name": "Netlify Deployment",
-      "path": "/notes/netlify-deployment"
-    },
-    {
-      "id": "writing-notes",
-      "name": "Writing Notes",
-      "path": "/notes/writing-notes"
     },
     {
       "id": "graph-features",

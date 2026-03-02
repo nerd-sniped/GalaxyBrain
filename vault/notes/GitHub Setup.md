@@ -30,7 +30,7 @@ If you don't have one, sign up at [github.com](https://github.com). The free pla
 
 ## 3. Connect Your Local Vault
 
-If you cloned a fresh copy, open the `vault/` folder in Obsidian as described in [[Obsidian Setup]].
+If you cloned a fresh copy, open the `vault/` folder in Obsidian as described in the Obsidian Setup note.
 
 ## 4. Authenticate Git in Obsidian
 

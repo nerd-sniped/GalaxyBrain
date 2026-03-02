@@ -44,7 +44,7 @@
       "name": "GitHub Setup",
       "type": "file",
       "path": "/notes/github-setup",
-      "val": 6,
+      "val": 4,
       "shape": "cylinder",
       "color": "#27ae60",
       "collapsible": false,
@@ -83,7 +83,7 @@
       "name": "Netlify Deployment",
       "type": "file",
       "path": "/notes/netlify-deployment",
-      "val": 6,
+      "val": 5,
       "shape": "cylinder",
       "color": "#00ad9f",
       "collapsible": false,
@@ -96,7 +96,7 @@
       "name": "Obsidian Setup",
       "type": "file",
       "path": "/notes/obsidian-setup",
-      "val": 6,
+      "val": 4,
       "shape": "cylinder",
       "color": "#8e44ad",
       "collapsible": false,
@@ -135,7 +135,7 @@
       "name": "Welcome",
       "type": "file",
       "path": "/notes/welcome",
-      "val": 8,
+      "val": 4,
       "shape": "sphere",
       "color": "#3498db",
       "collapsible": false,
@@ -148,7 +148,7 @@
       "name": "Writing Notes",
       "type": "file",
       "path": "/notes/writing-notes",
-      "val": 5,
+      "val": 4,
       "shape": "torus",
       "color": "#e67e22",
       "collapsible": false,
@@ -286,11 +286,6 @@
     },
     {
       "source": "github-setup",
-      "target": "obsidian-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "github-setup",
       "target": "netlify-deployment",
       "type": "wikilink"
     },
@@ -392,26 +387,6 @@
     {
       "source": "welcome",
       "target": "how-to-use-this-template",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "obsidian-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "github-setup",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "netlify-deployment",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "writing-notes",
       "type": "wikilink"
     },
     {

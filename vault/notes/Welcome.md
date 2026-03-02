@@ -6,7 +6,6 @@ aliases: [home, start]
 graph:
   shape: sphere
   color: "#3498db"
-  collapsible: true
   callout: true
   calloutText: "Start Here!"
 ---
@@ -25,17 +24,9 @@ You're looking at a live example of the site running with template notes. Each n
 
 ## Setup Path
 
-Follow these notes in order to go from zero to a live site:
+Start with [[How to Use This Template]] — it walks through every step from vault to live site, with the full setup sequence inside.
 
-1. [[How to Use This Template]] — what the template gives you and how it works
-2. [[Obsidian Setup]] — creating a vault and configuring Obsidian
-3. [[GitHub Setup]] — connecting your vault to a GitHub repo
-4. [[Netlify Deployment]] — deploying the site to the web for free
-5. [[Writing Notes]] — how to write notes that appear on the site
-6. [[Graph Features]] — shapes, colours, tags, collapsible nodes, and more
-7. [[Frontmatter Reference]] — every frontmatter field explained
-
-> [!tip] Tip
+For reference docs: [[Graph Features]] covers all visual customisation options, and [[Frontmatter Reference]] lists every frontmatter field.
 > Right-click any node in the graph to fly the camera to it. Click a tag node (diamond shape) to highlight all connected notes.
 
 ## About This Graph
