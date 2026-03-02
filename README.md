@@ -208,6 +208,44 @@ dist/  →  live on CDN (~60–90 seconds)
 
 ---
 
+## Staying Up to Date with Template Changes
+
+GalaxyBrain ships with a `.github/workflows/sync-upstream.yml` workflow so your deployed copy can receive improvements from this template without manual effort.
+
+### How it works
+
+When your repo is created via the **Deploy to Netlify** button (or by using this repo as a template), the workflow is included automatically. It will:
+
+1. **Open a PR** that merges upstream changes into your `main` branch — it never pushes directly
+2. Run **weekly on Monday** by default, or whenever you trigger it manually via **Actions → Sync from upstream template → Run workflow**
+3. **Skip itself** when run in this template repo, so it only activates in derived repos
+
+### What is and isn't touched
+
+| | Affected by upstream sync |
+|---|---|
+| Template source code (components, integrations, styles, config) | ✅ Yes — PRs will include these |
+| Your vault notes (`vault/notes/`) | ❌ Never — these are yours |
+| Your vault attachments | ❌ Never |
+
+Review the PR diff before merging — if you have customised components or config files, there may be conflicts to resolve.
+
+### Adding the upstream remote manually
+
+If you prefer to pull changes yourself:
+
+```bash
+git remote add upstream https://github.com/nerd-sniped/GalaxyBrain.git
+git fetch upstream
+git merge upstream/main
+```
+
+### Opting out
+
+To stop receiving update PRs, delete or disable `.github/workflows/sync-upstream.yml` in your repo.
+
+---
+
 ## Writing Notes
 
 ### Publishing
