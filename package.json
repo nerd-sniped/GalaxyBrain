@@ -8,6 +8,9 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "pnpm": {
+    "ignoredBuiltDependencies": ["@parcel/watcher", "esbuild", "sharp"]
+  },
   "dependencies": {
     "@astrojs/netlify": "^6.6.4",
     "@astrojs/react": "^4.4.2",
