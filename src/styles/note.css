@@ -5,27 +5,6 @@
   max-width: 72ch;
 }
 
-/* Tables */
-.prose table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.9em;
-}
-.prose th, .prose td {
-  border: 1px solid var(--border);
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-}
-.prose thead th {
-  background: var(--surface-1);
-  font-weight: 600;
-  color: var(--text);
-}
-.prose tbody tr:nth-child(even) {
-  background: var(--surface-0);
-}
-
 /* Images */
 .prose img {
   max-width: 100%;
@@ -53,7 +32,7 @@
 
 /* ==highlights== become <span class="highlight"> via remark-obsidian */
 .prose .highlight {
-  background: rgba(255, 213, 0, 0.22);
+  background: var(--mark-bg);
   color: inherit;
   padding: 0.05em 0.25em;
   border-radius: 2px;
@@ -61,30 +40,30 @@
 
 /* Internal wikilinks */
 .prose a[data-wikilink] {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
-  border-bottom: 1px solid rgba(52, 152, 219, 0.35);
+  border-bottom: 1px solid color-mix(in srgb, var(--link) 40%, transparent);
   transition: border-color 0.15s;
 }
 .prose a[data-wikilink]:hover {
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--link);
   text-decoration: none;
 }
 
 /* Ghost links — wikilinks pointing to unpublished notes */
 .prose a[data-wikilink].ghost-link {
-  color: var(--text-muted);
-  border-bottom: 1px dashed rgba(136, 136, 136, 0.5);
+  color: var(--link-ghost);
+  border-bottom: 1px dashed color-mix(in srgb, var(--link-ghost) 60%, transparent);
   cursor: not-allowed;
 }
 .prose a[data-wikilink].ghost-link:hover {
-  border-bottom-color: var(--text-muted);
+  border-bottom-color: var(--link-ghost);
   text-decoration: none;
 }
 
-/* External links — subtle indicator */
+/* External links */
 .prose a:not([data-wikilink]) {
-  color: var(--accent);
+  color: var(--link);
 }
 .prose a:not([data-wikilink]):hover {
   text-decoration: underline;
@@ -170,7 +149,7 @@
 .prose blockquote.transclusion {
   border-left: 3px solid var(--accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: var(--surface-1);
+  background: var(--transclusion-bg);
   padding: 0.75rem 1.1rem 0.6rem 1.1rem;
   margin: 1.25rem 0 1.25rem 0.5rem;
   box-shadow: inset 4px 0 0 var(--accent);
@@ -223,7 +202,7 @@
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   margin: 1.25rem 0;
   overflow: hidden;
-  background: var(--surface-1);
+  background: var(--transclusion-bg);
 }
 
 .prose details.transclusion-embed > summary.transclusion-embed-header {
@@ -233,7 +212,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-muted);
-  background: var(--surface-1);
+  background: var(--transclusion-bg);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -254,8 +233,8 @@
 }
 
 .prose details.transclusion-embed > summary.transclusion-embed-header:hover {
-  background: var(--surface-2, var(--surface-1));
-  color: var(--text);
+  background: var(--bg-surface-2, var(--transclusion-bg));
+  color: var(--text-primary);
 }
 
 .prose details.transclusion-embed > summary.transclusion-embed-header a {

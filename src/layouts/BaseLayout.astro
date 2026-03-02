@@ -22,21 +22,56 @@ const { title = 'GalaxyBrain', description = 'A digital garden' } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    {/* Inline script runs before first paint — prevents dark/light flash */}
+    {/* ── Inline script: runs before first paint, prevents theme flash ── */}
     <script is:inline>
       (function () {
         try {
-          var stored = localStorage.getItem('galaxybrain-theme');
-          var dark = stored ? stored !== 'light' : true;
-          document.documentElement.classList.toggle('theme-light', !dark);
-          document.documentElement.classList.toggle('theme-dark', dark);
+          var theme = localStorage.getItem('theme') || 'dark';
+          document.documentElement.classList.add(theme === 'light' ? 'light' : 'dark');
         } catch (e) {
-          document.documentElement.classList.add('theme-dark');
+          document.documentElement.classList.add('dark');
         }
       })();
     </script>
   </head>
   <body>
     <slot />
+
+    {/* ── Theme toggle button — visible on every page ── */}
+    <button id="theme-toggle" aria-label="Toggle dark / light mode" title="Toggle theme">
+      <span id="theme-toggle-icon">🌙</span>
+    </button>
+
+    <script is:inline>
+      (function () {
+        var btn  = document.getElementById('theme-toggle');
+        var icon = document.getElementById('theme-toggle-icon');
+        var html = document.documentElement;
+
+        function applyTheme(theme) {
+          if (theme === 'light') {
+            html.classList.remove('dark');
+            html.classList.add('light');
+          } else {
+            html.classList.remove('light');
+            html.classList.add('dark');
+          }
+          if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀️';
+          try { localStorage.setItem('theme', theme); } catch (e) {}
+          window.dispatchEvent(new CustomEvent('theme-change', { detail: { theme: theme } }));
+        }
+
+        // Set initial icon
+        var current = localStorage.getItem('theme') || 'dark';
+        if (icon) icon.textContent = current === 'light' ? '🌙' : '☀️';
+
+        if (btn) {
+          btn.addEventListener('click', function () {
+            var next = (localStorage.getItem('theme') || 'dark') === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

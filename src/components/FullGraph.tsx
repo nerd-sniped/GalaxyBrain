@@ -9,7 +9,7 @@ import type { GraphData, GraphNode } from '../lib/types';
 
 const BG_DARK  = '#0a0a0a';
 const BG_LIGHT = '#f5f5f5';
-const STORAGE_KEY = 'galaxybrain-theme';
+const STORAGE_KEY = 'theme';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -58,13 +58,21 @@ export default function FullGraph() {
     try { return (localStorage.getItem(STORAGE_KEY) ?? 'dark') !== 'light'; }
     catch { return true; }
   });
-
-  const toggleTheme = useCallback(() => {
-    setIsDark((prev) => {
-      const next = !prev;
-      try { localStorage.setItem(STORAGE_KEY, next ? 'dark' : 'light'); } catch { /* ignore */ }
-      return next;
-    });
+  // Listen for theme-change dispatched by the global BaseLayout toggle
+  useEffect(() => {
+    const onThemeChange = (e: Event) => {
+      const detail = (e as CustomEvent<{ theme: string }>).detail;
+      setIsDark(detail.theme !== 'light');
+    };
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY) setIsDark((e.newValue ?? 'dark') !== 'light');
+    };
+    window.addEventListener('theme-change', onThemeChange);
+    window.addEventListener('storage', onStorage);
+    return () => {
+      window.removeEventListener('theme-change', onThemeChange);
+      window.removeEventListener('storage', onStorage);
+    };
   }, []);
 
   const bgColor     = isDark ? BG_DARK  : BG_LIGHT;
@@ -82,7 +90,10 @@ export default function FullGraph() {
   }, [graphData]);
 
   // ── Tag highlight ──────────────────────────────────────────────────────────
-  const [highlightedTag, setHighlightedTag] = useState<string | null>(null);
+  const [highlightedTag, setHighlightedTag] = useState<string | null>(() => {
+    try { return new URLSearchParams(window.location.search).get('highlight'); }
+    catch { return null; }
+  });
 
   /**
    * Set of node IDs directly connected to the currently highlighted tag
@@ -229,7 +240,7 @@ export default function FullGraph() {
     const group = new THREE.Group();
 
     // ── base mesh ────────────────────────────────────────────────────────────
-    const mesh = buildNodeObject(node.type, node.shape, node.color, node.val);
+    const mesh = buildNodeObject(node.type, node.shape, node.color, node.val, !isDark);
 
     // Scale up highlighted / connected nodes
     if (isHighlightedTag || isConnected) {
@@ -278,7 +289,7 @@ export default function FullGraph() {
     }
 
     return group;
-  }, [highlightedTag, highlightedNodeIds, collapsedNodes]);
+  }, [highlightedTag, highlightedNodeIds, collapsedNodes, isDark]);
 
   // ── Hover ──────────────────────────────────────────────────────────────────
   const handleNodeHover = useCallback((rawNode: object | null) => {
@@ -412,28 +423,7 @@ export default function FullGraph() {
         showNavInfo={false}
       />
 
-      {/* Dark / light toggle — fixed top-right, persists to localStorage */}
-      <button
-        onClick={toggleTheme}
-        title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        style={{
-          position:       'fixed',
-          top:            16,
-          right:          16,
-          zIndex:         9999,
-          background:     uiBgColor,
-          color:          uiTextColor,
-          border:         `1px solid ${uiBorder}`,
-          borderRadius:   8,
-          padding:        '6px 12px',
-          fontSize:       18,
-          cursor:         'pointer',
-          lineHeight:     1,
-          backdropFilter: 'blur(4px)',
-        }}
-      >
-        {isDark ? '☀️' : '🌙'}
-      </button>
+      {/* Dark / light toggle has moved to BaseLayout */}
 
       {/* Hover tooltip — single DOM node, updated imperatively */}
       <div

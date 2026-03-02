@@ -31,6 +31,13 @@ export default defineConfig({
     rehypePlugins: [
       rehypeRaw,           // allow the inline HTML nodes the plugins emit
     ],
+    shikiConfig: {
+      // Dual themes — class-based switching via html.dark / html.light
+      themes: { dark: 'github-dark', light: 'github-light' },
+      // Don't auto-apply either theme; we control it via CSS classes
+      defaultColor: false,
+      wrap: false,
+    },
   },
   vite: {
     ssr: {

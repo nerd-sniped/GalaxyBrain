@@ -1,13 +1,13 @@
 # GalaxyBrain — LLM Context Document
 
-> Last updated: Phase 5 complete.
+> Last updated: Phase 7 complete.
 > Purpose: Give any future LLM session immediate, accurate context to continue development without re-deriving decisions from scratch.
 
 ---
 
 ## What This Project Is
 
-A **static Astro website** that publishes an Obsidian vault of `.md` files as a "digital garden". The **primary navigation is a full-viewport interactive 3D force-directed graph** rendered with `react-force-graph-3d` (Three.js). Notes appear as nodes; wikilinks and tags are edges. Clicking a node navigates to its note page. Each note page will have a sidebar with a smaller local graph (not yet built).
+A **static Astro website** that publishes an Obsidian vault of `.md` files as a "digital garden". The **primary navigation is a full-viewport interactive 3D force-directed graph** rendered with `react-force-graph-3d` (Three.js). Notes appear as nodes; wikilinks and tags are edges. Clicking a node navigates to its note page. Each note page has a sidebar with a **live interactive local graph** (`LocalGraph.tsx`) showing the 1-hop neighbourhood, a backlinks list, forward links list, and tag pills. The site has a full **dark/light theme system** with no flash on load and a single global toggle button.
 
 The project is hosted on **Netlify** as a fully static deploy (`output: 'static'`).
 
@@ -26,6 +26,7 @@ The project is hosted on **Netlify** as a fully static deploy (`output: 'static'
 | Remark | `@heavycircle/remark-obsidian` | Callouts, `==highlights==`, block refs, tasks |
 | Custom remark | `src/lib/remark-wikilinks.ts`, `src/plugins/remark-vault-images.ts`, `src/plugins/remark-transclusion.ts` | See pipeline order below |
 | Rehype | `rehype-raw` | Passes inline HTML from remark plugins through rehype |
+| Syntax highlighting | Shiki (built into Astro) | Dual themes: `github-dark` / `github-light`, bound to `html.dark` / `html.light` via CSS variables |
 | Lucide | `lucide-react` | Callout icons |
 | `unist-util-visit` | `unist-util-visit` | AST traversal used by remark plugins |
 | `unified` | `unified@11` | Remark plugin typing (dev dep) |
@@ -49,7 +50,7 @@ GalaxyBrain/
 │       └── diagram.svg             ← Sample image in attachments/ (Phase 5)
 ├── public/
 │   ├── graph.json                  ← Full graph — built by graph-builder
-│   ├── graph/[noteId].json         ← 1-hop neighbourhood per published note (14 files)
+│   ├── graph/[noteId].json         ← 1-hop neighbourhood per published note (14 files, includes backlinks/forwardLinks arrays)
 │   └── vault-assets/               ← Copied vault images (built by asset-collector)
 │       ├── attachments/diagram.svg
 │       └── notes/examples/screenshot.svg
@@ -58,15 +59,16 @@ GalaxyBrain/
 │   └── block-index.json            ← { "rust/^ownership-intro": "…", "note-taking": "…", … }
 ├── src/
 │   ├── components/
-│   │   ├── FullGraph.tsx           ← Landing page React island (COMPLETE — all Phase 3 interactions)
-│   │   └── GraphNodeFactory.ts     ← shape string → THREE.BufferGeometry
+│   │   ├── FullGraph.tsx           ← Landing page React island (COMPLETE — all Phase 3 interactions + Phase 7 theme)
+│   │   ├── LocalGraph.tsx          ← Note page sidebar island (COMPLETE — Phase 6)
+│   │   └── GraphNodeFactory.ts     ← shape string → THREE.BufferGeometry; accepts isLight flag (Phase 7)
 │   ├── integrations/
 │   │   ├── graph-builder.ts        ← Emits graph.json + per-note JSONs at astro:config:done
 │   │   ├── asset-collector.ts      ← Copies vault images → public/vault-assets/ at astro:build:start
 │   │   └── block-indexer.ts        ← Indexes ^blockIds per note → .astro/block-index.json
 │   ├── layouts/
-│   │   ├── BaseLayout.astro        ← HTML shell; anti-FOUC inline theme script
-│   │   └── NoteLayout.astro        ← Two-column layout + "View in graph" + ghost-link detection
+│   │   ├── BaseLayout.astro        ← HTML shell; anti-FOUC inline script; global theme toggle button
+│   │   └── NoteLayout.astro        ← Two-column layout, <LocalGraph client:only>, sidebar CSS
 │   ├── lib/
 │   │   ├── graph-types.ts          ← Re-exports types.ts + NoteGraphData / NoteRef
 │   │   ├── link-resolver.ts        ← Obsidian shortest-path wikilink resolution
@@ -81,22 +83,16 @@ GalaxyBrain/
 │   │   ├── remark-vault-images.ts  ← ![[img.ext]] / ![](img) → /vault-assets/ paths
 │   │   └── remark-transclusion.ts  ← ![[note#^id]] / ![[note]] → blockquote/details embeds
 │   ├── styles/
-│   │   ├── callouts.css            ← All 13 Obsidian callout types with Lucide SVG icons
-│   │   ├── global.css              ← Design tokens, reset, prose typography
+│   │   ├── callouts.css            ← All 13 Obsidian callout types; light-mode via html.light selector
+│   │   ├── global.css              ← html.dark / html.light token blocks, Shiki binding, tables, transitions
 │   │   ├── graph.css               ← Graph overlay chrome styles
-│   │   └── note.css                ← Prose typography + transclusion styles (updated Phase 5)
+│   │   └── note.css                ← Prose, wikilinks, ghost links, transclusion (all using CSS vars)
 │   └── content.config.ts           ← "notes" content collection (vault/notes → Astro)
-├── astro.config.mjs
+├── astro.config.mjs                ← Includes shikiConfig dual themes
 ├── tsconfig.json
 ├── package.json
 ├── netlify.toml
 └── Context.md                      ← This file
-```
-
-**Not yet created** (future phases):
-```
-src/components/
-│   └── LocalGraph.tsx              ← Phase 6: sidebar expandable local graph
 ```
 
 ---
@@ -110,8 +106,8 @@ src/components/
 | **3** | Full graph interactions: collapse/expand with `+` sprite, tag highlight + pulsing glow, shift+click re-collapse, ghost-click toast, right-click camera focus, directional link particles | ✅ Complete |
 | **4** | Content pipeline: `remark-wikilinks`, `remark-obsidian`, `rehype-raw`; `NoteLayout`; anti-FOUC; `?focus=` camera; callout + prose CSS | ✅ Complete |
 | **5** | Block indexer, remark-transclusion, asset collector, remark-vault-images, transclusion CSS | ✅ Complete |
-| **6** | `LocalGraph.tsx` sidebar with progressive expansion (click-to-expand → click-to-navigate), backlinks/forward links from per-note JSONs | ⬜ Not started |
-| **7** | Full vault test, CSS polish, dark mode on note pages, performance, edge cases | ⬜ Not started |
+| **6** | `LocalGraph.tsx` sidebar with progressive expansion, backlinks/forward links/tags from per-note JSONs | ✅ Complete |
+| **7** | Full dark/light theme system, Shiki dual-themes, CSS variable overhaul, `GraphNodeFactory` light-mode colours | ✅ Complete |
 
 ---
 
@@ -196,7 +192,24 @@ type NodeShape = 'sphere' | 'box' | 'cone' | 'cylinder' |
                  'dodecahedron' | 'torus' | 'torusknot' | 'octahedron';
 ```
 
-`public/graph/[noteId].json` — same schema, 1-hop neighborhood. 14 files.
+`public/graph/[noteId].json` — same `nodes`/`links` schema as above (1-hop neighbourhood), plus two additional arrays:
+
+```typescript
+{
+  nodes: GraphNode[];
+  links: GraphLink[];
+  backlinks: NoteRef[];      // notes that link TO this note
+  forwardLinks: NoteRef[];   // published notes this note links TO (non-ghost only)
+}
+
+interface NoteRef {
+  id: string;
+  name: string;
+  path: string | null;
+}
+```
+
+14 files total (one per published note). Ghost nodes and tag nodes appear in the `nodes` array but not in `backlinks`/`forwardLinks`.
 
 `.astro/vault-images.json` — `{ "basename.ext": "/vault-assets/relative/path.ext" }` (both lowercased basename and full relative path stored as keys).
 
@@ -240,25 +253,48 @@ cover: attachments/hero.png     # optional hero image
 
 ### Local Graph (`/notes/[slug]` sidebar) — Phase 6
 
-- First click on neighbour: fetch that node's `/graph/[id].json`, merge into view
-- Second click on same neighbour: navigate to that note's page
-- Below graph: backlinks list + forward links list
+Rendered by `<LocalGraph client:only="react" noteId={focusId} />` in `NoteLayout.astro`.
+
+| Interaction | Result |
+|---|---|
+| Mount | Fetches `/graph/[noteId].json`, displays current note + its 1-hop neighbours. Current note is in `expandedNodes` from the start. |
+| Left-click **tag** node | No-op (tags don't expand or navigate in local graph) |
+| Left-click **ghost** node | Shows "Note not yet created" toast at cursor, auto-dismisses after 2.2 s |
+| Left-click **file** node (not yet clicked) | Adds to `clickedOnce`; fetches `/graph/[nodeId].json`; merges new nodes/links into `graphState` (deduplicated); adds a white ring overlay indicating "click again to open" |
+| Left-click **file** node (already in `clickedOnce`) | `window.location.href = node.path` |
+| Right-click any node | Camera fly-to focus (1200 ms animation) |
+| Below the canvas | Backlinks section, Linked Notes section, Tags as pills |
+| Tag pill click | Navigates to `/?highlight=<tagId>` — opens full graph with that tag highlighted |
+
+**State model in `LocalGraph.tsx`:**
+- `nodes: Map<string, GraphNode>` — currently visible nodes (deduplicated by ID)
+- `links: GraphLink[]` — all links in view
+- `expandedNodes: Set<string>` — nodes whose neighbours have been fetched
+- `clickedOnce: Set<string>` — nodes primed for navigation
+
+**Visual distinction for current note:** 1.55× scale + emissive glow material + `THREE.PointLight` child.
+**Primed node (clickedOnce):** white `THREE.RingGeometry` overlay floats around the mesh.
 
 ---
 
 ## Node Visuals
 
-| Node type | Shape | Material | Color |
-|---|---|---|---|
-| `file` | Shape from frontmatter (default sphere) | `MeshLambertMaterial` solid | From frontmatter |
-| `tag` | Octahedron (forced, regardless of shape field) | `MeshLambertMaterial` solid | From node data (red/orange family) |
-| `ghost` | Sphere | `MeshBasicMaterial` wireframe, opacity 0.15 | White |
+| Node type | Shape | Material | Color (dark) | Color (light) |
+|---|---|---|---|---|
+| `file` | Shape from frontmatter (default sphere) | `MeshLambertMaterial` solid | From frontmatter | Darkened 22% via HSL (see `resolveColor`) |
+| `tag` | Octahedron (forced) | `MeshLambertMaterial` solid | From node data | Darkened 22% |
+| `ghost` | Sphere | `MeshBasicMaterial` wireframe | White, opacity 0.15 | Gray `0x888888`, opacity 0.35 |
 
-Node size (`val`) is set at build time proportional to link count. Scale applied: `Math.cbrt(val) * 1.2` (increased from 0.8 in Phase 3 for better visibility).
+Node size (`val`) is set at build time proportional to link count. Scale applied: `Math.cbrt(val) * 1.2`.
 
-**Collapsed node indicator:** a `THREE.Sprite` with a canvas-drawn `+` badge floats above-right of the mesh. Built fresh per node in `nodeThreeObject`.
+`buildNodeObject(type, shape, color, val, isLight?)` in `GraphNodeFactory.ts` — the optional `isLight` flag triggers colour darkening for light-mode readability. Ghost nodes also switch from white to gray wireframe.
 
-**Tag highlight state:** when `highlightedTag` is set, `nodeThreeObject` gives the tag node an emissive glow + `THREE.PointLight` child. A `requestAnimationFrame` loop in a `useEffect` pulses `light.intensity = 3 + 2·sin(3t)`. All non-connected nodes get `opacity: 0.15`; connected nodes scale ×1.35.
+**Collapsed node indicator:** a `THREE.Sprite` with a canvas-drawn `+` badge floats above-right of the mesh.
+
+**Tag highlight state:** when `highlightedTag` is set, the tag node gets emissive glow + `THREE.PointLight` child. A `requestAnimationFrame` loop pulses `light.intensity = 3 + 2·sin(3t)`. All non-connected nodes fade to opacity 0.15; connected nodes scale ×1.35.
+
+**Local graph current note:** 1.55× base scale, emissive colour, `PointLight` halo.
+**Local graph primed node (clickedOnce):** white `RingGeometry` overlay.
 
 ---
 
@@ -273,32 +309,24 @@ The hover tooltip updates `el.style` and `el.textContent` directly via a DOM ref
 ### `visibleData` is memoized with `useMemo`
 `graphData` is passed to `<ForceGraph3D graphData={...}>`. If this prop changes reference on every render, the library restarts the force simulation. `useMemo` ensures the reference only changes when `graphData` or `collapsedNodes` actually changes.
 
-### Dark/light mode
-- Toggle button fixed top-right: ☀️ / 🌙
-- State stored in `localStorage` under key `galaxybrain-theme`
-- Values: `'dark'` (default) / `'light'`
-- Background colors: dark = `#0a0a0a`, light = `#f5f5f5`
-- Tooltip and link colors adapt to the current theme
+### Dark/light theme system (Phase 7)
 
-### Content collection
-`src/content.config.ts` defines a `notes` collection using Astro 5's Content Layer API (`glob` loader pointing at `vault/notes/`). Rendering uses the `render(note)` function (not the deprecated `note.render()` method). Only notes with `publish: true` get static routes.
+- **Anti-FOUC:** `BaseLayout.astro` has an `is:inline` `<script>` directly in `<head>` that reads `localStorage.getItem('theme')` and adds `'dark'` or `'light'` class to `<html>` before the first paint.
+- **Toggle button:** A `#theme-toggle` button is appended to `<body>` in `BaseLayout.astro` via a second `is:inline` script. It is fixed top-right (`z-index: 9999`), styles itself from CSS variables, and works on every page.
+- **Storage key:** `'theme'`, values `'dark'` (default) or `'light'`.
+- **CSS variables:** `html.dark { --bg-primary: … }` / `html.light { --bg-primary: … }` in `global.css`. All colour references in all CSS files use only these variables — no hardcoded colours.
+- **Event propagation to React islands:** The toggle dispatches `CustomEvent('theme-change', { detail: { theme } })` on `window`. Both `FullGraph.tsx` and `LocalGraph.tsx` listen for this event (and also the `'storage'` event for cross-tab sync) to update their `isDark` state without a page reload.
+- **Graph background:** `FullGraph` and `LocalGraph` pass `bgColor` to `ForceGraph3D.backgroundColor`. Values: dark = `#0a0a0a`, light = `#f5f5f5`.
+- **Smooth transitions:** `body`, `.prose`, `.note-layout` etc have `transition: background-color 0.2s, color 0.2s, border-color 0.2s`. Canvas, SVG, and Shiki code spans are excluded (`transition: none !important`).
+- **Shiki dual themes:** `astro.config.mjs` sets `shikiConfig: { themes: { dark: 'github-dark', light: 'github-light' }, defaultColor: false }`. Astro emits `--shiki-dark`, `--shiki-dark-bg`, `--shiki-light`, `--shiki-light-bg` (etc.) as CSS custom properties per token. `global.css` binds them via `html.dark .astro-code { color: var(--shiki-dark) !important; … }` and same for `html.light`.
 
-### Remark/rehype pipeline
-Configured in `astro.config.mjs` — order is critical:
-1. **`remarkVaultImages`** (`src/plugins/remark-vault-images.ts`) — runs first; rewrites `![[img.ext]]` text nodes to `<img class="vault-image">` and rewrites standard `image` AST node URLs to `/vault-assets/...` paths. Must run before other plugins consume `![[...]]` syntax.
-2. **`remarkTransclusion`** (`src/plugins/remark-transclusion.ts`) — converts `![[note#^blockId]]` to `<blockquote class="transclusion">` and `![[note]]` to `<details class="transclusion-embed">`. Missing refs render a `<div class="transclusion-missing">` warning. Must run before `remarkWikilinks` so embeds aren't partially parsed as wikilinks.
-3. **`remarkWikilinks`** (custom, `src/lib/remark-wikilinks.ts`) — converts `[[Note Name]]` and `[[Note Name|Display]]` into `<a href="/notes/<slug>" data-wikilink="<slug>">`. Heading fragments preserved.
-4. **`remarkObsidian`** (`@heavycircle/remark-obsidian`) — callouts (`[!type]` → `.callout[callout="type"]` divs + Lucide SVG), `==highlights==` → `<span class="highlight">`, tasks, `%%comments%%`.
-5. **`rehypeRaw`** — processes raw HTML nodes emitted by all remark plugins above.
+### `?highlight=tagId` URL param (FullGraph)
 
-### Ghost-link detection
-A client-side `<script>` in `NoteLayout.astro` fetches `/graph.json` after DOM ready, builds a `Set` of published node IDs, then adds `.ghost-link` to any `a[data-wikilink]` whose slug is not in the set. Ghost links render with dashed underline + muted color + `cursor: not-allowed`.
+`FullGraph.tsx` initialises `highlightedTag` from `new URLSearchParams(window.location.search).get('highlight')` so navigating to `/?highlight=tag:programming` immediately activates tag-filter mode. Tag pills in `LocalGraph.tsx` link to `/?highlight=<tagId>`.
 
-### Anti-FOUC theme script
-`BaseLayout.astro` has an `is:inline` script directly in `<head>`. It reads `localStorage.getItem('galaxybrain-theme')` and toggles `theme-dark` / `theme-light` on `<html>` before the first paint, preventing the dark/light flash on page load.
+### `?focus=noteId` camera auto-focus (FullGraph)
 
-### `?focus=noteId` camera auto-focus
-The "View in graph" link in `NoteLayout` navigates to `/?focus=<noteId>`. `FullGraph.tsx` reads this param via `new URLSearchParams(window.location.search)` in a `useMemo`. A `setTimeout` of 4 seconds (after mount, giving the force sim time to settle) triggers the same `cameraPosition()` animation used by right-click.
+The "View in graph" link in `NoteLayout` navigates to `/?focus=<noteId>`. `FullGraph.tsx` reads this param via `useMemo`. A `setTimeout` of 4 seconds (after mount, giving the force sim time to settle) triggers the `cameraPosition()` animation.
 
 ### Callout attribute selector
 The `@heavycircle/remark-obsidian` plugin sets `callout="type"` as a bare attribute (not `data-callout`). All CSS selectors in `callouts.css` use `[callout="type"]` accordingly.
@@ -322,6 +350,20 @@ remark pipeline (per .md file)
   rehype-raw               — processes raw HTML from steps 1–4
 ```
 
+### Content collection
+`src/content.config.ts` defines a `notes` collection using Astro 5's Content Layer API (`glob` loader pointing at `vault/notes/`). Rendering uses the `render(note)` function (not the deprecated `note.render()` method). Only notes with `publish: true` get static routes.
+
+### Remark/rehype pipeline
+Configured in `astro.config.mjs` — order is critical:
+1. **`remarkVaultImages`** — runs first; rewrites `![[img.ext]]` text nodes to `<img class="vault-image">`. Must run before other plugins consume `![[...]]` syntax.
+2. **`remarkTransclusion`** — converts `![[note#^blockId]]` / `![[note]]` to HTML embeds. Must run before `remarkWikilinks`.
+3. **`remarkWikilinks`** — `[[Note Name]]` → `<a href="/notes/<slug>" data-wikilink="<slug>">`.
+4. **`remarkObsidian`** — callouts, `==highlights==`, tasks, `%%comments%%`.
+5. **`rehypeRaw`** — processes raw HTML nodes emitted by all remark plugins above.
+
+### Ghost-link detection
+A client-side `<script>` in `NoteLayout.astro` fetches `/graph.json` after DOM ready, builds a `Set` of published node IDs, then adds `.ghost-link` to any `a[data-wikilink]` whose slug is not in the set. Ghost links render with dashed underline + `var(--link-ghost)` color + `cursor: not-allowed`.
+
 ### Block index key convention
 Keys in `.astro/block-index.json`:
 - Full note: `"note-slug"` → full body string
@@ -344,33 +386,144 @@ Vault images are served from `public/vault-assets/` as static files with `loadin
 
 ---
 
+## Phase 6 — What Was Built
+
+### `LocalGraph.tsx` (`src/components/LocalGraph.tsx`)
+
+A React island mounted in `NoteLayout.astro` sidebar via `<LocalGraph client:only="react" noteId={focusId} />`.
+
+**Data:** Fetches `/graph/[noteId].json` on mount. The response provides `nodes`, `links`, `backlinks`, and `forwardLinks`. Tags and ghost forward-links are derived from the `nodes`/`links` arrays (no separate fetch needed).
+
+**Graph rendering:** `ForceGraph3D` at `100% width × 350 px` using a `ResizeObserver` to track the container's actual pixel width. Uses `buildNodeObject` from `GraphNodeFactory` (same as `FullGraph`).
+
+**Progressive expansion state:**
+- `nodes: Map<string, GraphNode>` — deduplicated by ID
+- `links: GraphLink[]` — deduplicated by `source→target` key
+- `expandedNodes: Set<string>` — initially contains only `noteId`
+- `clickedOnce: Set<string>` — tracks nodes primed for navigation
+
+**Click logic:**
+```
+tag node    → no-op
+ghost node  → "Note not yet created" toast
+file node, not in clickedOnce:
+  → add to clickedOnce
+  → fetch /graph/[node.id].json, merge into graphState
+  → add to expandedNodes
+  → show white ring overlay (primed indicator)
+file node, already in clickedOnce:
+  → window.location.href = node.path
+```
+
+**Visual features:**
+- Current note: 1.55× scale, emissive glow, `PointLight` halo in node colour
+- Primed node: `THREE.RingGeometry` white overlay (semi-transparent)
+- Hover tooltip: updates DOM imperatively (no React re-render)
+- Right-click: camera fly-to (same as FullGraph)
+
+**Sidebar sections (rendered in React below the canvas):**
+- **Backlinks**: `backlinks[]` from JSON → links list
+- **Linked Notes**: `forwardLinks[]` (published) + ghost forward links (muted italic with dashed underline)
+- **Tags**: `file-tag` links from the data → pills, each linking to `/?highlight=<tagId>`
+
+**NoteLayout.astro sidebar** (`src/layouts/NoteLayout.astro`):
+- Sidebar is `position: sticky; height: calc(100vh - 4rem); overflow-y: auto` — scrolls independently of main content
+- All `.local-graph-*` CSS classes defined via `:global()` rules in the scoped `<style>` block
+
+---
+
+## Phase 7 — What Was Built
+
+### Theme variable system (`src/styles/global.css`)
+
+All colour tokens moved from `:root` to theme-specific classes:
+```css
+html.dark  { --bg-primary: #0a0a0a; --bg-secondary: …; --text-primary: …; … }
+html.light { --bg-primary: #ffffff; --bg-secondary: …; --text-primary: …; … }
+```
+
+Backward-compat aliases (`--bg`, `--surface-0/1/2`, `--text`) kept for old rules. No hardcoded colours remain in any CSS file.
+
+**Key variables:**
+
+| Variable | Dark | Light |
+|---|---|---|
+| `--bg-primary` | `#0a0a0a` | `#ffffff` |
+| `--bg-secondary` | `#141414` | `#f5f5f5` |
+| `--bg-surface` | `#1e1e1e` | `#fafafa` |
+| `--text-primary` | `#e0e0e0` | `#1a1a1a` |
+| `--text-muted` | `#606060` | `#999999` |
+| `--border` | `#2a2a2a` | `#e0e0e0` |
+| `--accent` | `#42a5f5` | `#1565c0` |
+| `--link` | `#42a5f5` | `#1565c0` |
+| `--link-ghost` | `#555555` | `#aaaaaa` |
+| `--mark-bg` | `rgba(255,213,0,0.22)` | `rgba(255,220,0,0.38)` |
+| `--transclusion-bg` | `#15171e` | `#f2f4ff` |
+| `--graph-bg` | `#0a0a0a` | `#f5f5f5` |
+
+### Theme toggle (`src/layouts/BaseLayout.astro`)
+
+Two inline scripts added to `BaseLayout`:
+1. **`<head>` anti-FOUC script:** reads `localStorage.getItem('theme')` and adds `dark` or `light` class to `<html>` before any paint.
+2. **`<body>` toggle script:** wires up the `#theme-toggle` button; on click flips the class, writes to `localStorage`, dispatches `CustomEvent('theme-change', { detail: { theme } })`.
+
+Both `FullGraph.tsx` and `LocalGraph.tsx` listen for `'theme-change'` (same tab) and `'storage'` (cross-tab) events to update their `isDark` React state. Storage key is `'theme'` (changed from the old `'galaxybrain-theme'`).
+
+### Shiki dual themes
+
+`astro.config.mjs` shikiConfig:
+```js
+shikiConfig: {
+  themes: { dark: 'github-dark', light: 'github-light' },
+  defaultColor: false,
+  wrap: false,
+}
+```
+`global.css` binds per-token CSS variables:
+```css
+html.dark  .astro-code, html.dark  .astro-code span { color: var(--shiki-dark) !important; … }
+html.light .astro-code, html.light .astro-code span { color: var(--shiki-light) !important; … }
+```
+
+### `GraphNodeFactory.ts` light-mode colours
+
+`buildNodeObject(type, shape, color, val, isLight?)` — new optional `isLight` parameter.
+
+When `isLight = true`:
+- File and tag nodes: `resolveColor(color, true)` calls `darkenHex(color, 0.22)` — converts hex to HSL, reduces lightness by 22%, converts back.
+- Ghost nodes: wireframe colour changes from `0xffffff` (white) to `0x888888` (gray), opacity raises from 0.15 to 0.35.
+
+HSL helpers (`hexToRgb`, `rgbToHsl`, `hslToRgb`, `darkenHex`) are pure functions in the same file, no external dependency.
+
+---
+
 ## Design System
 
-CSS custom properties defined in `src/styles/global.css`:
+CSS custom properties are defined in `src/styles/global.css` on `html.dark` and `html.light` classes (Phase 7 — no more `:root` colour tokens). See the Phase 7 variable table above for all values.
 
+**Non-colour tokens (always in `:root`):**
 ```css
---bg:          #0d0d0d
---surface-0:   #111111
---surface-1:   #1a1a1a
---surface-2:   #222222
---border:      rgba(255 255 255 / 0.08)
---text:        #e0e0e0
---text-muted:  #888888
---accent:      #3498db
---accent-tag:  #e74c3c
---font-body:   'Inter', system-ui, sans-serif
---font-mono:   'JetBrains Mono', 'Fira Code', monospace
---radius-md:   6px
+--radius-sm: 4px  |  --radius-md: 8px  |  --radius-lg: 12px
+--font-body: 'Inter', system-ui, sans-serif
+--font-mono: 'JetBrains Mono', 'Fira Code', monospace
 ```
+
+**Typography notes:**
+- Tables: horizontal borders only, striped even rows, responsive `overflow-x: auto`
+- Highlights: `var(--mark-bg)` (yellow-tinted, adapts per theme)
+- Callouts: background/border/icon colour set per callout type; `html.light` selector overrides quote/cite callouts
+- Transclusion: `var(--transclusion-bg)` (dark blue tint / light lavender)
+- Wikilinks: `var(--link)` with `color-mix` bottom border; ghost links: `var(--link-ghost)` dashed
 
 ---
 
 ## Open Design Questions
 
 1. **Tag geometry**: All tags currently share one shape (octahedron). Should tag families (`#programming/systems`) get distinct shapes or colors?
-2. **Graph background**: Currently ties to note page theme. Should the graph always be dark (space-like)?
+2. **Transclusion recursion**: Transcluded blocks containing `![[...]]` are NOT recursively resolved. Is deep nesting a requirement?
 3. **Image optimization**: Vault raster images bypass Astro's WebP/AVIF pipeline. Worth adding `sharp` in `asset-collector` for PNG/JPG?
-4. **Transclusion recursion**: Transcluded blocks containing `![[...]]` are NOT recursively resolved. Is deep nesting a requirement?
+4. **Graph always-dark option**: Should the 3D graph always use a dark background regardless of the page theme (space aesthetic)?
+5. **Local graph physics**: Currently uses default force-graph d3 settings (`alphaDecay: 0.03`, `velocityDecay: 0.3`). Worth tuning for a tighter, faster-settling local graph?
 
 ---
 

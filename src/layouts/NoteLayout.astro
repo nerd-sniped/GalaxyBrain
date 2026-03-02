@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import LocalGraph from '../components/LocalGraph.tsx';
 import '../styles/note.css';
 import '../styles/callouts.css';
 
@@ -39,22 +40,7 @@ const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-
       </a>
 
       <!-- ── Local graph (Phase 6) ───────────────────────────── -->
-      <div class="sidebar-section">
-        <div class="sidebar-section-title">Local Graph</div>
-        <div class="sidebar-placeholder">Coming in Phase 6</div>
-      </div>
-
-      <!-- ── Backlinks (Phase 6) ────────────────────────────── -->
-      <div class="sidebar-section">
-        <div class="sidebar-section-title">Backlinks</div>
-        <div class="sidebar-placeholder">Coming in Phase 6</div>
-      </div>
-
-      <!-- ── Forward links (Phase 6) ───────────────────────── -->
-      <div class="sidebar-section">
-        <div class="sidebar-section-title">Linked Notes</div>
-        <div class="sidebar-placeholder">Coming in Phase 6</div>
-      </div>
+      <LocalGraph client:only="react" noteId={focusId} />
     </aside>
   </div>
 </BaseLayout>
@@ -100,11 +86,19 @@ const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-
   .note-sidebar {
     position: sticky;
     top: 2rem;
-    height: fit-content;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0;
+    /* hide scrollbar on Webkit while still scrollable */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
+  .note-sidebar::-webkit-scrollbar        { width: 4px; }
+  .note-sidebar::-webkit-scrollbar-track  { background: transparent; }
+  .note-sidebar::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 2px; }
 
   .view-in-graph {
     display: inline-flex;
@@ -126,28 +120,103 @@ const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-
     text-decoration: none;
   }
 
-  .sidebar-section {
+  /* ── LocalGraph component styles ─────────────────────────── */
+  :global(.local-graph-wrapper) {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0;
+    padding-top: 0.75rem;
   }
 
-  .sidebar-section-title {
-    font-size: 0.7rem;
+  :global(.local-graph-canvas) {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--graph-bg);
+    width: 100%;
+  }
+
+  :global(.local-graph-hint) {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 4px 0 8px;
+    opacity: 0.7;
+  }
+
+  :global(.local-graph-section) {
+    padding: 0.9rem 0 0.25rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  :global(.local-graph-section-heading) {
+    font-size: 0.68rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
+    margin: 0;
   }
 
-  .sidebar-placeholder {
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 1.25rem;
+  :global(.local-graph-link-list) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  :global(.local-graph-link) {
+    font-size: 0.82rem;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  :global(.local-graph-link:hover) {
+    color: var(--text);
+    text-decoration: underline;
+  }
+
+  :global(.local-graph-link--ghost) {
     color: var(--text-muted);
+    font-style: italic;
+    border-bottom: 1px dashed var(--text-muted);
+    cursor: default;
+    font-size: 0.82rem;
+  }
+
+  :global(.local-graph-tags) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  :global(.local-graph-tag) {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.28);
+    padding: 2px 9px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  :global(.local-graph-tag:hover) {
+    background: rgba(231, 76, 60, 0.2);
+    border-color: rgba(231, 76, 60, 0.5);
+    text-decoration: none;
+  }
+
+  :global(.local-graph-error) {
     font-size: 0.8rem;
-    text-align: center;
+    color: #e74c3c;
+    padding: 0.75rem 0;
   }
 
   /* ── Mobile: sidebar stacks below content ───────────────── */
@@ -162,6 +231,8 @@ const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-
     }
     .note-sidebar {
       position: static;
+      height: auto;
+      overflow: visible;
       border-top: 1px solid var(--border);
       padding-top: 1.5rem;
     }

@@ -1,22 +1,77 @@
-/* ─── Design tokens ─────────────────────────────────────────────────────────── */
+/* --- Non-color design tokens (always the same) ------------------------------- */
 :root {
-  --bg:          #0d0d0d;
-  --surface-0:   #111111;
-  --surface-1:   #1a1a1a;
-  --surface-2:   #222222;
-  --border:      rgba(255 255 255 / 0.08);
-  --text:        #e0e0e0;
-  --text-muted:  #888888;
-  --accent:      #3498db;
-  --accent-tag:  #e74c3c;
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
-  --font-body:   'Inter', system-ui, sans-serif;
-  --font-mono:   'JetBrains Mono', 'Fira Code', monospace;
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --font-body:  'Inter', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* ─── Reset ──────────────────────────────────────────────────────────────────── */
+/* --- Dark theme -------------------------------------------------------------- */
+html.dark {
+  --bg-primary:     #0a0a0a;
+  --bg-secondary:   #141414;
+  --bg-surface:     #1e1e1e;
+  --bg-surface-2:   #272727;
+  --text-primary:   #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted:     #606060;
+  --border:         #2a2a2a;
+  --accent:         #42a5f5;
+  --accent-tag:     #ef5350;
+  --link:           #42a5f5;
+  --link-ghost:     #555555;
+  --mark-bg:        rgba(255, 213, 0, 0.22);
+  --transclusion-bg: #15171e;
+  --graph-bg:       #0a0a0a;
+  color-scheme:     dark;
+}
+
+/* --- Light theme ------------------------------------------------------------- */
+html.light {
+  --bg-primary:     #ffffff;
+  --bg-secondary:   #f5f5f5;
+  --bg-surface:     #fafafa;
+  --bg-surface-2:   #eeeeee;
+  --text-primary:   #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted:     #999999;
+  --border:         #e0e0e0;
+  --accent:         #1565c0;
+  --accent-tag:     #c62828;
+  --link:           #1565c0;
+  --link-ghost:     #aaaaaa;
+  --mark-bg:        rgba(255, 220, 0, 0.38);
+  --transclusion-bg: #f2f4ff;
+  --graph-bg:       #f5f5f5;
+  color-scheme:     light;
+}
+
+/* --- Backward-compat aliases used in older CSS rules ------------------------- */
+html.dark  {
+  --bg: var(--bg-primary); --surface-0: var(--bg-secondary);
+  --surface-1: var(--bg-surface); --surface-2: var(--bg-surface-2);
+  --text: var(--text-primary); --text-muted: var(--text-muted);
+}
+html.light {
+  --bg: var(--bg-primary); --surface-0: var(--bg-secondary);
+  --surface-1: var(--bg-surface); --surface-2: var(--bg-surface-2);
+  --text: var(--text-primary); --text-muted: var(--text-muted);
+}
+
+/* --- Smooth theme transitions ------------------------------------------------- */
+*, *::before, *::after {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+/* Exclude transitions that look janky when not needed */
+*:focus, button, svg, canvas, .astro-code, .astro-code span {
+  transition: none !important;
+}
+
+/* --- Reset -------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -29,55 +84,79 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg-primary);
+  color:       var(--text-primary);
   font-family: var(--font-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
 }
-a:hover {
-  text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 
-/* ─── Typography (prose) ─────────────────────────────────────────────────────── */
+/* --- Typography (prose) ------------------------------------------------------- */
 .prose h1, .prose h2, .prose h3, .prose h4 {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   font-weight: 600;
   line-height: 1.3;
+  color: var(--text-primary);
 }
 .prose h1 { font-size: 2rem; }
 .prose h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
 .prose h3 { font-size: 1.25rem; }
 
-.prose p  { margin-bottom: 1rem; }
+.prose p          { margin-bottom: 1rem; }
 .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
-.prose li + li { margin-top: 0.25rem; }
+.prose li + li    { margin-top: 0.25rem; }
 
+/* Inline code */
 .prose code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background: var(--surface-2);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
   padding: 0.15em 0.4em;
   border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
 }
 
+/* Code block shell (Shiki injects its own bg colours per token) */
 .prose pre {
-  background: var(--surface-1);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
   overflow-x: auto;
   margin-bottom: 1rem;
+  font-size: 0.875em;
+  line-height: 1.6;
 }
 .prose pre code {
-  background: transparent;
+  background: transparent !important;
+  border: none;
   padding: 0;
+  font-size: inherit;
+}
+
+/* -- Shiki dual-theme � bind to html.dark / html.light ------------------------ */
+html.dark  .astro-code,
+html.dark  .astro-code span {
+  color:            var(--shiki-dark)                 !important;
+  background-color: var(--shiki-dark-bg)              !important;
+  font-style:       var(--shiki-dark-font-style)      !important;
+  font-weight:      var(--shiki-dark-font-weight)     !important;
+  text-decoration:  var(--shiki-dark-text-decoration) !important;
+}
+html.light .astro-code,
+html.light .astro-code span {
+  color:            var(--shiki-light)                 !important;
+  background-color: var(--shiki-light-bg)              !important;
+  font-style:       var(--shiki-light-font-style)      !important;
+  font-weight:      var(--shiki-light-font-weight)     !important;
+  text-decoration:  var(--shiki-light-text-decoration) !important;
 }
 
 .prose blockquote {
@@ -93,23 +172,73 @@ a:hover {
   margin: 2rem 0;
 }
 
-/* ─── Obsidian highlights ────────────────────────────────────────────────────── */
-mark {
-  background: rgba(255, 213, 0, 0.25);
+/* --- Tables ------------------------------------------------------------------- */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9em;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose th, .prose td {
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-left: none;
+  border-right: none;
+}
+.prose thead th {
+  background: var(--bg-surface);
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border);
+  border-top: none;
+}
+.prose tbody tr:nth-child(even) { background: var(--bg-secondary); }
+.prose tbody tr:hover            { background: var(--bg-surface); }
+
+/* --- Highlights --------------------------------------------------------------- */
+mark,
+.prose .highlight {
+  background: var(--mark-bg);
   color: inherit;
-  padding: 0 0.2em;
+  padding: 0.05em 0.25em;
   border-radius: 2px;
 }
 
-/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
+/* --- Scrollbar ---------------------------------------------------------------- */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--bg-surface-2); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border); }
+* { scrollbar-width: thin; scrollbar-color: var(--bg-surface-2) transparent; }
 
-/* ─── Graph interaction animations ──────────────────────────────────────────── */
+/* --- Graph animation ---------------------------------------------------------- */
 @keyframes fadeOut {
   0%   { opacity: 1; transform: translateY(0);    }
   70%  { opacity: 1; transform: translateY(-4px); }
   100% { opacity: 0; transform: translateY(-8px); }
 }
+
+/* --- Theme toggle button (fixed top-right, all pages) ------------------------- */
+#theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  /* toggle button intentionally excluded from global transition */
+  transition: background 0.15s, border-color 0.15s !important;
+}
+#theme-toggle:hover { background: var(--bg-surface-2); }

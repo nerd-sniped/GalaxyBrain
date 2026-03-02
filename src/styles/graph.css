@@ -19,7 +19,7 @@
   left: 24px;
   font-size: 1.1rem;
   font-weight: 600;
-  color: rgba(255 255 255 / 0.7);
+  color: var(--text-secondary);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -30,7 +30,7 @@
   transform: translateX(-50%);
   font-size: 0.75rem;
   color: var(--text-muted);
-  background: rgba(0 0 0 / 0.5);
+  background: var(--bg-surface);
   padding: 6px 14px;
   border-radius: 20px;
   border: 1px solid var(--border);

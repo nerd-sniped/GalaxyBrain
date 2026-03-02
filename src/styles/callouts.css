@@ -140,8 +140,8 @@
 }
 
 /* ─── Light-mode overrides ───────────────────────────────────────────────────── */
-.theme-light .callout[callout="quote"],
-.theme-light .callout[callout="cite"] {
+html.light .callout[callout="quote"],
+html.light .callout[callout="cite"] {
   background: rgba(0, 0, 0, 0.03);
   border-color: rgba(0, 0, 0, 0.25);
   --callout-icon-color: rgba(0, 0, 0, 0.45);
