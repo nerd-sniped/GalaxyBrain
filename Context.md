@@ -356,7 +356,7 @@ remark pipeline (per .md file)
 ```
 
 ### Content collection
-`src/content.config.ts` defines a `notes` collection using Astro 5's Content Layer API (`glob` loader pointing at `vault/notes/`). Rendering uses the `render(note)` function (not the deprecated `note.render()` method). Only notes with `publish: true` get static routes.
+`src/content.config.ts` defines a `notes` collection using Astro 5's Content Layer API (`glob` loader pointing at `vault/`, excluding `attachments/`). Rendering uses the `render(note)` function (not the deprecated `note.render()` method). Only notes with `publish: true` get static routes.
 
 ### Remark/rehype pipeline
 Configured in `astro.config.mjs` — order is critical:

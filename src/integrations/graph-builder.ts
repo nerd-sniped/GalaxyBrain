@@ -1,6 +1,6 @@
 /**
  * graph-builder.ts
- * Astro integration that parses vault/notes/*.md and emits:
+ * Astro integration that parses vault/*.md and emits:
  *   public/graph.json          — full graph
  *   public/graph/[id].json     — 1-hop neighbourhood for each published note
  *
@@ -48,26 +48,27 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
     warn: (s: string) => logger?.warn(s) ?? console.warn(`[graph-builder] ${s}`),
   };
 
-  const vaultNotesRoot = path.join(projectRoot, 'vault', 'notes');
+  const vaultRoot = path.join(projectRoot, 'vault');
   const publicDir = path.join(projectRoot, 'public');
   const graphDir = path.join(publicDir, 'graph');
 
   // ── 1. Glob all .md files ──────────────────────────────────────────────────
   const mdFiles = await fg('**/*.md', {
-    cwd: vaultNotesRoot,
+    cwd: vaultRoot,
     absolute: true,
     onlyFiles: true,
+    ignore: ['attachments/**'],
   });
 
-  log.info(`Found ${mdFiles.length} markdown files in vault/notes/`);
+  log.info(`Found ${mdFiles.length} markdown files in vault/`);
 
   // ── 2. Parse every file ────────────────────────────────────────────────────
   const allNotes = mdFiles.flatMap((filePath) => {
     try {
       const raw = readFileSync(filePath, 'utf-8');
-      return [parseNote(raw, filePath, vaultNotesRoot)];
+      return [parseNote(raw, filePath, vaultRoot)];
     } catch (err) {
-      log.warn(`Skipping malformed file ${path.relative(vaultNotesRoot, filePath)}: ${String(err)}`);
+      log.warn(`Skipping malformed file ${path.relative(vaultRoot, filePath)}: ${String(err)}`);
       return [] as ReturnType<typeof parseNote>[];
     }
   });

@@ -2,13 +2,13 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 /**
- * "notes" collection — maps to vault/notes/**\/*.md
+ * "notes" collection — maps to vault/**\/*.md (excludes attachments/)
  *
  * Only files with `publish: true` in frontmatter will be rendered.
  * The graph-builder integration also respects this field.
  */
 const notes = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './vault/notes' }),
+  loader: glob({ pattern: ['**/*.md', '!attachments/**'], base: './vault' }),
   schema: z.object({
     publish: z.boolean().optional().default(false),
     title: z.string().optional(),

@@ -88,7 +88,7 @@ In **Settings**:
 
 | Section | Setting | Value |
 |---|---|---|
-| Files & Links | Default location for new notes | `vault/notes` |
+| Files & Links | Default location for new notes | `vault` |
 | Files & Links | Default location for new attachments | `vault/attachments` |
 | Files & Links | Use \[\[Wikilinks\]\] | ✅ On |
 | Editor | Strict line breaks | Off |
@@ -135,7 +135,7 @@ Open [http://localhost:4321](http://localhost:4321). The template notes appear i
 
 ## Step 5 — Write Your First Note
 
-Create a file in `vault/notes/`, for example `vault/notes/My First Note.md`:
+Create a file in `vault/`, for example `vault/My First Note.md`:
 
 ```markdown
 ---
@@ -225,7 +225,7 @@ When your repo is created via the **Deploy to Netlify** button (or by using this
 | | Affected by upstream sync |
 |---|---|
 | Template source code (components, integrations, styles, config) | ✅ Yes — PRs will include these |
-| Your vault notes (`vault/notes/`) | ❌ Never — these are yours |
+| Your vault notes (`vault/`) | ❌ Never — these are yours |
 | Your vault attachments | ❌ Never |
 
 Review the PR diff before merging — if you have customised components or config files, there may be conflicts to resolve.

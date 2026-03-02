@@ -66,7 +66,7 @@ export interface NoteFrontmatter {
 export interface ParsedNote {
   id: string;            // slug derived from file path
   filePath: string;      // absolute path on disk
-  relativePath: string;  // relative to vault/notes/
+  relativePath: string;  // relative to vault/
   frontmatter: NoteFrontmatter;
   /** Raw markdown content (without frontmatter) */
   content: string;

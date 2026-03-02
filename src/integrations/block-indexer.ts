@@ -2,7 +2,7 @@
  * block-indexer.ts
  * Astro integration that runs at astro:build:start, AFTER graph-builder.
  *
- * 1. Reads all published .md files from vault/notes/.
+ * 1. Reads all published .md files from vault/.
  * 2. For each file, finds all block ID definitions (lines ending with ^blockId).
  * 3. Extracts the block that the ID is attached to:
  *    - ^id on a paragraph line → entire paragraph is the block
@@ -147,15 +147,16 @@ async function buildIndex(
     warn: (s) => console.warn(`[block-indexer] ${s}`),
   },
 ): Promise<void> {
-  const vaultNotesRoot = path.join(projectRoot, 'vault', 'notes');
+  const vaultRoot = path.join(projectRoot, 'vault');
   const astroDir = path.join(projectRoot, '.astro');
   const indexFile = path.join(astroDir, 'block-index.json');
 
   // ── 1. Glob markdown files ─────────────────────────────────────────────────
   const mdFiles = await fg('**/*.md', {
-    cwd: vaultNotesRoot,
+    cwd: vaultRoot,
     absolute: true,
     onlyFiles: true,
+    ignore: ['attachments/**'],
   });
 
   const blockIndex: Record<string, string> = {};

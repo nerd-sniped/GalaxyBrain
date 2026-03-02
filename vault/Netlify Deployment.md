@@ -86,7 +86,7 @@ GalaxyBrain doesn't require any environment variables. If you add features that 
 
 | Symptom | Likely cause |
 |---|---|
-| Build fails with `ENOENT vault/notes` | The `vault/notes/` folder is missing from the repo |
+| Build fails with `ENOENT vault` | The `vault/` folder is missing from the repo |
 | Graph shows 0 nodes | No notes have `publish: true` |
 | Images not showing | Run `pnpm build` locally and check for asset-collector warnings |
 | 404 on note pages | Netlify's redirect rule catches these — check `netlify.toml` has `/* → /index.html, 404` |

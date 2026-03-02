@@ -2,7 +2,7 @@
  * asset-collector.ts
  * Astro integration that runs at astro:build:start (before everything else).
  *
- * 1. Reads all published .md files from vault/notes/.
+ * 1. Reads all published .md files from vault/.
  * 2. Extracts image references: ![[img.ext]], ![alt](path), frontmatter cover.
  * 3. Resolves each image by shortest-path match across vault/ (same logic as wikilinks).
  * 4. Copies matched files to public/vault-assets/ preserving relative vault/ structure.
@@ -98,16 +98,16 @@ async function collect(
   },
 ): Promise<void> {
   const vaultRoot = path.join(projectRoot, 'vault');
-  const vaultNotesRoot = path.join(vaultRoot, 'notes');
   const outputDir = path.join(projectRoot, 'public', 'vault-assets');
   const astroDir = path.join(projectRoot, '.astro');
   const mapFile = path.join(astroDir, 'vault-images.json');
 
   // ── 1. Find all markdown files ─────────────────────────────────────────────
   const mdFiles = await fg('**/*.md', {
-    cwd: vaultNotesRoot,
+    cwd: vaultRoot,
     absolute: true,
     onlyFiles: true,
+    ignore: ['attachments/**'],
   });
 
   // ── 2. Find all image files in vault/ ─────────────────────────────────────

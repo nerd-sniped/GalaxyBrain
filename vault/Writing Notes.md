@@ -14,7 +14,7 @@ Everything you need to know about writing notes that appear correctly on the sit
 
 ## The Basics
 
-A publishable note is any `.md` file in `vault/notes/` with `publish: true` in its frontmatter:
+A publishable note is any `.md` file in `vault/` with `publish: true` in its frontmatter:
 
 ```markdown
 ---

@@ -17,7 +17,7 @@ GalaxyBrain is a **template** — a starting point for publishing your own Obsid
 
 | Part | What it does |
 |---|---|
-| `vault/notes/` | Where your Markdown notes live |
+| `vault/` | Where your Markdown notes live (flat — `.md` files go directly here) |
 | `vault/attachments/` | Images, PDFs, and other media |
 | `src/` | The Astro site code (you rarely touch this) |
 | `netlify.toml` | Netlify build config (already set up) |
@@ -31,7 +31,7 @@ Obsidian Git auto-commits & pushes to GitHub
         ↓
 Netlify detects push, runs `npm run build`
         ↓
-Astro reads vault/notes/*.md, builds graph JSON + HTML
+Astro reads vault/*.md, builds graph JSON + HTML
         ↓
 Live site updates at your Netlify URL
 ```
@@ -58,7 +58,7 @@ Then Astro renders each published note to a static HTML page.
 
 ## Keeping vs Replacing Template Notes
 
-These template notes (`Welcome`, `Getting Started`, etc.) exist only to explain the system. Once you understand how it works, delete or replace them. Start fresh notes anywhere in `vault/notes/` and add `publish: true` to any you want to appear on the site.
+These template notes (`Welcome`, `Getting Started`, etc.) exist only to explain the system. Once you understand how it works, delete or replace them. Start fresh notes directly in `vault/` and add `publish: true` to any you want to appear on the site.
 
 > [!tip] Tip
 > The `Draft Note` and `Inbox` notes in this vault have `publish: false` — they're invisible to the site but show how unpublished notes behave.

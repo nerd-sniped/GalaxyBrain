@@ -26,14 +26,14 @@ The GalaxyBrain repo already contains a `vault/` folder. Rather than creating a 
 4. Obsidian will create a hidden `.obsidian/` folder inside `vault/` with your settings
 
 > [!important] Important
-> Open the `vault/` subfolder, **not** the repo root. Obsidian stores its config inside whichever folder you open, and the build tools expect notes at `vault/notes/`.
+> Open the `vault/` subfolder, **not** the repo root. Obsidian stores its config inside whichever folder you open, and notes can live anywhere inside `vault/` (excluding `attachments/`).
 
 ## 3. Recommended Obsidian Settings
 
 Inside Obsidian, go to **Settings** and configure the following:
 
 ### Files & Links
-- **Default location for new notes** → `vault/notes`
+- **Default location for new notes** → `vault` (the root of the vault)
 - **Default location for new attachments** → `vault/attachments`
 - **Use [[Wikilinks]]** → ✅ On
 - **Detect all file extensions** → ✅ On
@@ -55,7 +55,7 @@ The **Obsidian Git** community plugin auto-commits and pushes your notes to GitH
 
 ## 5. Verify the Setup
 
-Create a test note in `vault/notes/`:
+Create a test note in `vault/`:
 
 ```markdown
 ---

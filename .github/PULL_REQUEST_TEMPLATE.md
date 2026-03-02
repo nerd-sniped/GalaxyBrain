@@ -23,7 +23,7 @@
 
 - [ ] `pnpm build` completes without errors or new warnings
 - [ ] No hardcoded values that should be configurable via frontmatter
-- [ ] New frontmatter fields are documented in `vault/notes/Frontmatter Reference.md`
+- [ ] New frontmatter fields are documented in `vault/Frontmatter Reference.md`
 - [ ] New features are described in the relevant vault note (e.g. `Graph Features.md`)
 - [ ] README updated if the setup steps or commands changed
 

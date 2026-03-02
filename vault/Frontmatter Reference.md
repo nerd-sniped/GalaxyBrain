@@ -10,7 +10,7 @@ graph:
 
 # Frontmatter Reference
 
-Every note in `vault/notes/` can include a YAML frontmatter block between `---` delimiters at the very top of the file. All fields are optional except `publish`.
+Every note in `vault/` can include a YAML frontmatter block between `---` delimiters at the very top of the file. All fields are optional except `publish`.
 
 ## Full Example
 

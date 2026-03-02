@@ -49,7 +49,7 @@ The build must complete without errors before any PR can be merged.
 ## Project Structure
 
 ```
-vault/notes/      ← Template vault notes (Markdown)
+vault/         ← Template vault notes (.md files, flat at root; attachments/ holds media)
 src/
   components/     ← React islands (FullGraph, LocalGraph, GraphNodeFactory)
   integrations/   ← Astro integrations (graph-builder, asset-collector, block-indexer)
@@ -78,7 +78,7 @@ See [Context.md](Context.md) for a detailed description of every file and the de
 
 1. Add the new name to the `NodeShape` union in [`src/lib/types.ts`](src/lib/types.ts)
 2. Add a `case` to `buildGeometry()` in [`src/components/GraphNodeFactory.ts`](src/components/GraphNodeFactory.ts) returning a `THREE.BufferGeometry`
-3. Document it in [`vault/notes/Graph Features.md`](vault/notes/Graph%20Features.md) and [`vault/notes/Frontmatter Reference.md`](vault/notes/Frontmatter%20Reference.md)
+3. Document it in [`vault/Graph Features.md`](vault/Graph%20Features.md) and [`vault/Frontmatter Reference.md`](vault/Frontmatter%20Reference.md)
 
 ---
 
@@ -86,7 +86,7 @@ See [Context.md](Context.md) for a detailed description of every file and the de
 
 1. Add the field to `NoteFrontmatter` (and `GraphNode` if it's graph-visible) in [`src/lib/types.ts`](src/lib/types.ts)
 2. Map it in the file-node block of [`src/integrations/graph-builder.ts`](src/integrations/graph-builder.ts) — also add `fieldName: defaultValue` to the tag and ghost node constructors to keep TypeScript happy
-3. Document it in [`vault/notes/Frontmatter Reference.md`](vault/notes/Frontmatter%20Reference.md)
+3. Document it in [`vault/Frontmatter Reference.md`](vault/Frontmatter%20Reference.md)
 
 ---
 

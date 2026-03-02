@@ -108,12 +108,12 @@ export function makeExcerpt(body: string): string {
  *
  * @param rawContent  Full file contents (including frontmatter block).
  * @param absolutePath  Absolute path on disk; used for id/relativePath.
- * @param vaultNotesRoot  Absolute path to `vault/notes/`; used to compute relative path.
+ * @param vaultRoot  Absolute path to `vault/`; used to compute relative path.
  */
 export function parseNote(
   rawContent: string,
   absolutePath: string,
-  vaultNotesRoot: string,
+  vaultRoot: string,
 ): ParsedNote {
   // Gracefully handle malformed / missing frontmatter: gray-matter may throw on
   // certain malformed YAML strings. Falling back to an empty frontmatter object
@@ -129,9 +129,9 @@ export function parseNote(
   // An empty frontmatter data object means publish is undefined → treated as false.
   const fm = (parsed.data ?? {}) as NoteFrontmatter;
 
-  // Compute relative path from vault/notes/ root
+  // Compute relative path from vault/ root
   const relativePath = path
-    .relative(vaultNotesRoot, absolutePath)
+    .relative(vaultRoot, absolutePath)
     .replace(/\\/g, '/');
 
   // Derive slug from filename (without .md)

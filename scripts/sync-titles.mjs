@@ -1,6 +1,6 @@
 /**
  * sync-titles.mjs
- * Validates and auto-repairs frontmatter in every vault/notes/**\/*.md file.
+ * Validates and auto-repairs frontmatter in every vault/**\/*.md file (excluding attachments/).
  *
  * Repairs applied (in order):
  *   1. Strip leading blank lines before the opening `---` fence.
@@ -21,9 +21,9 @@ import fg from 'fast-glob';
 import matter from 'gray-matter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const vaultNotesRoot = path.join(__dirname, '..', 'vault', 'notes');
+const vaultRoot = path.join(__dirname, '..', 'vault');
 
-const files = await fg('**/*.md', { cwd: vaultNotesRoot, absolute: true });
+const files = await fg('**/*.md', { cwd: vaultRoot, absolute: true, ignore: ['attachments/**'] });
 
 let updated = 0;
 
