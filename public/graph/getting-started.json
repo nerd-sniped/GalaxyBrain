@@ -5,302 +5,58 @@
       "name": "Getting Started",
       "type": "file",
       "path": "/notes/getting-started",
-      "val": 11,
+      "val": 2,
       "shape": "dodecahedron",
       "color": "#2ecc71",
       "collapsible": false,
-      "excerpt": "Getting Started Welcome to the navigation guide for this garden. The 3D Graph The landing page shows a force-directed 3D"
+      "excerpt": "Getting Started This page explains how to navigate the site and what everything in the graph means. Navigating the 3D Gr"
     },
     {
-      "id": "digital-garden",
-      "name": "Digital Garden",
+      "id": "how-to-use-this-template",
+      "name": "How to Use This Template",
       "type": "file",
-      "path": "/notes/digital-garden",
-      "val": 13,
-      "shape": "torus",
-      "color": "#27ae60",
-      "collapsible": false,
-      "excerpt": "Digital Garden A digital garden is a personal knowledge base that grows and evolves over time — somewhere between a blog"
-    },
-    {
-      "id": "ghost:diagram-svg",
-      "name": "diagram.svg",
-      "type": "ghost",
-      "path": null,
-      "val": 1,
-      "shape": "sphere",
-      "color": "#ffffff",
-      "collapsible": false,
-      "excerpt": null
-    },
-    {
-      "id": "rust",
-      "name": "Rust",
-      "type": "file",
-      "path": "/notes/rust",
-      "val": 13,
-      "shape": "box",
-      "color": "#F74C00",
-      "collapsible": false,
-      "excerpt": "Rust Rust is a systems programming language focused on safety, speed, and concurrency. The Ownership Model Rust's core i"
-    },
-    {
-      "id": "note-taking",
-      "name": "Note Taking",
-      "type": "file",
-      "path": "/notes/note-taking",
-      "val": 12,
-      "shape": "cone",
-      "color": "#8e44ad",
+      "path": "/notes/how-to-use-this-template",
+      "val": 8,
+      "shape": "dodecahedron",
+      "color": "#9b59b6",
       "collapsible": true,
-      "excerpt": "Note Taking Effective note taking is fundamentally about creating retrievable, connectable knowledge — not just capturin"
+      "excerpt": "How to Use This Template GalaxyBrain is a template — a starting point for publishing your own Obsidian vault as an inter"
     },
     {
-      "id": "ghost:nonexistent-note",
-      "name": "nonexistent note",
-      "type": "ghost",
-      "path": null,
-      "val": 1,
-      "shape": "sphere",
-      "color": "#ffffff",
-      "collapsible": false,
-      "excerpt": null
-    },
-    {
-      "id": "tag:meta",
-      "name": "#meta",
+      "id": "tag:meta/start",
+      "name": "#meta/start",
       "type": "tag",
       "path": null,
-      "val": 7,
+      "val": 3,
       "shape": "octahedron",
       "color": "#EC407A",
       "collapsible": false,
       "excerpt": null
-    },
-    {
-      "id": "obsidian",
-      "name": "Obsidian",
-      "type": "file",
-      "path": "/notes/obsidian",
-      "val": 8,
-      "shape": "cylinder",
-      "color": "#8e44ad",
-      "collapsible": false,
-      "excerpt": "Obsidian Obsidian is a local-first Markdown note-taking app. It stores notes as plain files on disk, which makes it triv"
-    },
-    {
-      "id": "reading-list",
-      "name": "Reading List",
-      "type": "file",
-      "path": "/notes/reading-list",
-      "val": 12,
-      "shape": "cylinder",
-      "color": "#e67e22",
-      "collapsible": false,
-      "excerpt": "Reading List An ongoing list of books — partly a record of what I've read, partly a wishlist, mostly a reflection on ide"
-    },
-    {
-      "id": "second-brain",
-      "name": "Second Brain",
-      "type": "file",
-      "path": "/notes/second-brain",
-      "val": 12,
-      "shape": "torusknot",
-      "color": "#16a085",
-      "collapsible": false,
-      "excerpt": "Second Brain The \"Second Brain\" is a methodology for building a personal knowledge management (PKM) system. ^pkm-definit"
-    },
-    {
-      "id": "welcome",
-      "name": "Welcome",
-      "type": "file",
-      "path": "/notes/welcome",
-      "val": 7,
-      "shape": "sphere",
-      "color": "#3498db",
-      "collapsible": false,
-      "excerpt": "Welcome to GalaxyBrain This is the starting point of the garden. This site is a living documentGetting Started — a colle"
     }
   ],
   "links": [
     {
-      "source": "digital-garden",
-      "target": "obsidian",
+      "source": "getting-started",
+      "target": "how-to-use-this-template",
       "type": "wikilink"
     },
     {
-      "source": "digital-garden",
-      "target": "welcome",
-      "type": "wikilink"
-    },
-    {
-      "source": "digital-garden",
-      "target": "getting-started",
-      "type": "wikilink"
-    },
-    {
-      "source": "digital-garden",
-      "target": "second-brain",
-      "type": "wikilink"
-    },
-    {
-      "source": "digital-garden",
-      "target": "tag:meta",
+      "source": "getting-started",
+      "target": "tag:meta/start",
       "type": "file-tag"
     },
     {
-      "source": "getting-started",
-      "target": "ghost:diagram-svg",
-      "type": "wikilink"
-    },
-    {
-      "source": "getting-started",
-      "target": "rust",
-      "type": "wikilink"
-    },
-    {
-      "source": "getting-started",
-      "target": "note-taking",
-      "type": "wikilink"
-    },
-    {
-      "source": "getting-started",
-      "target": "ghost:nonexistent-note",
-      "type": "wikilink"
-    },
-    {
-      "source": "getting-started",
-      "target": "tag:meta",
-      "type": "file-tag"
-    },
-    {
-      "source": "note-taking",
-      "target": "obsidian",
-      "type": "wikilink"
-    },
-    {
-      "source": "note-taking",
-      "target": "second-brain",
-      "type": "wikilink"
-    },
-    {
-      "source": "note-taking",
-      "target": "digital-garden",
-      "type": "wikilink"
-    },
-    {
-      "source": "note-taking",
-      "target": "getting-started",
-      "type": "wikilink"
-    },
-    {
-      "source": "obsidian",
-      "target": "getting-started",
-      "type": "wikilink"
-    },
-    {
-      "source": "reading-list",
-      "target": "rust",
-      "type": "wikilink"
-    },
-    {
-      "source": "reading-list",
-      "target": "second-brain",
-      "type": "wikilink"
-    },
-    {
-      "source": "reading-list",
-      "target": "note-taking",
-      "type": "wikilink"
-    },
-    {
-      "source": "reading-list",
-      "target": "getting-started",
-      "type": "wikilink"
-    },
-    {
-      "source": "second-brain",
-      "target": "digital-garden",
-      "type": "wikilink"
-    },
-    {
-      "source": "second-brain",
-      "target": "obsidian",
-      "type": "wikilink"
-    },
-    {
-      "source": "second-brain",
-      "target": "note-taking",
-      "type": "wikilink"
-    },
-    {
-      "source": "second-brain",
-      "target": "getting-started",
-      "type": "wikilink"
-    },
-    {
-      "source": "second-brain",
-      "target": "tag:meta",
-      "type": "file-tag"
-    },
-    {
-      "source": "welcome",
-      "target": "getting-started",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "obsidian",
-      "type": "wikilink"
-    },
-    {
-      "source": "welcome",
-      "target": "tag:meta",
+      "source": "how-to-use-this-template",
+      "target": "tag:meta/start",
       "type": "file-tag"
     }
   ],
-  "backlinks": [
-    {
-      "id": "digital-garden",
-      "name": "Digital Garden",
-      "path": "/notes/digital-garden"
-    },
-    {
-      "id": "note-taking",
-      "name": "Note Taking",
-      "path": "/notes/note-taking"
-    },
-    {
-      "id": "obsidian",
-      "name": "Obsidian",
-      "path": "/notes/obsidian"
-    },
-    {
-      "id": "reading-list",
-      "name": "Reading List",
-      "path": "/notes/reading-list"
-    },
-    {
-      "id": "second-brain",
-      "name": "Second Brain",
-      "path": "/notes/second-brain"
-    },
-    {
-      "id": "welcome",
-      "name": "Welcome",
-      "path": "/notes/welcome"
-    }
-  ],
+  "backlinks": [],
   "forwardLinks": [
     {
-      "id": "rust",
-      "name": "Rust",
-      "path": "/notes/rust"
-    },
-    {
-      "id": "note-taking",
-      "name": "Note Taking",
-      "path": "/notes/note-taking"
+      "id": "how-to-use-this-template",
+      "name": "How to Use This Template",
+      "path": "/notes/how-to-use-this-template"
     }
   ]
 }

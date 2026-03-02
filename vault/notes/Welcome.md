@@ -1,31 +1,42 @@
 ---
 publish: true
 title: "Welcome"
-tags: [meta]
+tags: [meta/start]
 aliases: [home, start]
 graph:
   shape: sphere
   color: "#3498db"
+  collapsible: true
 ---
 
 # Welcome to GalaxyBrain
 
-This is the starting point of the garden. This site is a [[Getting Started|living document]] — a collection of notes, ideas, and connections that grow over time.
+This is the **starter template** for building your own 3D knowledge graph from an Obsidian vault.
 
-Navigate by exploring the 3D graph on the landing page, or follow the links below.
+You're looking at a live example of the site running with template notes. Each node in the graph on the landing page is one of the notes below. The edges are the `[[wikilinks]]` between them.
 
-## Where to Start
+## What You Can Do Here
 
-- [[Getting Started]] — how to navigate and use this garden
-- [[Tools]] — the software used to build and maintain this site
+- **Explore** — rotate the 3D graph, click nodes to read notes
+- **Learn** — follow the setup path below to build your own version
+- **Fork** — replace these notes with your own vault and deploy
+
+## Setup Path
+
+Follow these notes in order to go from zero to a live site:
+
+1. [[How to Use This Template]] — what the template gives you and how it works
+2. [[Obsidian Setup]] — creating a vault and configuring Obsidian
+3. [[GitHub Setup]] — connecting your vault to a GitHub repo
+4. [[Netlify Deployment]] — deploying the site to the web for free
+5. [[Writing Notes]] — how to write notes that appear on the site
+6. [[Graph Features]] — shapes, colours, tags, collapsible nodes, and more
+7. [[Frontmatter Reference]] — every frontmatter field explained
 
 > [!tip] Tip
-> Right-click any node in the graph to fly the camera toward it.
+> Right-click any node in the graph to fly the camera to it. Click a tag node (diamond shape) to highlight all connected notes.
 
-## About This Garden
+## About This Graph
 
-A digital garden is somewhere between a blog and a wiki. Notes are written at various stages of completeness and are openly linked to each other.
+Every published note becomes a node. Every `[[wikilink]]` becomes an edge. Tags become their own nodes. Links to notes that don't exist (or have `publish: false`) become **ghost nodes** — transparent wireframe spheres that show a note is referenced but not yet written.
 
-![[graph-preview.svg]]
-
-This garden uses [[Obsidian]] as its authoring tool and [[Astro]] as its publishing platform.

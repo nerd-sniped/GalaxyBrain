@@ -1,8 +1,8 @@
 ---
 publish: true
 title: "Getting Started"
-tags: [meta]
-aliases: [how-to]
+tags: [meta/start]
+aliases: [how-to, nav]
 graph:
   shape: dodecahedron
   color: "#2ecc71"
@@ -10,65 +10,45 @@ graph:
 
 # Getting Started
 
-Welcome to the navigation guide for this garden.
+This page explains how to navigate the site and what everything in the graph means.
 
-## The 3D Graph
+## Navigating the 3D Graph
 
-The landing page shows a **force-directed 3D graph** of all published notes. Each node is a note; edges are `[[wikilinks]]` and `#tags`.
+The landing page shows a **force-directed 3D graph** of every published note. Each node is a note; edges are `[[wikilinks]]` between notes or connections to `#tag` nodes.
 
 | Interaction | Result |
 |---|---|
-| Left-click file node | Navigate to note |
-| Left-click tag node | Highlight all notes with that tag |
-| Right-click any node | Camera flies to that node |
+| Left-click a file node | Navigate to that note |
+| Left-click a tag node | Highlight all notes sharing that tag |
+| Right-click any node | Camera flies smoothly to that node |
 | Drag | Rotate the graph |
-| Scroll | Zoom in/out |
+| Scroll / pinch | Zoom in or out |
+| Shift+click a collapsible node | Re-collapse its children |
 
 ## Node Types
 
-- **Spheres / custom shapes** — published notes
-- **Octahedra (diamond)** — tags
-- **Wireframe spheres** — ghost nodes (linked but not yet written)
+| Appearance | What it is |
+|---|---|
+| Solid custom shape | A published note |
+| Diamond (octahedron) | A tag node |
+| Wireframe sphere | A ghost node — linked but not yet written |
 
-## Ghost Notes
+## The Local Graph
 
-A ==ghost node== appears when a wikilink points to a note that doesn't exist yet (or has `publish: false`). Ghost nodes are transparent and not clickable — they're placeholders.
+On any individual note page, a **local graph** appears in the sidebar. It shows only the current note and its immediate neighbours — notes it links to, notes that link back, and shared tags. Click any node in the sidebar to navigate.
 
-> [!note] Note
-> Ghost notes show up as `Future Ideas` in the seed graph on the landing page.
+## Ghost Nodes
+
+A ghost node appears when a `[[wikilink]]` points to a note that hasn't been written yet, or has `publish: false`. Ghost nodes are visual placeholders — they make the shape of your knowledge graph visible even for ideas you haven't captured yet.
 
 ## Collapsible Nodes
 
-Notes with `collapsible: true` in their frontmatter start with their downstream links hidden. Click once to reveal children; click again to navigate.
+Notes with `collapsible: true` in their frontmatter start with their downstream links hidden behind a `+` badge. Click to expand the subtree; Shift+click to re-collapse.
 
-## Graph Architecture Diagram
+## Tags
 
-The graph below shows a simplified sample of the force-directed layout used on the home page:
+Tags appear as octahedron nodes. Clicking one dims all unrelated nodes and highlights only the notes connected to that tag. A filter banner appears at the top — click the **✕** button to clear the filter.
 
-![[diagram.svg]]
+## Next Steps
 
-## Transclusion Examples
-
-This section demonstrates block and note embedding.
-
-### Rust Ownership Model (block embed)
-
-> The following is transcluded directly from [[Rust]]:
-
-![[Rust#^ownership-intro]]
-
-### Note-Taking Principle (block embed)
-
-![[Note Taking#^atomic-note]]
-
-### Broken Reference (error handling test)
-
-The embed below references a block that does not exist — it should render a warning instead of breaking the build:
-
-![[nonexistent note#^broken-id]]
-
-### Full Note Embed
-
-The full content of [[Note Taking]] is embedded below (collapsed by default):
-
-![[Note Taking]]
+Ready to build your own? Start with [[How to Use This Template]].
