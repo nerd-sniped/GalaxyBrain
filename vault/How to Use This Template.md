@@ -50,11 +50,14 @@ Then Astro renders each published note to a static HTML page.
 
 ## What You Need to Do
 
-1. [[Obsidian Setup]] — create your vault, point it at `vault/` in this repo
-2. [[GitHub Setup]] — push the repo to GitHub
-3. [[Netlify Deployment]] — connect GitHub to Netlify for auto-deploy
-4. [[Writing Notes]] — publish your first real note
+1. **[[GitHub Setup]]** — use this repo as a GitHub template, clone it locally, and authenticate (handled automatically by Git Credential Manager — no tokens or terminal auth needed)
+2. **[[Obsidian Setup]]** — open the cloned `vault/` folder in Obsidian and install the Obsidian Git plugin for auto-push
+3. **[[Netlify Deployment]]** — connect your GitHub repo to Netlify; the `netlify.toml` handles all build config automatically
+4. **[[Writing Notes]]** — publish your first real note
 5. Replace these template notes with your own content
+
+> [!tip] Total setup time
+> Most people are up and running in about 15 minutes. Steps 1 and 3 are the longest — GitHub and Netlify each need a browser sign-in and a few clicks.
 
 ## Keeping vs Replacing Template Notes
 

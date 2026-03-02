@@ -34,23 +34,36 @@ If you cloned a fresh copy, open the `vault/` folder in Obsidian as described in
 
 ## 4. Authenticate Git in Obsidian
 
-The **Obsidian Git** plugin needs write access to your remote repo.
+The **Obsidian Git** plugin needs write access to your remote repo. The easiest path depends on your OS.
 
-### Using a Personal Access Token (PAT) — recommended
+### Git Credential Manager — recommended (Windows & macOS)
 
-1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
-2. Create a new token with **Repository: Contents (Read and Write)** permission on your repo
-3. Copy the token
-4. In your cloned repo, set the remote URL to include your PAT:
-   ```
-   git remote set-url origin https://YOUR_TOKEN@github.com/your-username/your-repo.git
-   ```
-5. Obsidian Git uses this URL automatically — no further login prompts
+**Git Credential Manager (GCM)** ships bundled with [Git for Windows](https://git-scm.com/download/win) (and is available via Homebrew on macOS). It handles GitHub authentication through a browser OAuth flow — no tokens to copy or URLs to edit.
 
-### Using SSH (alternative)
+1. Make sure you have [Git for Windows](https://git-scm.com/download/win) installed (GCM is included by default — no separate install needed)
+2. Clone your repo normally: `git clone https://github.com/your-username/your-repo.git`
+3. The first time Obsidian Git tries to push, a browser window opens asking you to sign in to GitHub
+4. Authorize the app — credentials are saved in Windows Credential Manager automatically
+5. All future pushes are silent; no further prompts
+
+> [!tip] Already installed Git without GCM?
+> Run `git credential-manager --version` in a terminal. If it errors, re-install Git for Windows and ensure **Git Credential Manager** is checked in the installer.
+
+### Using SSH (alternative — all platforms)
 
 1. [Generate an SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and add it to your GitHub account
 2. Set your remote to the SSH URL: `git remote set-url origin git@github.com:your-username/your-repo.git`
+
+### Using a Personal Access Token (PAT) — fallback
+
+If neither GCM nor SSH is an option (e.g. a restricted environment):
+
+1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
+2. Create a token with **Repository: Contents (Read and Write)** permission
+3. Embed it in the remote URL so Obsidian Git can authenticate:
+   ```
+   git remote set-url origin https://YOUR_TOKEN@github.com/your-username/your-repo.git
+   ```
 
 ## 5. Test a Push
 

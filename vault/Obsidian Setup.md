@@ -46,12 +46,15 @@ Inside Obsidian, go to **Settings** and configure the following:
 The **Obsidian Git** community plugin auto-commits and pushes your notes to GitHub so the site rebuilds without you touching a terminal.
 
 1. Go to **Settings → Community plugins → Browse**
-2. Search for **Obsidian Git** and install it
+2. Search for **Obsidian Git** ([direct link](obsidian://show-plugin?id=obsidian-git)) and install it
 3. Enable it
 4. Go to its settings and configure:
    - **Auto commit interval** — e.g. `5` (minutes)
    - **Auto push after commit** — ✅ On
    - **Commit message** — e.g. `vault: auto-save {{date}}`
+
+> [!note] Authentication
+> You don't need to configure credentials here. On the first push, Git Credential Manager opens a GitHub login page in your browser — approve it once and all future pushes are silent. See [[GitHub Setup]] for details.
 
 ## 5. Verify the Setup
 
