@@ -11,10 +11,15 @@ import remarkVaultImages from './src/plugins/remark-vault-images.ts';
 import remarkTransclusion from './src/plugins/remark-transclusion.ts';
 import rehypeRaw from 'rehype-raw';
 
-// https://astro.build/config
+// Only attach the Netlify adapter during `astro build`.
+// In dev mode the adapter forces Vite into server-mode rendering which breaks
+// its HMR client injection (css MIME errors, __DEFINES__ not replaced, etc.).
+const isBuild = process.argv.some((a) => a === 'build');
+
+// https://astro.com/config
 export default defineConfig({
   output: 'static',
-  adapter: netlify(),
+  adapter: isBuild ? netlify() : undefined,
   integrations: [
     assetCollector(),  // astro:build:start — copy vault images → public/vault-assets/
     graphBuilder(),    // astro:config:done — build graph JSON
