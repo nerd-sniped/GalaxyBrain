@@ -36,4 +36,4 @@ Astro integrations run in order before the Astro content pipeline:
 
 Then Astro's remark plugins process the Markdown into HTML.
 
-See [[Tools]] for the full workflow diagram.
+See the **Tools** note for the full workflow diagram.

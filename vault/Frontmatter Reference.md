@@ -92,7 +92,7 @@ graph:
   shape: sphere
 ```
 
-The shape of this note's node in the 3D graph. See [[Graph Features]] for the full list of valid values and a usage guide.
+The shape of this note's node in the 3D graph. See the **Graph Features** note for the full list of valid values and a usage guide.
 
 Default: `sphere`
 

@@ -51,4 +51,4 @@ Tags appear as octahedron nodes. Clicking one dims all unrelated nodes and highl
 
 ## Next Steps
 
-Ready to build your own? Start with [[How to Use This Template]].
+Ready to build your own? Start with **How to Use This Template** — click it in the graph or find it on the home page.

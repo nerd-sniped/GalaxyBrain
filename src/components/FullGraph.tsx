@@ -12,6 +12,12 @@ const BG_DARK  = '#0a0a0a';
 const BG_LIGHT = '#f5f5f5';
 const STORAGE_KEY = 'theme';
 
+/**
+ * Set to false once you've replaced the default template content with your
+ * own notes and no longer want the "Build your own" prompt to appear.
+ */
+const SHOW_BUILD_CTA = true;
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function resolveId(v: unknown): string {
@@ -21,18 +27,22 @@ function resolveId(v: unknown): string {
 /** Create a "+" sprite texture canvas, cached per call */
 function makePlusSprite(): THREE.Sprite {
   const canvas = document.createElement('canvas');
-  canvas.width = 64; canvas.height = 64;
+  canvas.width = 128; canvas.height = 128;
   const ctx = canvas.getContext('2d')!;
-  ctx.clearRect(0, 0, 64, 64);
+  ctx.clearRect(0, 0, 128, 128);
   // Circular background
-  ctx.fillStyle = 'rgba(255,255,255,0.25)';
-  ctx.beginPath(); ctx.arc(32, 32, 28, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,0.55)';
+  ctx.beginPath(); ctx.arc(64, 64, 54, 0, Math.PI * 2); ctx.fill();
+  // Subtle stroke
+  ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.arc(64, 64, 54, 0, Math.PI * 2); ctx.stroke();
   // "+" symbol
   ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 36px sans-serif';
+  ctx.font = 'bold 72px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('+', 32, 33);
+  ctx.fillText('+', 64, 66);
   const tex = new THREE.CanvasTexture(canvas);
   const mat = new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true });
   return new THREE.Sprite(mat);
@@ -98,7 +108,9 @@ export default function FullGraph() {
     graphData.nodes.forEach((n) => { if (n.collapsible) s.add(n.id); });
     setCollapsedNodes(s);
   }, [graphData]);
-
+  // ── Build CTA (shown once after the first collapsible node is expanded) ──────
+  const [showBuildCta, setShowBuildCta] = useState(false);
+  const hasShownCtaRef = useRef(false);
   // ── Tag highlight ──────────────────────────────────────────────────────────
   const [highlightedTag, setHighlightedTag] = useState<string | null>(() => {
     try { return new URLSearchParams(window.location.search).get('highlight'); }
@@ -387,10 +399,10 @@ export default function FullGraph() {
     // ── "+" sprite overlay for collapsed nodes ───────────────────────────────
     if (isCollapsed) {
       const sprite = makePlusSprite();
-      const spriteScale = Math.cbrt(node.val) * 0.8 * 1.8;
+      const spriteScale = Math.cbrt(node.val) * 0.8 * 2.8;
       sprite.scale.set(spriteScale, spriteScale, 1);
-      // Offset slightly so it floats above-right of the mesh
-      sprite.position.set(spriteScale * 0.4, spriteScale * 0.4, 0);
+      // Float above-right of the mesh
+      sprite.position.set(spriteScale * 0.38, spriteScale * 0.38, 0);
       group.add(sprite);
     }
 
@@ -475,6 +487,10 @@ export default function FullGraph() {
     // Click on a collapsed node → expand
     if (node.collapsible && collapsedNodes.has(node.id)) {
       setCollapsedNodes((p) => { const s = new Set(p); s.delete(node.id); return s; });
+      if (SHOW_BUILD_CTA && !hasShownCtaRef.current) {
+        hasShownCtaRef.current = true;
+        setTimeout(() => setShowBuildCta(true), 600); // slight delay so the graph expansion animates first
+      }
       return;
     }
 
@@ -714,6 +730,68 @@ export default function FullGraph() {
       <div style={{ position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)', background: isDark ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.75)', color: uiTextColor, padding: '5px 14px', borderRadius: 20, fontSize: 12, pointerEvents: 'none', zIndex: 9998, border: `1px solid ${uiBorder}`, whiteSpace: 'nowrap', backdropFilter: 'blur(4px)' }}>
         Click file → navigate &nbsp;|&nbsp; Shift+click → collapse &nbsp;|&nbsp; Click tag → filter &nbsp;|&nbsp; Right-click → focus &nbsp;|&nbsp; Drag to rotate
       </div>
+
+      {/* Build-your-own CTA — slides up after first expansion */}
+      {showBuildCta && createPortal(
+        <div style={{
+          position:       'fixed',
+          bottom:         62,
+          left:           '50%',
+          transform:      'translateX(-50%)',
+          zIndex:         99999,
+          display:        'flex',
+          alignItems:     'center',
+          gap:            12,
+          background:     isDark ? 'rgba(15,25,40,0.92)' : 'rgba(230,240,255,0.95)',
+          border:         '1px solid #3498db66',
+          borderRadius:   14,
+          padding:        '12px 16px',
+          backdropFilter: 'blur(10px)',
+          boxShadow:      '0 6px 32px rgba(52,152,219,0.22)',
+          fontFamily:     'sans-serif',
+          animation:      'gb-fadein 0.4s ease',
+          whiteSpace:     'nowrap',
+        }}>
+          <span style={{ fontSize: 13, color: isDark ? '#b0cfe8' : '#1a5fa8' }}>
+            Want a galaxy of your own?
+          </span>
+          <a
+            href="/notes/build-your-own"
+            style={{
+              fontSize:       13,
+              fontWeight:     600,
+              color:          '#fff',
+              background:     '#3498db',
+              border:         'none',
+              borderRadius:   8,
+              padding:        '6px 14px',
+              cursor:         'pointer',
+              textDecoration: 'none',
+              transition:     'background 0.15s',
+            }}
+          >
+            Build your own →
+          </a>
+          <button
+            onPointerDown={(e) => { e.stopPropagation(); e.preventDefault(); setShowBuildCta(false); }}
+            style={{
+              background:   'transparent',
+              border:       `1px solid ${isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)'}`,
+              color:        isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)',
+              borderRadius: 8,
+              width:        26,
+              height:       26,
+              cursor:       'pointer',
+              fontSize:     14,
+              lineHeight:   1,
+              padding:      0,
+              flexShrink:   0,
+            }}
+            title="Dismiss"
+          >✕</button>
+        </div>,
+        document.body,
+      )}
     </div>
   );
 }

@@ -12,8 +12,8 @@ const notes = defineCollection({
   schema: z.object({
     publish: z.boolean().optional().default(false),
     title: z.string().optional(),
-    tags: z.array(z.string()).optional().default([]),
-    aliases: z.array(z.string()).optional().default([]),
+    tags: z.array(z.string()).nullish().transform(val => val ?? []),
+    aliases: z.array(z.string()).nullish().transform(val => val ?? []),
     graph: z
       .object({
         shape: z

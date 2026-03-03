@@ -29,8 +29,6 @@ Edit notes in Obsidian → push to GitHub → site rebuilds on Netlify automatic
 pnpm install
 ```
 
-Or with npm: `npm install`
-
 ---
 
 ## Step 3 — Set Up Obsidian
@@ -53,6 +51,8 @@ In **Settings**:
 | Files & Links | Default location for new attachments | `vault/attachments` |
 | Files & Links | Use \[\[Wikilinks\]\] | ✅ On |
 | Editor | Strict line breaks | Off |
+| Templates | Template folder location | template folder|
+| Hotkeys | Templates: Insert template | alt+t (or whatever you want) |
 
 ### 3c. Install the Obsidian Git plugin
 
@@ -110,6 +110,7 @@ Hello, graph! This links to [[Another Note]] which doesn't exist yet — it'll a
 
 Save it. The dev server will reflect the change after a restart (or run `pnpm build` to see the full output).
 
+The pro way to do this is to press `ctrl + N` + `
 ---
 
 ## Step 6 — Deploy to Netlify
@@ -131,9 +132,8 @@ git push
 
    | Setting | Value |
    |---|---|
-   | Build command | `npm run build` |
+   | Build command | `pnpm astro clean && node scripts/sync-titles.mjs && pnpm build` |
    | Publish directory | `dist` |
-   | Node version | `22` |
 
 5. Click **Deploy site**
 

@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const published = allNotes.filter((note) => note.data.publish === true);
 
   return published.map((note) => ({
-    params: { slug: slugify(note.id) },
+    params: { slug: slugify(note.id.split('/').pop()!) },
     props: { note },
   }));
 }
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 const { note } = Astro.props;
 const { Content } = await render(note);
 
-const noteId = slugify(note.id);
+const noteId = slugify(note.id.split('/').pop()!);
 // Obsidian filename (without .md) is always the canonical title — it overrides
 // whatever the frontmatter `title` field says, matching the vault-parser behaviour.
 const title = note.id.split('/').pop()!.replace(/\.md$/i, '');
