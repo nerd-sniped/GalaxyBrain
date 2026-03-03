@@ -4,10 +4,11 @@ title: "Welcome"
 tags: [meta/start]
 aliases: [home, start]
 graph:
-  shape: sphere
+  shape: torusknot
   color: "#3498db"
+  collapsible: true
   callout: true
-  calloutText: "Start Here! Click Me"
+  calloutText: "Start Here! Click Me!"
 ---
 
 # Welcome to GalaxyBrain
