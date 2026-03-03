@@ -11,38 +11,8 @@ Edit notes in Obsidian → push to GitHub → site rebuilds on Netlify automatic
 
 **[Live demo →](https://galaxybrain.netlify.app)**
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/nerd-sniped/GalaxyBrain)
-
----
-
-## What You Get
-
-- **Landing page** — force-directed 3D graph of all published notes, wikilinks, and tags
-- **Note pages** — rendered Markdown with a sidebar local graph, backlinks, forward-links, and tags
-- **Ghost nodes** — wireframe nodes for linked-but-unwritten notes
-- **Collapsible nodes** — hub notes can start with subtrees hidden
-- **Tag nodes** — click a tag to filter and highlight connected notes
-- **Dark / light mode** — stored in `localStorage`, no flash on load
-- **Full Markdown support** — callouts, tables, code blocks with syntax highlighting, wikilinks, transclusion (`![[embeds]]`), images from vault
-
----
-
-## Prerequisites
-
-| Tool | Version | Notes |
-|---|---|---|
-| Node.js | 22+ | [nodejs.org](https://nodejs.org) |
-| pnpm | 9+ | `npm install -g pnpm` |
-| Git | Any | [git-scm.com](https://git-scm.com) |
-| Obsidian | Latest | [obsidian.md](https://obsidian.md) — free |
-| GitHub account | — | [github.com](https://github.com) — free |
-| Netlify account | — | [netlify.com](https://netlify.com) — free tier is sufficient |
-
----
 
 ## Step 1 — Get the Template
-
-### Option A: Use as template (recommended)
 
 1. Click **Use this template** → **Create a new repository** on the GitHub page for this repo
 2. Name your repo, set visibility (public or private — both work with Netlify)
@@ -51,15 +21,6 @@ Edit notes in Obsidian → push to GitHub → site rebuilds on Netlify automatic
    git clone https://github.com/your-username/your-repo.git
    cd your-repo
    ```
-
-### Option B: Fork
-
-Click **Fork**, then clone your fork:
-```bash
-git clone https://github.com/your-username/galaxybrain.git
-cd galaxybrain
-```
-
 ---
 
 ## Step 2 — Install Dependencies
@@ -128,8 +89,6 @@ pnpm dev
 ```
 
 Open [http://localhost:4321](http://localhost:4321). The template notes appear in the graph. Edit or create a note in Obsidian and save — the browser will hot-reload.
-
-> **Note:** Graph JSON files (`public/graph.json`, `public/graph/*.json`) are regenerated at server start. If you add a new note and it doesn't appear, restart the dev server.
 
 ---
 
@@ -246,96 +205,6 @@ To stop receiving update PRs, delete or disable `.github/workflows/sync-upstream
 
 ---
 
-## Writing Notes
-
-### Publishing
-
-Add `publish: true` to any note to make it appear on the site:
-
-```yaml
----
-publish: true
----
-```
-
-Without this field the note is completely invisible — no node, no page, no edges from its wikilinks.
-
-### Wikilinks
-
-```markdown
-[[Note Name]]                    links to that note
-[[Note Name|Display text]]       with custom link text
-```
-
-Links to unpublished or non-existent notes become **ghost nodes** (wireframe spheres) in the graph.
-
-### Tags
-
-```yaml
-tags: [programming/rust, tech]
-```
-
-Tags become octahedron nodes in the graph. Hierarchical tags like `#programming/rust` cluster into visual families.
-
-### Images
-
-Drop images into `vault/attachments/` and embed with `![[filename.png]]`. The build pipeline copies them to `public/vault-assets/` automatically.
-
-### Block transclusion
-
-Mark a paragraph with `^id`:
-```markdown
-This is the paragraph I want to share. ^my-id
-```
-
-Embed it in another note:
-```markdown
-![[Source Note#^my-id]]
-```
-
-### Full-note embed
-
-```markdown
-![[Note Name]]
-```
-
-Renders as a collapsible `<details>` element.
-
----
-
-## Frontmatter Reference
-
-```yaml
----
-publish: true           # Must be true to appear on the site
-title: "My Note"        # Display name (defaults to filename)
-tags:                   # YAML list or inline array
-  - topic/subtopic
-  - other-tag
-aliases:                # Alternative names for wikilink resolution
-  - short name
-graph:
-  shape: sphere         # Node shape — see table below
-  color: "#3498db"      # Hex colour for the node
-  collapsible: false    # true = start with children hidden
----
-```
-
-### Node shapes
-
-| Value | Shape |
-|---|---|
-| `sphere` | Default — general notes |
-| `box` | Cube — tools, reference |
-| `cone` | Cone — entry points |
-| `cylinder` | Cylinder — documentation |
-| `dodecahedron` | 12-face — hub notes |
-| `torus` | Donut — concepts |
-| `torusknot` | Knotted torus — complex interconnections |
-| `octahedron` | Diamond — reserved for tag nodes |
-
----
-
 ## Customising the Site
 
 ### Colours and fonts
@@ -356,70 +225,6 @@ Edit `src/layouts/NoteLayout.astro`.
 
 ---
 
-## Architecture
-
-```
-vault/
-├── notes/         ← Your Markdown files
-└── attachments/   ← Images and media
-
-src/
-├── integrations/
-│   ├── graph-builder.ts      ← Parses vault → graph.json + per-note JSONs
-│   ├── asset-collector.ts    ← Copies images to public/vault-assets/
-│   └── block-indexer.ts      ← Indexes ^blockIds for transclusion
-├── plugins/
-│   ├── remark-transclusion.ts   ← ![[embed]] → HTML
-│   └── remark-vault-images.ts   ← ![[img]] → <img src>
-├── lib/
-│   ├── vault-parser.ts   ← Frontmatter, wikilinks, tags, block IDs
-│   ├── link-resolver.ts  ← Obsidian shortest-path wikilink resolution
-│   └── types.ts          ← Shared TypeScript types
-├── components/
-│   ├── FullGraph.tsx    ← Landing page 3D graph (React island)
-│   └── LocalGraph.tsx   ← Sidebar local graph (React island)
-└── pages/
-    ├── index.astro              ← Landing page
-    └── notes/[...slug].astro   ← Note pages
-
-public/
-├── graph.json          ← Full graph (generated at build time)
-└── graph/[id].json     ← Per-note 1-hop neighbourhood JSONs
-```
-
-### Build pipeline order
-
-1. `astro:config:done` — graph-builder reads vault, writes `public/graph.json` and `public/graph/*.json`
-2. `astro:build:start` — asset-collector copies images; block-indexer writes `.astro/block-index.json`
-3. Remark/Rehype — `remark-vault-images` → `remark-transclusion` → `remark-wikilinks` process each note
-4. Astro — renders pages to static HTML in `dist/`
-
----
-
-## Commands
-
-| Command | Action |
-|---|---|
-| `pnpm install` | Install dependencies |
-| `pnpm dev` | Dev server at `localhost:4321` |
-| `pnpm build` | Production build → `dist/` |
-| `pnpm preview` | Preview production build locally |
-
----
-
-## Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| Note doesn't appear in graph | Check `publish: true` is in frontmatter |
-| Graph shows after dev server restart | Graph JSON is built at startup — restart after adding notes |
-| Images not loading | Ensure file is in `vault/attachments/`; filename case must match exactly |
-| Build error on frontmatter | Check YAML syntax — unclosed quotes are common |
-| Netlify build fails on Node version | Verify `netlify.toml` has `NODE_VERSION = "22"` |
-| Obsidian Git not pushing | Re-check PAT permissions (Contents: Read & Write) |
-
----
-
 ## Community
 
 | | |
@@ -433,6 +238,3 @@ Contributions are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) for guideline
 
 ---
 
-## License
-
-MIT — use this template for anything, personal or commercial. See [LICENSE](LICENSE).
