@@ -304,6 +304,8 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
 // ─── Astro integration ────────────────────────────────────────────────────────
 
 export function graphBuilder(): AstroIntegration {
+  let projectRoot = '';
+
   return {
     name: 'graph-builder',
     hooks: {
@@ -313,8 +315,51 @@ export function graphBuilder(): AstroIntegration {
        * means the dev server and production build both get fresh data.
        */
       'astro:config:done': async ({ config, logger }) => {
-        const projectRoot = fileURLToPath(config.root);
+        projectRoot = fileURLToPath(config.root);
         await buildGraph(projectRoot, logger);
+      },
+
+      /**
+       * In dev mode, watch vault notes for changes and rebuild the graph
+       * automatically. Sends a full-page reload so the React graph island
+       * re-fetches /graph.json with the latest data.
+       */
+      'astro:server:setup': ({ server, logger }) => {
+        const vaultGlob = path.join(projectRoot, 'vault', '**', '*.md');
+
+        server.watcher.add(vaultGlob);
+
+        let rebuilding = false;
+        const rebuild = async (filePath: string) => {
+          if (rebuilding) return;
+          rebuilding = true;
+          try {
+            logger.info(`Vault file changed: ${path.relative(projectRoot, filePath)} — rebuilding graph…`);
+            await buildGraph(projectRoot, logger);
+            // Invalidate the graph JSON modules in Vite's module graph so the
+            // dev server serves fresh data, then trigger a full page reload.
+            server.moduleGraph.invalidateAll();
+            server.hot.send({ type: 'full-reload' });
+          } finally {
+            rebuilding = false;
+          }
+        };
+
+        server.watcher.on('change', (filePath) => {
+          if (filePath.includes(`${path.sep}vault${path.sep}`) && filePath.endsWith('.md')) {
+            rebuild(filePath);
+          }
+        });
+        server.watcher.on('add', (filePath) => {
+          if (filePath.includes(`${path.sep}vault${path.sep}`) && filePath.endsWith('.md')) {
+            rebuild(filePath);
+          }
+        });
+        server.watcher.on('unlink', (filePath) => {
+          if (filePath.includes(`${path.sep}vault${path.sep}`) && filePath.endsWith('.md')) {
+            rebuild(filePath);
+          }
+        });
       },
     },
   };
