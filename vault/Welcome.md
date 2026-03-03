@@ -8,7 +8,7 @@ graph:
   color: "#3498db"
   collapsible: true
   callout: true
-  calloutText: "Start Here!"
+  calloutText: "Start Here! Click Me!"
 ---
 
 # Welcome to GalaxyBrain

@@ -101,7 +101,7 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
       val: 1,
       shape: (fm.graph?.shape as NodeShape) ?? 'sphere',
       color: fm.graph?.color ?? '#3498db',
-      collapsible: fm.graph?.callout ? false : (fm.graph?.collapsible ?? false),
+      collapsible: fm.graph?.collapsible ?? false,
       callout:     fm.graph?.callout    ?? false,
       calloutText: fm.graph?.calloutText ?? 'Click to get started',
       excerpt: note.excerpt || null,
