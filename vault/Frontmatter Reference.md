@@ -6,6 +6,7 @@ aliases: [frontmatter, yaml, fields]
 graph:
   shape: box
   color: "#7f8c8d"
+  pinned: true
 ---
 
 # Frontmatter Reference

@@ -187,7 +187,7 @@ export default function FullGraph() {
   // ── "Start here" callout (shown once to new visitors) ─────────────────────
   // Points to the note with `graph.callout: true` in its frontmatter.
   // The callout text comes from `graph.calloutText`.
-  const CALLOUT_KEY = 'gb-callout-dismissed';
+  const CALLOUT_KEY = 'gb-callout-dismissed-v2';
 
   const calloutTarget = useMemo(() => {
     if (!graphData) return null;
@@ -307,41 +307,72 @@ export default function FullGraph() {
     if (!graphData) return { nodes: [], links: [] };
     if (collapsedNodes.size === 0) return graphData;
 
-    // Iteratively propagate hidden status: a node is hidden if ALL its incoming
-    // wikilinks come only from collapsed / hidden nodes, starting from collapsed roots.
-    const hidden = new Set<string>();
+    // Determine which nodes to hide when a collapsible node is collapsed.
+    //
+    // Strategy: forward BFS from "absolute root" nodes — nodes that have ZERO
+    // incoming wikilinks from ANYWHERE, plus explicitly `pinned: true` nodes.
+    //
+    // Key rules:
+    //   • A collapsed node reached by BFS is added to `visible` but NOT queued —
+    //     it shows as a collapsed badge, hiding everything downstream.
+    //   • A collapsed node that is NEVER reached by BFS stays hidden entirely,
+    //     which fixes the "hub shows up disconnected then disappears on expand" bug.
+    //   • `pinned` nodes are always seeded as roots regardless of incoming links.
+    const wikilinks = graphData.links.filter((l) => l.type === 'wikilink');
+    const fileTags  = graphData.links.filter((l) => l.type === 'file-tag');
 
-    // Seed: direct wikilink targets of collapsed nodes
-    let changed = true;
-    while (changed) {
-      changed = false;
-      graphData.links.forEach((l) => {
-        if (l.type !== 'wikilink') return;
+    // Build a per-node set of ALL nodes that link TO it (collapsed included).
+    const incomingAll = new Map<string, Set<string>>();
+    graphData.nodes.forEach((n) => incomingAll.set(n.id, new Set()));
+    wikilinks.forEach((l) => {
+      const src = resolveId(l.source);
+      const tgt = resolveId(l.target);
+      incomingAll.get(tgt)?.add(src);
+    });
+
+    // Helper: enqueue a node as visible, but only traverse it if it's not collapsed.
+    const visible = new Set<string>();
+    const queue: string[] = [];
+    const addVisible = (id: string) => {
+      if (visible.has(id)) return;
+      visible.add(id);
+      if (!collapsedNodes.has(id)) queue.push(id);
+      // collapsed nodes: visible (shown as badge) but not traversed → children hidden
+    };
+
+    // Seeds: zero-incoming nodes (true graph roots) + explicitly pinned notes.
+    // Tag nodes are excluded (they follow their notes, handled below).
+    graphData.nodes.forEach((n) => {
+      if (n.type === 'tag') return;
+      const isPinned = n.pinned === true;
+      const isRoot   = (incomingAll.get(n.id)?.size ?? 0) === 0;
+      if (isPinned || isRoot) addVisible(n.id);
+    });
+
+    // BFS: propagate visibility forward through wikilinks.
+    // Collapsed targets are marked visible-but-not-traversed by addVisible().
+    while (queue.length > 0) {
+      const cur = queue.shift()!;
+      wikilinks.forEach((l) => {
         const src = resolveId(l.source);
         const tgt = resolveId(l.target);
-        if (hidden.has(tgt)) return;                        // already hidden
-        const tgtNode = graphData.nodes.find((n) => n.id === tgt);
-        if (tgtNode?.type === 'tag') return;               // tags are never hidden
-
-        if (collapsedNodes.has(src) || hidden.has(src)) {
-          // Check whether tgt has ANY incoming wikilink from a visible, non-collapsed node
-          const hasOtherParent = graphData.links.some((ll) => {
-            if (ll.type !== 'wikilink') return false;
-            const llSrc = resolveId(ll.source);
-            const llTgt = resolveId(ll.target);
-            return llTgt === tgt && llSrc !== src && !collapsedNodes.has(llSrc) && !hidden.has(llSrc);
-          });
-          if (!hasOtherParent) { hidden.add(tgt); changed = true; }
-        }
+        if (src === cur) addVisible(tgt);
       });
     }
 
+    // Tag nodes become visible only when at least one of their tagged notes is visible.
+    fileTags.forEach((l) => {
+      const src = resolveId(l.source);
+      const tgt = resolveId(l.target);
+      if (visible.has(src)) visible.add(tgt);
+    });
+
     return {
-      nodes: graphData.nodes.filter((n) => !hidden.has(n.id)),
+      nodes: graphData.nodes.filter((n) => visible.has(n.id)),
       links: graphData.links.filter((l) => {
         const src = resolveId(l.source);
         const tgt = resolveId(l.target);
-        return !hidden.has(src) && !hidden.has(tgt);
+        return visible.has(src) && visible.has(tgt);
       }),
     };
   }, [graphData, collapsedNodes]);

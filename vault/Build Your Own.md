@@ -1,11 +1,12 @@
 ---
 publish: true
 title: "Build Your Own"
-tags: [meta/setup, meta/start]
-aliases: [setup, build, create, make your own, get started]
+tags: []
+aliases: []
 graph:
   shape: dodecahedron
   color: "#e74c3c"
+  pinned: true
 ---
 
 # Build Your Own Galaxy

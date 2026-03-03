@@ -10,9 +10,9 @@ Raw capture. Process and move to proper notes.
 
 ---
 
-- [ ] Replace template notes with your own content
-- [ ] Set up Obsidian Git auto-push
-- [ ] Deploy to Netlify
+- [x] Replace template notes with your own content
+- [x] Set up Obsidian Git auto-push
+- [x] Deploy to Netlify
 - [ ] Add a custom domain
 
 ---

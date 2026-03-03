@@ -1,7 +1,8 @@
 ---
 publish: false
-title: "Draft Note"
-tags: [meta/draft]
+title: Draft Note
+tags:
+  - meta/draft
 ---
 
 # Draft Note
@@ -16,3 +17,5 @@ Use notes like this for:
 - Scratch space and captures that are still being processed
 
 When you're ready to publish a draft, just change `publish: false` to `publish: true` and push — it will appear on the next build.
+
+

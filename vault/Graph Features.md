@@ -6,6 +6,7 @@ aliases: [graph, shapes, colors, customisation]
 graph:
   shape: torusknot
   color: "#e74c3c"
+  pinned: true
 ---
 
 # Graph Features

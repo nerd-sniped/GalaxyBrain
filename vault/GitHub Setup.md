@@ -85,4 +85,4 @@ Your Markdown notes, frontmatter, and attachments **are** committed and pushed.
 
 ## Next: Deploy on Netlify
 
-With the repo on GitHub, the next step is **Netlify Deployment** — connect it to Netlify and get a live URL.
+With the repo on GitHub, see [[Netlify Deployment]] to connect it to Netlify and get a live URL.

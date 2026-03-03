@@ -7,6 +7,7 @@ graph:
   shape: dodecahedron
   color: "#9b59b6"
   collapsible: true
+  pinned: true
 ---
 
 # How to Use This Template
@@ -50,10 +51,10 @@ Then Astro renders each published note to a static HTML page.
 
 ## What You Need to Do
 
-1. **GitHub Setup** — use this repo as a GitHub template, clone it locally, and authenticate (handled automatically by Git Credential Manager — no tokens or terminal auth needed)
-2. **Obsidian Setup** — open the cloned `vault/` folder in Obsidian and install the Obsidian Git plugin for auto-push
-3. **Netlify Deployment** — connect your GitHub repo to Netlify; the `netlify.toml` handles all build config automatically
-4. **Writing Notes** — publish your first real note
+1. **[[GitHub Setup]]** — use this repo as a GitHub template, clone it locally, and authenticate (handled automatically by Git Credential Manager — no tokens or terminal auth needed)
+2. **[[Obsidian Setup]]** — open the cloned `vault/` folder in Obsidian and install the Obsidian Git plugin for auto-push
+3. **[[Netlify Deployment]]** — connect your GitHub repo to Netlify; the `netlify.toml` handles all build config automatically
+4. **[[Writing Notes]]** — publish your first real note
 5. Replace these template notes with your own content
 
 > [!tip] Total setup time

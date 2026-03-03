@@ -6,6 +6,7 @@ aliases: [how-to, nav]
 graph:
   shape: dodecahedron
   color: "#2ecc71"
+  pinned: true
 ---
 
 # Getting Started

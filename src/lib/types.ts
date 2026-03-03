@@ -24,6 +24,8 @@ export interface GraphNode {
   color: string;
   /** When true, downstream nodes start hidden until user clicks this node */
   collapsible: boolean;
+  /** When true, this node is always visible as a root seed regardless of incoming links */
+  pinned: boolean;
   /** When true, the landing-page callout arrow points to this node */
   callout: boolean;
   /** Text shown in the callout bubble — only used when callout is true */
@@ -53,6 +55,8 @@ export interface NoteFrontmatter {
     shape?: NodeShape;
     color?: string;
     collapsible?: boolean;
+    /** Always-visible even when parent nodes are collapsed */
+    pinned?: boolean;
     /** Show the animated "start here" callout arrow on the landing page */
     callout?: boolean;
     /** Text shown inside the callout bubble */
