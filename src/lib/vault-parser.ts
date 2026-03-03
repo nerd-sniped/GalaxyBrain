@@ -115,16 +115,23 @@ export function parseNote(
   absolutePath: string,
   vaultRoot: string,
 ): ParsedNote {
+  // ── Strip leading blank lines ──────────────────────────────────────────────
+  // gray-matter silently returns empty data ({}) when a file starts with
+  // whitespace / newlines before the opening `---` fence.  This is a common
+  // artefact of the Obsidian → git workflow and causes notes to be treated as
+  // unpublished even when they have `publish: true` in their frontmatter.
+  const sanitised = rawContent.replace(/^[\r\n]+/, '');
+
   // Gracefully handle malformed / missing frontmatter: gray-matter may throw on
   // certain malformed YAML strings. Falling back to an empty frontmatter object
   // means the note will be treated as publish: false (filtered out by graph-builder).
   let parsed: ReturnType<typeof matter>;
   try {
-    parsed = matter(rawContent);
+    parsed = matter(sanitised);
   } catch {
     console.warn(`[vault-parser] Failed to parse frontmatter in ${absolutePath} — treating as unpublished`);
     parsed = matter('');
-    parsed.content = rawContent;
+    parsed.content = sanitised;
   }
   // An empty frontmatter data object means publish is undefined → treated as false.
   const fm = (parsed.data ?? {}) as NoteFrontmatter;
@@ -137,6 +144,12 @@ export function parseNote(
   // Derive slug from filename (without .md)
   const filename = path.basename(absolutePath);
   const id = slugify(filename);
+
+  // The Obsidian filename (without .md) is the canonical note title.
+  // It always overrides whatever is in the frontmatter `title` field so that
+  // renaming a note in Obsidian is consistently reflected in the graph and on
+  // the rendered page — Obsidian already enforces unique filenames, so this is safe.
+  fm.title = path.basename(absolutePath, '.md');
 
   const body = parsed.content;
 

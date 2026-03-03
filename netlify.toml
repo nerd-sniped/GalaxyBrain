@@ -1,5 +1,5 @@
 [build]
-  command   = "pnpm astro clean && pnpm build"
+  command   = "pnpm astro clean && node scripts/sync-titles.mjs && pnpm build"
   publish   = "dist"
 
 [build.environment]

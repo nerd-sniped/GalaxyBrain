@@ -18,7 +18,9 @@ const { note } = Astro.props;
 const { Content } = await render(note);
 
 const noteId = slugify(note.id);
-const title = note.data.title ?? note.id;
+// Obsidian filename (without .md) is always the canonical title — it overrides
+// whatever the frontmatter `title` field says, matching the vault-parser behaviour.
+const title = note.id.split('/').pop()!.replace(/\.md$/i, '');
 ---
 
 <NoteLayout title={title} noteId={noteId} excerpt={undefined}>
