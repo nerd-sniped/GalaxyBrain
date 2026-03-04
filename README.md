@@ -2,7 +2,6 @@
 
 [![CI](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml/badge.svg)](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node 22+](https://img.shields.io/badge/node-22%2B-brightgreen)](https://nodejs.org)
 [![Built with Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01)](https://astro.build)
 
 A **starter template** for publishing your Obsidian vault as an interactive 3D knowledge graph website.
@@ -72,6 +71,7 @@ Obsidian Git needs write access to your remote repo. The easiest way is a **GitH
 1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
 2. Create a token with **Contents: Read and Write** on your repo
 3. In your local repo, embed the token in the remote URL:
+
    ```bash
    git remote set-url origin https://YOUR_PAT@github.com/your-username/your-repo.git
    ```
@@ -111,6 +111,7 @@ Hello, graph! This links to [[Another Note]] which doesn't exist yet — it'll a
 Save it. The dev server will reflect the change after a restart (or run `pnpm build` to see the full output).
 
 The pro way to do this is to press `ctrl + N` + `
+
 ---
 
 ## Step 6 — Deploy to Netlify
@@ -237,4 +238,3 @@ Edit `src/layouts/NoteLayout.astro`.
 Contributions are welcome! Read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
-

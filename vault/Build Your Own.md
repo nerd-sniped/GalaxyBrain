@@ -11,7 +11,7 @@ graph:
 
 # Build Your Own Galaxy
 
-This site is a template. Everything you see — the graph, the note pages, the auto-deploy pipeline — is yours to fork and fill with your own notes. The full setup takes about 15 minutes.
+This site is a template. Everything you see the graph is yours to fork and fill with your own notes. The full setup takes about 15 minutes.
 
 ---
 
@@ -34,9 +34,6 @@ cd your-repo
 ```bash
 pnpm install
 ```
-
-If you don't have `pnpm`, install it with `npm install -g pnpm` first (requires Node 22+).
-
 ---
 
 ## Step 3 — Set Up Obsidian
@@ -75,10 +72,18 @@ This plugin auto-commits and pushes your notes to GitHub so the site rebuilds wi
 
 ### Authenticate Git
 
-The first time Obsidian Git tries to push, a browser window will open and ask you to sign in to GitHub. That's it — [Git Credential Manager](https://git-scm.com/download/win) (bundled with Git for Windows) handles everything. No tokens to copy, no terminal auth needed.
+Obsidian Git needs write access to your remote repo. The easiest way is a **GitHub Personal Access Token (PAT)**:
 
-> [!tip] Already installed Git without GCM?
-> Run `git credential-manager --version` in a terminal. If it errors, re-install Git for Windows and ensure **Git Credential Manager** is checked in the installer.
+1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
+2. Create a token with **Contents: Read and Write** on your repo
+3. In your local repo, embed the token in the remote URL:
+   ```bash
+   git remote set-url origin https://YOUR_PAT@github.com/your-username/your-repo.git
+   ```
+
+Obsidian Git will use this URL. You won't be prompted for credentials again.
+
+Alternatively, use SSH keys — see [GitHub's SSH docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
 
 ---
 
@@ -88,7 +93,7 @@ The first time Obsidian Git tries to push, a browser window will open and ask yo
 pnpm dev
 ```
 
-Open [http://localhost:4321](http://localhost:4321). The template notes appear in the graph. Edit a note in Obsidian and save — the browser hot-reloads.
+Open [http://localhost:4321](http://localhost:4321). The template notes appear in the graph. Edit a note in Obsidian and save the browser will hot-reload.
 
 ---
 
@@ -118,6 +123,7 @@ Notes without `publish: true` are completely hidden — no node, no edges, no pa
 ## Step 6 — Deploy to Netlify
 
 ### Push to GitHub
+If using Obisidan, open the Git Panel and hit commit and sync, if using VS code, open your source manager and hit commit and push, otherwise follow the terminal command below.
 
 ```bash
 git add .
@@ -156,8 +162,6 @@ pnpm build
         ▼
 dist/  →  live on CDN  (~60–90 seconds)
 ```
-
-No terminal. No manual deploys. Write → save → live.
 
 ---
 
@@ -202,7 +206,7 @@ In Obsidian (or your file manager), delete every file listed below from the `vau
 ```
 vault/
 ├── Astro.md
-├── Build Your Own.md          ← this note
+├── Build Your Own.md          
 ├── Draft Note.md
 ├── Frontmatter Reference.md
 ├── Getting Started.md

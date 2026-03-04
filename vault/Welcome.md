@@ -13,9 +13,9 @@ graph:
 
 # Welcome to GalaxyBrain
 
-This is the **starter template** for building your own 3D knowledge graph from an Obsidian vault.
+This is the **Welcome Page** for the Galaxy Brain note system. 
 
-You're looking at a live example of the site running with template notes. Each node in the graph on the landing page is one of the notes below. The edges are the `[[wikilinks]]` between them.
+You're inside a live example of the site running with template notes. Each node in the graph on the landing page is one of the notes below. The edges are the `[[wikilinks]]` between them.
 
 ## What You Can Do Here
 
@@ -45,10 +45,4 @@ Not ready to set up yet? Browse around — [[Getting Started]] explains how to n
 
 ## About This Graph
 
-Every published note becomes a node. Every `[[wikilink]]` becomes an edge. Tags become their own nodes. Links to notes that don't exist (or have `publish: false`) become **ghost nodes** — transparent wireframe spheres that show a note is referenced but not yet written.
-[[This is a New Note]]
-[[New]]
-[[New2]]
-
-[[Testing]]
-[[This is another Test of the thing]]
+Every published note becomes a node. Every `[[wikilink]]` becomes an edge. Tags become their own nodes. Links to notes that don't exist become **ghost nodes** — transparent wireframe spheres that show a note is referenced but not yet written.
