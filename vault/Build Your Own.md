@@ -13,6 +13,9 @@ graph:
 
 This site is a template. Everything you see the graph is yours to fork and fill with your own notes. The full setup takes about 15 minutes.
 
+> [!tip] Free & open — please consider supporting
+> I'm releasing this for free because fun side projects are better when they aren't hidden behind a paywall — not everything needs to feed the soul-crushing capitalism machine. That said, I still have to pay rent. If you've found this helpful or end up using it yourself, please consider [supporting me on Patreon](https://www.patreon.com/cw/Nerd_Sniped). ❤️
+
 ---
 
 ## Step 1 — Get the Template

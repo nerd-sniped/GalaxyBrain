@@ -53,3 +53,10 @@ Tags appear as octahedron nodes. Clicking one dims all unrelated nodes and highl
 ## Next Steps
 
 Ready to build your own? Start with **How to Use This Template** — click it in the graph or find it on the home page.
+
+---
+
+## Support This Project
+
+> [!tip] This is free — and that's on purpose
+> I'm releasing this for free because fun side projects are better when they aren't hidden behind a paywall — not everything needs to feed the soul-crushing capitalism machine. That said, I still have to pay rent. If you've found this helpful or end up using it yourself, please consider [supporting me on Patreon](https://www.patreon.com/cw/Nerd_Sniped). ❤️

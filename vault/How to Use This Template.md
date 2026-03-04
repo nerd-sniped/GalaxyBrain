@@ -66,3 +66,10 @@ These template notes (`Welcome`, `Getting Started`, etc.) exist only to explain 
 
 > [!tip] Tip
 > The `Draft Note` and `Inbox` notes in this vault have `publish: false` — they're invisible to the site but show how unpublished notes behave.
+
+---
+
+## Support This Project
+
+> [!tip] This is free — and that's on purpose
+> I'm releasing this for free because fun side projects are better when they aren't hidden behind a paywall — not everything needs to feed the soul-crushing capitalism machine. That said, I still have to pay rent. If you've found this helpful or end up using it yourself, please consider [supporting me on Patreon](https://www.patreon.com/cw/Nerd_Sniped). ❤️

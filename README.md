@@ -3,8 +3,11 @@
 [![CI](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml/badge.svg)](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Built with Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01)](https://astro.build)
+[![Support on Patreon](https://img.shields.io/badge/Patreon-Support%20Me-FF424D?logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nerd_Sniped)
 
 A **starter template** for publishing your Obsidian vault as an interactive 3D knowledge graph website.
+
+> I'm releasing this for free because fun side projects are better when they aren't hidden behind a paywall — not everything needs to feed the soul-crushing capitalism machine. That said, I still have to pay rent. If you've found this helpful or end up using it yourself, please consider [supporting me on Patreon](https://www.patreon.com/cw/Nerd_Sniped). ❤️
 
 Edit notes in Obsidian → push to GitHub → site rebuilds on Netlify automatically.
 
