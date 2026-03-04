@@ -168,41 +168,41 @@ dist/  →  live on CDN (~60–90 seconds)
 
 ---
 
-## Staying Up to Date with Template Changes
+## Step 7 — Start With a Clean Slate
 
-GalaxyBrain ships with a `.github/workflows/sync-upstream.yml` workflow so your deployed copy can receive improvements from this template without manual effort.
+Once your site is live and you’ve written a few of your own notes, you’ll want to remove all the template content. Here’s exactly what to delete and change.
 
-### How it works
+### Remove the template notes
 
-When your repo is created via the **Deploy to Netlify** button (or by using this repo as a template), the workflow is included automatically. It will:
+In Obsidian (or your file manager), delete every file listed in `vault/` folder. Ideally you leave the attachments folder, and template folder, but everything else can go. 
 
-1. **Open a PR** that merges upstream changes into your `main` branch — it never pushes directly
-2. Run **weekly on Monday** by default, or whenever you trigger it manually via **Actions → Sync from upstream template → Run workflow**
-3. **Skip itself** when run in this template repo, so it only activates in derived repos
+### Turn off the “Build your own” prompt
 
-### What is and isn't touched
+The CTA that appeared after you first clicked the hub is controlled by a single constant in the source code. Open `src/components/FullGraph.tsx` and find this line near the top:
 
-| | Affected by upstream sync |
-|---|---|
-| Template source code (components, integrations, styles, config) | ✅ Yes — PRs will include these |
-| Your vault notes (`vault/`) | ❌ Never — these are yours |
-| Your vault attachments | ❌ Never |
-
-Review the PR diff before merging — if you have customised components or config files, there may be conflicts to resolve.
-
-### Adding the upstream remote manually
-
-If you prefer to pull changes yourself:
-
-```bash
-git remote add upstream https://github.com/nerd-sniped/GalaxyBrain.git
-git fetch upstream
-git merge upstream/main
+```ts
+const SHOW_BUILD_CTA = true;
 ```
 
-### Opting out
+Change it to:
 
-To stop receiving update PRs, delete or disable `.github/workflows/sync-upstream.yml` in your repo.
+```ts
+const SHOW_BUILD_CTA = false;
+```
+
+Save the file. The prompt will never appear again.
+
+### Push and rebuild
+
+Once you’ve deleted the template notes, updated Welcome.md, and flipped the flag:
+
+```bash
+git add .
+git commit -m "vault: replace template content with my notes"
+git push
+```
+
+Netlify will pick up the push and rebuild. Your graph will show only your notes.
 
 ---
 

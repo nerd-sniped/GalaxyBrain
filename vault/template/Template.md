@@ -1,5 +1,5 @@
 ---
-publish: true
+publish: false
 title: Template
 tags:
   - Remove This Tag

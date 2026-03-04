@@ -201,49 +201,7 @@ Once your site is live and you’ve written a few of your own notes, you’ll wa
 
 ### Remove the template notes
 
-In Obsidian (or your file manager), delete every file listed below from the `vault/` folder. You can do them all at once — none link to each other in a way that will break anything:
-
-```
-vault/
-├── Astro.md
-├── Build Your Own.md          
-├── Draft Note.md
-├── Frontmatter Reference.md
-├── Getting Started.md
-├── GitHub Setup.md
-├── Graph Features.md
-├── How to Use This Template.md
-├── Inbox.md
-├── JavaScript.md
-├── Netlify Deployment.md
-├── Obsidian.md
-├── Obsidian Setup.md
-├── React.md
-├── Tools.md
-├── TypeScript.md
-├── Vite.md
-└── Writing Notes.md
-```
-
-**Keep** `vault/template/Template.md` — Obsidian uses it when you press `alt+t` to insert frontmatter into a new note.
-
-### Replace or rewrite Welcome.md
-
-`vault/Welcome.md` is the collapsible hub that all other notes collapse behind on load. Replace its content with your own entry point — keep the frontmatter structure but change the title, links, and body to reflect your actual notes:
-
-```yaml
----
-publish: true
-title: "Your Title Here"
-tags: []
-graph:
-  shape: torusknot    # or any shape you like
-  color: "#3498db"
-  collapsible: true   # keep this so your graph starts collapsed
----
-```
-
-Any note you link to with `[[Note Name]]` inside Welcome will hide behind it when the graph loads, as long as that note has no other incoming wikilinks.
+In Obsidian (or your file manager), delete every file listed in `vault/` folder. Ideally you leave the attachments folder, and template folder, but everything else can go. 
 
 ### Turn off the “Build your own” prompt
 
