@@ -2,6 +2,7 @@ import { useRef, useCallback, useEffect, useState, useMemo } from 'react';
 import ForceGraph3D from 'react-force-graph-3d';
 import type { ForceGraphMethods } from 'react-force-graph-3d';
 import * as THREE from 'three';
+import { withPublicBase } from '../lib/public-path';
 import { buildNodeObject } from './GraphNodeFactory';
 import type { GraphNode, GraphLink } from '../lib/types';
 
@@ -103,7 +104,7 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
 
   // ── Initial load ───────────────────────────────────────────────────────────
   useEffect(() => {
-    fetch(`/graph/${noteId}.json`)
+    fetch(withPublicBase(`/graph/${noteId}.json`))
       .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() as Promise<LocalGraphData>; })
       .then((data) => {
         mergeInto(data);
@@ -302,7 +303,7 @@ export default function LocalGraph({ noteId }: LocalGraphProps) {
         setClickedOnce((p) => new Set([...p, node.id]));
 
         if (!expandedNodes.has(node.id)) {
-          fetch(`/graph/${node.id}.json`)
+          fetch(withPublicBase(`/graph/${node.id}.json`))
             .then((r) => { if (!r.ok) return null; return r.json() as Promise<LocalGraphData>; })
             .then((data) => {
               if (data) {

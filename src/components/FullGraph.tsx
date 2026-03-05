@@ -5,6 +5,7 @@ import type { ForceGraphMethods } from 'react-force-graph-3d';
 import * as THREE from 'three';
 import { buildNodeObject } from './GraphNodeFactory';
 import type { GraphData, GraphNode } from '../lib/types';
+import { withPublicBase } from '../lib/public-path';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -58,7 +59,7 @@ export default function FullGraph() {
   const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/graph.json')
+    fetch(withPublicBase('/graph.json'))
       .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() as Promise<GraphData>; })
       .then(setGraphData)
       .catch((err: unknown) => setLoadError(String(err)));
@@ -787,7 +788,7 @@ export default function FullGraph() {
             Want a galaxy of your own?
           </span>
           <a
-            href="/notes/build-your-own"
+            href={withPublicBase('/notes/build-your-own')}
             style={{
               fontSize:       13,
               fontWeight:     600,

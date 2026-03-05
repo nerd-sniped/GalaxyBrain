@@ -14,6 +14,9 @@
 import { visit } from 'unist-util-visit';
 import type { Plugin } from 'unified';
 import type { Root, Text, PhrasingContent, Link } from 'mdast';
+import { detectGitHubPagesBase, withBasePath } from './hosting';
+
+const basePath = detectGitHubPagesBase();
 
 /** Convert a note name like "My Note" → "my-note" */
 function toSlug(name: string): string {
@@ -56,7 +59,7 @@ const remarkWikilinks: Plugin<[], Root> = () => {
 
         const link: Link = {
           type: 'link',
-          url: `/notes/${slug}${fragment}`,
+          url: withBasePath(`/notes/${slug}${fragment}`, basePath),
           title: null,
           data: {
             hProperties: {

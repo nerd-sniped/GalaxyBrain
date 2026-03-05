@@ -7,22 +7,33 @@
 
 A **starter template** for publishing your Obsidian vault as an interactive 3D knowledge graph website.
 
-> I'm releasing this for free because fun side projects are better when they aren't hidden behind a paywall — not everything needs to feed the soul-crushing capitalism machine. That said, I still have to pay rent. If you've found this helpful or end up using it yourself, please consider [supporting me on Patreon](https://www.patreon.com/cw/Nerd_Sniped). ❤️
+Edit notes in Obsidian → push to GitHub → site rebuilds on **Netlify or GitHub Pages** automatically.
 
-Edit notes in Obsidian → push to GitHub → site rebuilds on Netlify automatically.
+**[Check out the Live demo →](https://galaxybrain.netlify.app)**
 
-**[Live demo →](https://galaxybrain.netlify.app)**
+I'm releasing this for free because fun side projects are better when they aren't hidden behind a paywall — not everything needs to feed the soul-crushing capitalism machine. That said, I still have to pay rent. If you've found this helpful or end up using it yourself, please consider [supporting me on Patreon](https://www.patreon.com/cw/Nerd_Sniped). ❤️
 
+## Overview
+Galaxy Brain consists of 3 main components:
+1. This codebase which creates a 3D graph based on notes in a `/vault` folder.
+2. Obsidian, a closed source (but free to use) note keeping app which we will use as a GUI
+3. Netlify (Or Github Pages), this is the service that hosts this codebase (for free) making it accessible on the internet. 
+
+While the intent is to use Obsidian as the User Interface, it's also entirely possible to use **any** Markdown editor. Additionally, there are some steps that require a Github account to connect Obsidian to a git repository. It should be trivial to use a different hosting service if you so desire. 
+
+I've done my best to keep the whole thing as flexible as I can manage, while also making it beginner friendly!  
 
 ## Step 1 — Get the Template
 
 1. Click **Use this template** → **Create a new repository** on the GitHub page for this repo
 2. Name your repo, set visibility (public or private — both work with Netlify)
 3. Clone it locally:
+If you're using the CLI 
    ```bash
    git clone https://github.com/your-username/your-repo.git
    cd your-repo
    ```
+
 ---
 
 ## Step 2 — Install Dependencies
@@ -70,6 +81,8 @@ This plugin auto-commits and pushes your notes to GitHub so the site rebuilds wi
 ### 3d. Authenticate Git
 
 Obsidian Git needs write access to your remote repo. The easiest way is a **GitHub Personal Access Token (PAT)**:
+
+> Hosting on GitHub Pages does **not** remove this requirement. If Obsidian Git is pushing commits for you, it still needs GitHub auth (PAT or SSH key).
 
 1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
 2. Create a token with **Contents: Read and Write** on your repo
@@ -126,6 +139,8 @@ git add .
 git commit -m "initial vault"
 git push
 ```
+**OR**
+Deploy from inside Obsidian! 
 
 ### 6b. Import to Netlify
 
@@ -149,25 +164,24 @@ The build takes 1–3 minutes. Look for:
 ```
 
 Your site is live at `random-name.netlify.app`.
+If you'de like to point your GalaxyBrain at a custom domain, follow Netlify's instructions/prompts, it's pretty straight forward.
 
-### 6d. Set a custom domain (optional)
 
-**Site configuration → Domain management → Add a domain** — then follow the DNS instructions for your registrar.
+### 6f. Deploy to GitHub Pages instead (Alternative to Netlify)
 
-### 6e. The full auto-deploy flow
+This repo includes a ready-to-use workflow at `.github/workflows/deploy-pages.yml`.
 
-```
-Edit note in Obsidian
-        │
-        ▼  (Obsidian Git — every N minutes)
-GitHub receives push
-        │
-        ▼  (Netlify webhook)
-npm run build
-        │
-        ▼
-dist/  →  live on CDN (~60–90 seconds)
-```
+1. Push your repo to GitHub
+2. Go to **Settings → Pages**
+3. Under **Build and deployment**, set **Source = GitHub Actions**
+4. The **Deploy to GitHub Pages** workflow will run on every push to `main`
+
+#### URLs on GitHub Pages
+
+- If your repo is named `username.github.io`, the site is hosted at the root.
+- Any other repo name is hosted at `/repo-name/`.
+
+GalaxyBrain auto-detects this at build time and adjusts links/assets automatically.
 
 ---
 
@@ -199,19 +213,15 @@ Save the file. The prompt will never appear again.
 
 Once you’ve deleted the template notes, updated Welcome.md, and flipped the flag:
 
-```bash
-git add .
-git commit -m "vault: replace template content with my notes"
-git push
-```
+Push these new changes via Obsidian Git 
 
 Netlify will pick up the push and rebuild. Your graph will show only your notes.
 
 ---
 
-## Customising the Site
+## Customizing the Site
 
-### Colours and fonts
+### Colors and fonts
 
 Edit `src/styles/global.css`. CSS custom properties at the top of the file control both dark and light themes.
 

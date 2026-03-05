@@ -19,6 +19,7 @@ import { parseNote, slugify } from '../lib/vault-parser.js';
 import { buildResolverIndex, resolveWikilink } from '../lib/link-resolver.js';
 import type { GraphNode, GraphLink, GraphData, NodeShape } from '../lib/types.js';
 import type { NoteGraphData, NoteRef } from '../lib/graph-types.js';
+import { detectGitHubPagesBase, withBasePath } from '../lib/hosting';
 
 // ─── Tag colour palette ───────────────────────────────────────────────────────
 
@@ -49,6 +50,7 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
   };
 
   const vaultRoot = path.join(projectRoot, 'vault');
+  const basePath = detectGitHubPagesBase();
   const publicDir = path.join(projectRoot, 'public');
   const graphDir = path.join(publicDir, 'graph');
 
@@ -97,7 +99,7 @@ async function buildGraph(projectRoot: string, logger?: { info: (s: string) => v
       id: note.id,
       name: fm.title ?? note.id,
       type: 'file',
-      path: `/notes/${note.id}`,
+      path: withBasePath(`/notes/${note.id}`, basePath),
       val: 1,
       shape: (fm.graph?.shape as NodeShape) ?? 'sphere',
       color: fm.graph?.color ?? '#3498db',

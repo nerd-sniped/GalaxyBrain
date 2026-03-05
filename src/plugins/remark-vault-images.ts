@@ -127,8 +127,8 @@ const remarkVaultImages: Plugin<[], Root> = () => {
     visit(tree, 'image', (node: Image) => {
       if (!node.url) return;
       if (!IMAGE_EXT_RE.test(node.url)) return;
-      // Only rewrite if it's NOT already an absolute URL or a /vault-assets/ path
-      if (node.url.startsWith('http') || node.url.startsWith('/vault-assets/')) return;
+      // Only rewrite if it's NOT already an absolute URL or an existing vault-assets path
+      if (node.url.startsWith('http') || node.url.includes('/vault-assets/')) return;
 
       const resolved = resolveImagePath(node.url, map);
       if (resolved) {

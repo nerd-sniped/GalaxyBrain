@@ -9,17 +9,23 @@ import remarkObsidian from '@heavycircle/remark-obsidian';
 import remarkWikilinks from './src/lib/remark-wikilinks.ts';
 import remarkVaultImages from './src/plugins/remark-vault-images.ts';
 import remarkTransclusion from './src/plugins/remark-transclusion.ts';
+import { detectGitHubPagesBase, detectSiteUrl } from './src/lib/hosting.ts';
 import rehypeRaw from 'rehype-raw';
 
 // Only attach the Netlify adapter during `astro build`.
 // In dev mode the adapter forces Vite into server-mode rendering which breaks
 // its HMR client injection (css MIME errors, __DEFINES__ not replaced, etc.).
 const isBuild = process.argv.some((a) => a === 'build');
+const isNetlifyBuild = isBuild && process.env.NETLIFY === 'true';
+const base = detectGitHubPagesBase();
+const site = detectSiteUrl();
 
 // https://astro.com/config
 export default defineConfig({
+  base,
+  site,
   output: 'static',
-  adapter: isBuild ? netlify() : undefined,
+  adapter: isNetlifyBuild ? netlify() : undefined,
   integrations: [
     assetCollector(),  // astro:build:start — copy vault images → public/vault-assets/
     graphBuilder(),    // astro:config:done — build graph JSON
