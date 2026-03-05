@@ -30,7 +30,7 @@ Write note in Obsidian
         ↓
 Obsidian Git auto-commits & pushes to GitHub
         ↓
-Netlify detects push, runs `npm run build`
+Netlify detects push, runs the build command from `netlify.toml`
         ↓
 Astro reads vault/*.md, builds graph JSON + HTML
         ↓
@@ -41,7 +41,7 @@ The site rebuilds **completely automatically** every time you push a change. No 
 
 ## The Build Pipeline
 
-When Netlify runs `npm run build`, three things happen before any Markdown is rendered:
+When Netlify runs the configured build command, three things happen before any Markdown is rendered:
 
 1. **Graph builder** — reads all published notes, resolves wikilinks, and writes `public/graph.json` and one per-note JSON file per published note
 2. **Asset collector** — copies everything in `vault/attachments/` to `public/vault-assets/` so images in notes are served correctly
@@ -51,9 +51,15 @@ Then Astro renders each published note to a static HTML page.
 
 ## What You Need to Do
 
-1. **[[GitHub Setup]]** — use this repo as a GitHub template, clone it locally, and authenticate (handled automatically by Git Credential Manager — no tokens or terminal auth needed)
-2. **[[Obsidian Setup]]** — open the cloned `vault/` folder in Obsidian and install the Obsidian Git plugin for auto-push
-3. **[[Netlify Deployment]]** — connect your GitHub repo to Netlify; the `netlify.toml` handles all build config automatically
+For all installation and deployment steps, use the GitHub README as the canonical guide:
+
+- [GalaxyBrain README (Installation Guide)](https://github.com/nerd-sniped/GalaxyBrain#readme)
+
+Then use these notes as supporting reference:
+
+1. **[[GitHub Setup]]** — Git auth options and repo hygiene notes
+2. **[[Obsidian Setup]]** — vault conventions and recommended app settings
+3. **[[Netlify Deployment]]** — deployment model and troubleshooting
 4. **[[Writing Notes]]** — publish your first real note
 5. Replace these template notes with your own content
 
