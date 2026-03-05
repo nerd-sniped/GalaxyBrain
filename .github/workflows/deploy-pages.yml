@@ -1,9 +1,16 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      enablement:
+        description: "Allow configure-pages to enable GitHub Pages if needed"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 permissions:
   contents: read
@@ -38,6 +45,8 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: ${{ inputs.enablement }}
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

@@ -171,10 +171,17 @@ If you'de like to point your GalaxyBrain at a custom domain, follow Netlify's in
 
 This repo includes a ready-to-use workflow at `.github/workflows/deploy-pages.yml`.
 
+> [!note]
+> Netlify is the default deployment path. GitHub Pages deployment is opt-in and manual.
+
 1. Push your repo to GitHub
 2. Go to **Settings → Pages**
 3. Under **Build and deployment**, set **Source = GitHub Actions**
-4. The **Deploy to GitHub Pages** workflow will run on every push to `main`
+4. Open **Actions → Deploy to GitHub Pages → Run workflow**
+5. Set `enablement`:
+   - `false` if Pages is already enabled
+   - `true` if you want the action to attempt enabling/configuring Pages
+6. Run the workflow
 
 #### URLs on GitHub Pages
 
