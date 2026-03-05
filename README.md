@@ -145,7 +145,7 @@ Deploy from inside Obsidian!
 ### 6b. Import to Netlify
 
 1. Go to [app.netlify.com](https://app.netlify.com) → **Add new site → Import an existing project**
-2. Choose **Deploy with GitHub** and authorise access
+2. Choose **Deploy with GitHub** and authorize access
 3. Select your repo
 4. Review build settings — `netlify.toml` pre-configures everything:
 
