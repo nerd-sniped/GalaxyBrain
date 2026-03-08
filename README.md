@@ -12,7 +12,7 @@
 📖 <strong><a href="https://nerd-sniped.com/projects/galaxybrain/">Project article</a></strong> — the how and why behind GalaxyBrain
 </p>
 <p align="center">
-🎥 <strong><a href="https://www.youtube.com/watch?v=e8GugdvpSYI">Install Video</a></strong>How to make your own
+🎥 <strong><a href="https://www.youtube.com/watch?v=dkJ-N9qwhZ8">Install Video</a></strong>How to make your own
 </p>
 A **starter template** for publishing your Obsidian vault as an interactive 3D knowledge graph website.
 
