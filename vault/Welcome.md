@@ -23,17 +23,22 @@ You're inside a live example of the site running with template notes. Each node 
 ## What You Can Do Here
 
 - **Explore** — rotate the 3D graph, click nodes to read notes
-- **Learn** — follow the setup path below to build your own version
+- **Learn** — use the setup docs and README to understand how everything fits together
 - **Fork** — replace these notes with your own vault and deploy
 
 ## Build Your Own Version
 
-Want a site like this for your own notes? The full setup takes about 15 minutes:
+For installation and deployment, use the GitHub README as the single source of truth:
 
-1. **[[GitHub Setup]]** — use this repo as a GitHub template and clone it locally
-2. **[[Obsidian Setup]]** — open the `vault/` folder in Obsidian and install the Obsidian Git plugin
-3. **[[Netlify Deployment]]** — connect your GitHub repo to Netlify for automatic deploys
-4. **[[Writing Notes]]** — write your first note and watch it appear on the live site
+- [GalaxyBrain README (Installation Guide)](https://github.com/nerd-sniped/GalaxyBrain#readme)
+
+Use these notes for background and feature details:
+
+1. **[[How to Use This Template]]** — architecture and build pipeline overview
+2. **[[GitHub Setup]]** — Git auth models and repo hygiene notes
+3. **[[Obsidian Setup]]** — vault conventions and recommended app settings
+4. **[[Netlify Deployment]]** — deployment model and troubleshooting
+5. **[[Writing Notes]]** — content authoring workflow
 
 For the full picture of how the pieces fit together, see [[How to Use This Template]].
 

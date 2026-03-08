@@ -16,6 +16,9 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Plugin } from 'unified';
 import type { Root, Text, PhrasingContent, BlockContent, Html } from 'mdast';
+import { detectGitHubPagesBase, withBasePath } from '../lib/hosting';
+
+const basePath = detectGitHubPagesBase();
 
 // ─── Block index loader (cached) ──────────────────────────────────────────────
 
@@ -142,7 +145,7 @@ function buildBlockTransclusion(
     `<blockquote class="transclusion">`,
     innerHtml,
     `<cite class="transclusion-cite">`,
-    `<a href="/notes/${noteSlug}" data-wikilink="${noteSlug}">From: ${noteName}</a>`,
+    `<a href="${withBasePath(`/notes/${noteSlug}`, basePath)}" data-wikilink="${noteSlug}">From: ${noteName}</a>`,
     `</cite>`,
     `</blockquote>`,
   ].join('\n');
@@ -159,7 +162,7 @@ function buildFullNoteEmbed(
   return [
     `<details class="transclusion-embed">`,
     `<summary class="transclusion-embed-header">`,
-    `<a href="/notes/${noteSlug}" data-wikilink="${noteSlug}">${noteName}</a>`,
+    `<a href="${withBasePath(`/notes/${noteSlug}`, basePath)}" data-wikilink="${noteSlug}">${noteName}</a>`,
     `</summary>`,
     `<div class="transclusion-embed-body">`,
     innerHtml,

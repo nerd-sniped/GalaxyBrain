@@ -10,48 +10,23 @@ graph:
 
 # Netlify Deployment
 
-Netlify hosts the built site and automatically rebuilds it every time you push to GitHub. Setup takes about five minutes.
+Installation and deployment steps are maintained in the GitHub README:
 
-## 1. Create a Netlify Account
+- [GalaxyBrain README (Installation Guide)](https://github.com/nerd-sniped/GalaxyBrain#readme)
 
-Sign up at [app.netlify.com](https://app.netlify.com). The free Starter plan supports unlimited personal sites with 100 GB bandwidth/month — more than enough for a personal knowledge graph.
+This note is reference-only for deployment behavior and troubleshooting.
 
-## 2. Import Your GitHub Repo
+## Build Configuration Reference
 
-1. Click **Add new site → Import an existing project**
-2. Choose **Deploy with GitHub** and authorise Netlify to access your repos
-3. Select your GalaxyBrain fork/template repo from the list
+GalaxyBrain already includes `netlify.toml`; Netlify reads build settings from it.
 
-## 3. Configure Build Settings
-
-GalaxyBrain already includes a `netlify.toml` with the correct settings. Netlify will detect it automatically. Verify the settings match:
+Current key settings:
 
 | Setting | Value |
 |---|---|
-| **Build command** | `npm run build` |
+| **Build command** | `pnpm astro clean && node scripts/sync-titles.mjs && pnpm build` |
 | **Publish directory** | `dist` |
-| **Node version** | `22` (set via `netlify.toml`) |
-
-Click **Deploy site**.
-
-## 4. Wait for the First Build
-
-The first build takes 1–3 minutes. Netlify will show a build log. A successful build ends with something like:
-
-```
-[build] 17 page(s) built in Xs
-[build] Complete!
-```
-
-## 5. Set a Custom Domain (Optional)
-
-By default Netlify gives you a URL like `random-name-123.netlify.app`. To use a custom domain:
-
-1. Go to **Site configuration → Domain management**
-2. Click **Add a domain**
-3. Enter your domain and follow the DNS configuration steps
-
-If you don't own a domain, the generated `.netlify.app` URL works fine and can be shared.
+| **Node version** | `22` |
 
 ## 6. How Auto-Deploy Works
 
@@ -64,7 +39,7 @@ Obsidian Git commits & pushes (auto, every N minutes)
        ↓
 GitHub receives push → notifies Netlify via webhook
        ↓
-Netlify runs `npm run build`
+Netlify runs the build command from `netlify.toml`
        ↓
 New static site replaces old one on CDN (~1–2 min)
 ```
@@ -93,4 +68,4 @@ GalaxyBrain doesn't require any environment variables. If you add features that 
 
 ## Next Steps
 
-Your site is live. Now learn how to fill it with content: [[Writing Notes]] and [[Graph Features]].
+After deploying via README, learn how to fill your site with content: [[Writing Notes]] and [[Graph Features]].

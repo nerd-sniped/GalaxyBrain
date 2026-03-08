@@ -12,6 +12,9 @@ interface Props {
 const { title, noteId, excerpt } = Astro.props;
 // Derive a slug from the title if noteId not explicitly passed
 const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+const baseUrl = import.meta.env.BASE_URL;
+const graphJsonUrl = `${baseUrl}graph.json`;
+const focusGraphUrl = `${baseUrl}?focus=${focusId}`;
 ---
 
 <BaseLayout title={`${title} — GalaxyBrain`} description={excerpt}>
@@ -25,7 +28,7 @@ const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-
     <aside class="note-sidebar">
       <!-- ── View in graph ─────────────────────────────────── -->
       <a
-        href={`/?focus=${focusId}`}
+        href={focusGraphUrl}
         class="view-in-graph"
         title="Open full graph focused on this note"
       >
@@ -46,9 +49,9 @@ const focusId = noteId ?? title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-
 </BaseLayout>
 
 {/* Client-side ghost-link detection — cross-references graph.json */}
-<script>
+<script define:vars={{ graphJsonUrl }}>
   document.addEventListener('DOMContentLoaded', () => {
-    fetch('/graph.json')
+    fetch(graphJsonUrl)
       .then((r) => r.json())
       .then((data: { nodes: Array<{ id: string; type: string }> }) => {
         const published = new Set(

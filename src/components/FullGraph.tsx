@@ -5,6 +5,7 @@ import type { ForceGraphMethods } from 'react-force-graph-3d';
 import * as THREE from 'three';
 import { buildNodeObject } from './GraphNodeFactory';
 import type { GraphData, GraphNode } from '../lib/types';
+import { withPublicBase } from '../lib/public-path';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -58,7 +59,7 @@ export default function FullGraph() {
   const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/graph.json')
+    fetch(withPublicBase('/graph.json'))
       .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() as Promise<GraphData>; })
       .then(setGraphData)
       .catch((err: unknown) => setLoadError(String(err)));
@@ -784,10 +785,12 @@ export default function FullGraph() {
           whiteSpace:     'nowrap',
         }}>
           <span style={{ fontSize: 13, color: isDark ? '#b0cfe8' : '#1a5fa8' }}>
-            Want a galaxy of your own?
+            Need setup instructions?
           </span>
           <a
-            href="/notes/build-your-own"
+            href="https://github.com/nerd-sniped/GalaxyBrain#readme"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               fontSize:       13,
               fontWeight:     600,
@@ -801,7 +804,7 @@ export default function FullGraph() {
               transition:     'background 0.15s',
             }}
           >
-            Build your own →
+            Open README →
           </a>
           <button
             onPointerDown={(e) => { e.stopPropagation(); e.preventDefault(); setShowBuildCta(false); }}

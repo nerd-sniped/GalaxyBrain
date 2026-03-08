@@ -10,25 +10,20 @@ graph:
 
 # Obsidian Setup
 
-This note walks you through creating and configuring an Obsidian vault that works with GalaxyBrain.
+Installation and onboarding steps are maintained in the GitHub README:
 
-## 1. Install Obsidian
+- [GalaxyBrain README (Installation Guide)](https://github.com/nerd-sniped/GalaxyBrain#readme)
 
-Download Obsidian from [obsidian.md](https://obsidian.md). It's free for personal use and runs on Windows, macOS, Linux, iOS, and Android.
+This note is reference-only for Obsidian-specific conventions and settings.
 
-## 2. Open the `vault/` Folder as a Vault
+## Vault Convention
 
-The GalaxyBrain repo already contains a `vault/` folder. Rather than creating a new vault from scratch:
-
-1. Open Obsidian
-2. Click **Open folder as vault**
-3. Navigate to and select the `vault/` folder **inside your cloned GalaxyBrain repo**
-4. Obsidian will create a hidden `.obsidian/` folder inside `vault/` with your settings
+GalaxyBrain expects you to open the `vault/` subfolder (not the repo root) as your Obsidian vault.
 
 > [!important] Important
 > Open the `vault/` subfolder, **not** the repo root. Obsidian stores its config inside whichever folder you open, and notes can live anywhere inside `vault/` (excluding `attachments/`).
 
-## 3. Recommended Obsidian Settings
+## Recommended Obsidian Settings
 
 Inside Obsidian, go to **Settings** and configure the following:
 
@@ -41,38 +36,19 @@ Inside Obsidian, go to **Settings** and configure the following:
 ### Editor
 - **Strict line breaks** → Off (lets paragraph breaks work naturally in rendered HTML)
 
-## 4. Install the Obsidian Git Plugin
+## Obsidian Git (Recommended)
 
-The **Obsidian Git** community plugin auto-commits and pushes your notes to GitHub so the site rebuilds without you touching a terminal.
+For automated sync, use the **Obsidian Git** plugin ([direct link](obsidian://show-plugin?id=obsidian-git)).
 
-1. Go to **Settings → Community plugins → Browse**
-2. Search for **Obsidian Git** ([direct link](obsidian://show-plugin?id=obsidian-git)) and install it
-3. Enable it
-4. Go to its settings and configure:
-   - **Auto commit interval** — e.g. `5` (minutes)
-   - **Auto push after commit** — ✅ On
-   - **Commit message** — e.g. `vault: auto-save {{date}}`
+Recommended plugin behavior:
+
+- Auto commit interval enabled
+- Auto push enabled
+- A stable commit message format
 
 > [!note] Authentication
 > You don't need to configure credentials here. On the first push, Git Credential Manager opens a GitHub login page in your browser — approve it once and all future pushes are silent. See [[GitHub Setup]] for details.
 
-## 5. Verify the Setup
-
-Create a test note in `vault/`:
-
-```markdown
----
-publish: true
-title: "Test Note"
----
-
-# Test Note
-
-Hello, graph!
-```
-
-Run `pnpm dev` from the repo root. Visit `http://localhost:4321` — your test note should appear as a node.
-
 ## Next: Configure GitHub
 
-Once your vault is working locally, see [[GitHub Setup]] to connect it to a remote repo so Netlify can watch for changes.
+Use README for the exact setup sequence, then see [[GitHub Setup]] for auth strategy and repo hygiene reference.

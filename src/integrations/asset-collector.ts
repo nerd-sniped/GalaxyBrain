@@ -20,6 +20,7 @@ import {
 import path from 'node:path';
 import fg from 'fast-glob';
 import matter from 'gray-matter';
+import { detectGitHubPagesBase, withBasePath } from '../lib/hosting';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -98,6 +99,7 @@ async function collect(
   },
 ): Promise<void> {
   const vaultRoot = path.join(projectRoot, 'vault');
+  const basePath = detectGitHubPagesBase();
   const outputDir = path.join(projectRoot, 'public', 'vault-assets');
   const astroDir = path.join(projectRoot, '.astro');
   const mapFile = path.join(astroDir, 'vault-images.json');
@@ -166,7 +168,7 @@ async function collect(
     }
 
     // Map both the full relative path and the bare filename
-    const publicPath = `/vault-assets/${relFromVault}`;
+    const publicPath = withBasePath(`/vault-assets/${relFromVault}`, basePath);
     pathMap[imgName] = publicPath;
     pathMap[path.basename(resolved).toLowerCase()] = publicPath;
   }

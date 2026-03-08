@@ -52,7 +52,7 @@ Tags appear as octahedron nodes. Clicking one dims all unrelated nodes and highl
 
 ## Next Steps
 
-Ready to build your own? Start with **How to Use This Template** — click it in the graph or find it on the home page.
+Ready to build your own? Follow the [GalaxyBrain README installation guide](https://github.com/nerd-sniped/GalaxyBrain#readme), then return to **How to Use This Template** for architecture details.
 
 ---
 
