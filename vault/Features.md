@@ -6,6 +6,7 @@ aliases: [feature-overview, what-can-it-do]
 graph:
   shape: dodecahedron
   color: "#9b59b6"
+  collapsible: true
 ---
 
 # GalaxyBrain Features
