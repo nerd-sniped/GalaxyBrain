@@ -1,5 +1,8 @@
 # GalaxyBrain
 
+▶️ **[Video installation guide](https://www.youtube.com/watch?v=e8GugdvpSYI)** — watch the full walkthrough on YouTube
+📖 **[Project article](https://nerd-sniped.com/projects/galaxybrain/)** — the how and why behind GalaxyBrain
+
 [![CI](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml/badge.svg)](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Built with Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01)](https://astro.build)
