@@ -102,7 +102,7 @@ export default function FullGraph() {
   }, [isDark]);
 
   // ── Collapse state ─────────────────────────────────────────────────────────
-  const [collapsedNodes, setCollapsedNodes] = useState<Set<string>>(new Set());
+  const [collapsedNodes, setCollapsedNodes] = useState<Set<string> | null>(null);
   useEffect(() => {
     if (!graphData) return;
     const s = new Set<string>();
@@ -306,7 +306,13 @@ export default function FullGraph() {
   // ── Visible data (stable reference → force sim never restarts spuriously) ──
   const visibleData = useMemo((): GraphData => {
     if (!graphData) return { nodes: [], links: [] };
-    if (collapsedNodes.size === 0) return graphData;
+    
+    // Compute collapsed nodes: use state if available, otherwise compute on-demand
+    const collapsed = collapsedNodes ?? new Set(
+      graphData.nodes.filter((n) => n.collapsible).map((n) => n.id)
+    );
+    
+    if (collapsed.size === 0) return graphData;
 
     // Determine which nodes to hide when a collapsible node is collapsed.
     //
@@ -337,7 +343,7 @@ export default function FullGraph() {
     const addVisible = (id: string) => {
       if (visible.has(id)) return;
       visible.add(id);
-      if (!collapsedNodes.has(id)) queue.push(id);
+      if (!collapsed.has(id)) queue.push(id);
       // collapsed nodes: visible (shown as badge) but not traversed → children hidden
     };
 
@@ -385,7 +391,7 @@ export default function FullGraph() {
     const isHighlightedTag   = node.id === highlightedTag;
     const isConnected        = highlightedTag !== null && highlightedNodeIds.has(node.id);
     const isDimmed           = highlightedTag !== null && !isConnected && !isHighlightedTag;
-    const isCollapsed        = node.collapsible && collapsedNodes.has(node.id);
+    const isCollapsed        = node.collapsible && (collapsedNodes?.has(node.id) ?? false);
 
     const group = new THREE.Group();
 
@@ -476,8 +482,8 @@ export default function FullGraph() {
       }
 
       let hint = '';
-      if (node.collapsible && collapsedNodes.has(node.id))  hint = 'Click to expand';
-      if (node.collapsible && !collapsedNodes.has(node.id)) hint = 'Shift+click to collapse';
+      if (node.collapsible && collapsedNodes?.has(node.id))  hint = 'Click to expand';
+      if (node.collapsible && collapsedNodes && !collapsedNodes.has(node.id)) hint = 'Shift+click to collapse';
 
       preview.style.background  = uiBgColor;
       preview.style.color       = uiTextColor;
@@ -511,14 +517,14 @@ export default function FullGraph() {
     }
 
     // Shift+click on an expanded collapsible node → re-collapse
-    if (event.shiftKey && node.collapsible && !collapsedNodes.has(node.id)) {
-      setCollapsedNodes((p) => { const s = new Set(p); s.add(node.id); return s; });
+    if (event.shiftKey && node.collapsible && collapsedNodes && !collapsedNodes.has(node.id)) {
+      setCollapsedNodes((p) => { const s = new Set(p ?? []); s.add(node.id); return s; });
       return;
     }
 
     // Click on a collapsed node → expand
-    if (node.collapsible && collapsedNodes.has(node.id)) {
-      setCollapsedNodes((p) => { const s = new Set(p); s.delete(node.id); return s; });
+    if (node.collapsible && collapsedNodes?.has(node.id)) {
+      setCollapsedNodes((p) => { const s = new Set(p ?? []); s.delete(node.id); return s; });
       if (SHOW_BUILD_CTA && !hasShownCtaRef.current) {
         hasShownCtaRef.current = true;
         setTimeout(() => setShowBuildCta(true), 600); // slight delay so the graph expansion animates first
