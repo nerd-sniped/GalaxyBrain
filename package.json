@@ -10,7 +10,11 @@
     "sync-titles": "node scripts/sync-titles.mjs"
   },
   "pnpm": {
-    "ignoredBuiltDependencies": ["@parcel/watcher", "esbuild", "sharp"]
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "sharp"
+    ]
   },
   "dependencies": {
     "@astrojs/netlify": "^6.6.4",
@@ -30,6 +34,7 @@
   "devDependencies": {
     "@types/mdast": "^4.0.4",
     "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@types/three": "^0.183.1",
     "mdast": "^3.0.0",
     "typescript": "^5.9.3",

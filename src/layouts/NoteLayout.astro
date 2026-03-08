@@ -53,11 +53,11 @@ const focusGraphUrl = `${baseUrl}?focus=${focusId}`;
   document.addEventListener('DOMContentLoaded', () => {
     fetch(graphJsonUrl)
       .then((r) => r.json())
-      .then((data: { nodes: Array<{ id: string; type: string }> }) => {
+      .then((data) => {
         const published = new Set(
           data.nodes.filter((n) => n.type === 'file').map((n) => n.id)
         );
-        document.querySelectorAll<HTMLAnchorElement>('a[data-wikilink]').forEach((a) => {
+        document.querySelectorAll('a[data-wikilink]').forEach((a) => {
           const slug = a.getAttribute('data-wikilink');
           if (slug && !published.has(slug)) {
             a.classList.add('ghost-link');
