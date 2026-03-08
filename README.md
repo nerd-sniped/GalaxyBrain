@@ -1,14 +1,18 @@
 # GalaxyBrain
-
-[![GalaxyBrain Video Installation Guide](https://img.youtube.com/vi/e8GugdvpSYI/0.jpg)](https://www.youtube.com/watch?v=e8GugdvpSYI)
-
-📖 **[Project article](https://nerd-sniped.com/projects/galaxybrain/)** — the how and why behind GalaxyBrain
-
 [![CI](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml/badge.svg)](https://github.com/nerd-sniped/GalaxyBrain/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Built with Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01)](https://astro.build)
 [![Support on Patreon](https://img.shields.io/badge/Patreon-Support%20Me-FF424D?logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nerd_Sniped)
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=e8GugdvpSYI">
+    <img src="https://img.youtube.com/vi/e8GugdvpSYI/1.jpg" alt="GalaxyBrain Video Installation Guide">
+  </a>
+</p>
+
+<p align="center">
+📖 <strong><a href="https://nerd-sniped.com/projects/galaxybrain/">Project article</a></strong> — the how and why behind GalaxyBrain
+</p>
 A **starter template** for publishing your Obsidian vault as an interactive 3D knowledge graph website.
 
 Edit notes in Obsidian → push to GitHub → site rebuilds on **Netlify or GitHub Pages** automatically.
