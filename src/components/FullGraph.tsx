@@ -188,7 +188,6 @@ export default function FullGraph() {
   // ── "Start here" callout (shown once to new visitors) ─────────────────────
   // Points to the note with `graph.callout: true` in its frontmatter.
   // The callout text comes from `graph.calloutText`.
-  const CALLOUT_KEY = 'gb-callout-dismissed-v2';
 
   const calloutTarget = useMemo(() => {
     if (!graphData) return null;
@@ -198,9 +197,7 @@ export default function FullGraph() {
 
   const calloutLabel = calloutTarget?.calloutText || 'Click to get started';
 
-  const [showCallout, setShowCallout] = useState<boolean>(() => {
-    try { return !sessionStorage.getItem(CALLOUT_KEY); } catch { return true; }
-  });
+  const [showCallout, setShowCallout] = useState<boolean>(true);
   const [calloutPos, setCalloutPos] = useState<{ x: number; y: number } | null>(null);
   // Keep a ref so the RAF loop always reads the current node position object
   const calloutTargetRef = useRef(calloutTarget);
@@ -210,7 +207,6 @@ export default function FullGraph() {
   showCalloutRef.current = showCallout;
 
   const dismissCallout = useCallback(() => {
-    try { sessionStorage.setItem(CALLOUT_KEY, '1'); } catch {}
     setShowCallout(false);
     setCalloutPos(null);
   }, []);
