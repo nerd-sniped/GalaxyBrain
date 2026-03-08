@@ -5,7 +5,13 @@
 [![Support on Patreon](https://img.shields.io/badge/Patreon-Support%20Me-FF424D?logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nerd_Sniped)
 
 <p align="center">
+<<<<<<< HEAD
   <img src="public/GalaxyGIF.dark.gif" alt="GalaxyBrain Interactive 3D Knowledge Graph" width="80%">
+=======
+  <a href="https://www.youtube.com/watch?v=e8GugdvpSYI">
+    <img src="https://img.youtube.com/vi/e8GugdvpSYI/1.jpg" alt="GalaxyBrain Video Installation Guide">
+  </a>
+>>>>>>> 511654ad7880e7bc8fe25d8d2dcf0bb2f5298fc2
 </p>
 
 <p align="center">
