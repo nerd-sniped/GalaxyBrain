@@ -5,18 +5,13 @@
 [![Support on Patreon](https://img.shields.io/badge/Patreon-Support%20Me-FF424D?logo=patreon&logoColor=white)](https://www.patreon.com/cw/Nerd_Sniped)
 
 <p align="center">
-<<<<<<< HEAD
   <img src="public/GalaxyGIF.dark.gif" alt="GalaxyBrain Interactive 3D Knowledge Graph" width="80%">
-=======
-  <a href="https://www.youtube.com/watch?v=e8GugdvpSYI">
-    <img src="https://img.youtube.com/vi/e8GugdvpSYI/1.jpg" alt="GalaxyBrain Video Installation Guide">
-  </a>
->>>>>>> 511654ad7880e7bc8fe25d8d2dcf0bb2f5298fc2
 </p>
 
 <p align="center">
 📖 <strong><a href="https://nerd-sniped.com/projects/galaxybrain/">Project article</a></strong> — the how and why behind GalaxyBrain
 </p>
+
 A **starter template** for publishing your Obsidian vault as an interactive 3D knowledge graph website.
 
 Edit notes in Obsidian → push to GitHub → site rebuilds on **Netlify or GitHub Pages** automatically.
