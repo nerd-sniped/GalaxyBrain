@@ -6,7 +6,7 @@ aliases: [home, start]
 graph:
   shape: torusknot
   color: "#3498db"
-  collapsible: true
+  pinned: true
   callout: true
   calloutText: "Start Here! Click Me!"
 ---
