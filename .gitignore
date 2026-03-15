@@ -2,6 +2,7 @@
 node_modules/
 dist/
 .astro/
+packages/*/dist/
 
 # Generated public assets (rebuilt on every deploy — don't commit)
 public/graph.json
@@ -12,6 +13,7 @@ public/blocks.json
 public/vault-assets/
 
 # Obsidian workspace state (machine-local, not useful in git)
+vault/.obsidian/plugins/
 vault/.obsidian/workspace.json
 vault/.obsidian/workspace-mobile.json
 

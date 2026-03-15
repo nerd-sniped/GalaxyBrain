@@ -115,6 +115,44 @@ export function parseNote(
   absolutePath: string,
   vaultRoot: string,
 ): ParsedNote {
+  const relativePath = path
+    .relative(vaultRoot, absolutePath)
+    .replace(/\\/g, '/');
+
+  return parseNoteWithPaths(
+    rawContent,
+    absolutePath.replace(/\\/g, '/'),
+    relativePath,
+    path.basename(absolutePath, '.md'),
+  );
+}
+
+/**
+ * Parse a vault note when only its vault-relative path is available.
+ *
+ * This is used by the Obsidian plugin, which reads notes through `app.vault`
+ * and therefore doesn't need or always have a stable absolute filesystem path.
+ */
+export function parseVaultNote(
+  rawContent: string,
+  relativePath: string,
+): ParsedNote {
+  const normalizedPath = relativePath.replace(/\\/g, '/');
+
+  return parseNoteWithPaths(
+    rawContent,
+    normalizedPath,
+    normalizedPath,
+    path.posix.basename(normalizedPath, '.md'),
+  );
+}
+
+function parseNoteWithPaths(
+  rawContent: string,
+  filePath: string,
+  relativePath: string,
+  title: string,
+): ParsedNote {
   // ── Strip leading blank lines ──────────────────────────────────────────────
   // gray-matter silently returns empty data ({}) when a file starts with
   // whitespace / newlines before the opening `---` fence.  This is a common
@@ -129,27 +167,21 @@ export function parseNote(
   try {
     parsed = matter(sanitised);
   } catch {
-    console.warn(`[vault-parser] Failed to parse frontmatter in ${absolutePath} — treating as unpublished`);
+    console.warn(`[vault-parser] Failed to parse frontmatter in ${filePath} — treating as unpublished`);
     parsed = matter('');
     parsed.content = sanitised;
   }
   // An empty frontmatter data object means publish is undefined → treated as false.
   const fm = (parsed.data ?? {}) as NoteFrontmatter;
 
-  // Compute relative path from vault/ root
-  const relativePath = path
-    .relative(vaultRoot, absolutePath)
-    .replace(/\\/g, '/');
-
   // Derive slug from filename (without .md)
-  const filename = path.basename(absolutePath);
-  const id = slugify(filename);
+  const id = slugify(title);
 
   // The Obsidian filename (without .md) is the canonical note title.
   // It always overrides whatever is in the frontmatter `title` field so that
   // renaming a note in Obsidian is consistently reflected in the graph and on
   // the rendered page — Obsidian already enforces unique filenames, so this is safe.
-  fm.title = path.basename(absolutePath, '.md');
+  fm.title = title;
 
   const body = parsed.content;
 
@@ -170,7 +202,7 @@ export function parseNote(
 
   return {
     id,
-    filePath: absolutePath.replace(/\\/g, '/'),
+    filePath,
     relativePath,
     frontmatter: fm,
     content: body,
