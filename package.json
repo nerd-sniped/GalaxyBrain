@@ -7,7 +7,10 @@
     "build": "node scripts/sync-titles.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "sync-titles": "node scripts/sync-titles.mjs"
+    "sync-titles": "node scripts/sync-titles.mjs",
+    "plugin:build": "pnpm --filter galaxybrain-obsidian-plugin build",
+    "plugin:dev": "pnpm --filter galaxybrain-obsidian-plugin dev",
+    "plugin:check": "pnpm --filter galaxybrain-obsidian-plugin check"
   },
   "pnpm": {
     "ignoredBuiltDependencies": [

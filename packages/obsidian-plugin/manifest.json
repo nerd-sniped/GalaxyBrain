@@ -1,0 +1,10 @@
+{
+  "id": "galaxybrain-preview",
+  "name": "GalaxyBrain Preview",
+  "version": "0.1.0",
+  "minAppVersion": "1.6.0",
+  "description": "Native 3D GalaxyBrain graph view for Obsidian vaults.",
+  "author": "GalaxyBrain contributors",
+  "authorUrl": "https://github.com/trungnguyenarts/GalaxyBrain",
+  "isDesktopOnly": true
+}

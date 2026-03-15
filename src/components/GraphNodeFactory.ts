@@ -117,7 +117,13 @@ export function buildNodeObject(
 
   const effectiveColor = resolveColor(color, isLight);
   const geo = buildGeometry(type === 'tag' ? 'octahedron' : shape);
-  const mat = new THREE.MeshLambertMaterial({ color: effectiveColor });
+  const mat = new THREE.MeshPhongMaterial({
+    color: effectiveColor,
+    emissive: new THREE.Color(effectiveColor).multiplyScalar(isLight ? 0.12 : 0.22),
+    emissiveIntensity: 1,
+    shininess: 22,
+    specular: new THREE.Color(isLight ? '#ffffff' : '#cfd8ff').multiplyScalar(isLight ? 0.18 : 0.24),
+  });
   const mesh = new THREE.Mesh(geo, mat);
   mesh.scale.setScalar(scale);
   return mesh;

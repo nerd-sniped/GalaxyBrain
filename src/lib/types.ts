@@ -12,6 +12,7 @@ export type NodeShape =
 
 export type NodeType = 'file' | 'ghost' | 'tag';
 export type LinkType = 'wikilink' | 'file-tag' | 'tag-hierarchy';
+export type NodeColorSource = 'manual' | 'default' | 'tag' | 'ghost';
 
 export interface GraphNode {
   id: string;
@@ -22,6 +23,7 @@ export interface GraphNode {
   val: number;
   shape: NodeShape;
   color: string;
+  colorSource?: NodeColorSource;
   /** When true, downstream nodes start hidden until user clicks this node */
   collapsible: boolean;
   /** When true, this node is always visible as a root seed regardless of incoming links */
